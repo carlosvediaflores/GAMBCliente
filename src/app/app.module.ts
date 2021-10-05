@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,17 @@ import { ConfiguracionComponent } from './components/configuracion/configuracion
 import { PanelsComponent } from './components/panels/panels.component';
 import { AuthGuard } from './auth.guard';
 import { TokenService } from './services/token.service';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { UsuarioAddComponent } from './components/usuario-add/usuario-add.component';
+import { HojaRutaComponent } from './components/hoja-ruta/hoja-ruta.component';
 
 @NgModule({
   declarations: [
@@ -25,13 +37,27 @@ import { TokenService } from './services/token.service';
     LoginComponent,
     RegistroComponent,
     ConfiguracionComponent,
-    PanelsComponent
+    PanelsComponent,
+    SidebarComponent,
+    UsuarioComponent,
+    UsuarioAddComponent,
+    HojaRutaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    // * MATERIAL IMPORTS
+    MatSidenavModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDividerModule,
+    MatListModule,
+
   ],
   providers: [
     AuthGuard,{

@@ -1,30 +1,44 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
+import { User } from '../models/user';
+import { Observable } from 'rxjs';
+import { Global } from './global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private URL = 'http://localhost:8000/api'
+  public URL: string;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+    this.URL=Global.url;
+  }
 
-  login(user: { email: string; password: string; }) {
-    return this.http.post<any>(this.URL + '/login', user);
+  register(user: User): Observable<any> {
+    return this.http.post(this.URL + 'users', user);
+  }
+
+  login(user: {}) {
+    return this.http.post<any>(this.URL + 'login', user);
   }
 
   loggedIn() {
+    if (localStorage.getItem('token')=='undefined'){
+      return !!localStorage.getItem('');
+    }
+    else
     return !!localStorage.getItem('token');
-  }
-
-  getToken() {
-    return localStorage.getItem('token');
   }
 
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
 }
