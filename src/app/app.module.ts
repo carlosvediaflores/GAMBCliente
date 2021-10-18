@@ -27,6 +27,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { UsuarioAddComponent } from './components/usuario-add/usuario-add.component';
 import { HojaRutaComponent } from './components/hoja-ruta/hoja-ruta.component';
+import { OrganizacionComponent } from './components/organizacion/organizacion.component';
+import { OrganizacionAddComponent } from './components/organizacion-add/organizacion-add.component';
+import { SubdirComponent } from './components/subdir/subdir.component';
+import { SubdirAddComponent } from './components/subdir-add/subdir-add.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { HojaRutaComponent } from './components/hoja-ruta/hoja-ruta.component';
     SidebarComponent,
     UsuarioComponent,
     UsuarioAddComponent,
-    HojaRutaComponent
+    HojaRutaComponent,
+    OrganizacionComponent,
+    OrganizacionAddComponent,
+    SubdirComponent,
+    SubdirAddComponent
   ],
   imports: [
     BrowserModule,

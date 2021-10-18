@@ -1,7 +1,7 @@
 
 <div class="container mt-5">
   <div class="row">
-      <div class="col-lg-8 offset-lg-2">
+      <div class="card">
           <div class="card">
               <div class="card-body text-center">
                   <span class="titulo">LISTADO DE USUARIOS </span>
@@ -10,16 +10,24 @@
                       <thead>
                         <tr>
                           <th scope="col">Nombre</th>
+                          <th scope="col">Apellidos</th>
+                          <th scope="col">C.I.</th>
                           <th scope="col">Email</th>
-                          <th scope="col">Password</th>
+                          <th scope="col">Telefono</th>
+                          <th scope="col">Fecha de Nacimiento</th>
+                          <th scope="col">Cargo</th>
                           <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let user of users">
                           <td>{{ user.username }}</td>
+                          <td>{{ user.surnames }}</td>
+                          <td>{{ user.ci }}</td>
                           <td>{{ user.email }}</td>
-                          <td>{{ user.password }}</td>
+                          <td>{{ user.numberphone }}</td>
+                          <td>{{ user.birthdate  | date:'dd/MM/yyyy' }}</td>
+                          <td>{{ user.post }}</td>
                           <td>
                               <i [routerLink]="['/usuarioAdd', user._id]" class="fas fa-edit text-primary"></i>
                               <i (click)="eliminarUser(user._id)" class="fas fa-trash text-danger"></i>
@@ -33,86 +41,3 @@
       </div>
   </div>
 </div>
-<!--Agregar cliente modal-->
-<!--<div class="modal fade" id="agregarClienteModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-info text-white">
-        <h5 class="modal-title">Agregar Cliente</h5>
-        <button class="close" data-dismiss="modal" #botonCerrar>
-          <span>&times;</span>
-        </button>
-      </div>
-
-
-
-      <form #clienteForm="ngForm" (ngSubmit)="agregar()">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input
-              type="text"
-              name="nombre"
-              class="form-control"
-             >
-              <div  class="invalid-feedback">
-                Nombre requerido
-              </div>
-              <div  class="invalid-feedback">
-                Debe contener al menos 2 caracteres
-              </div>
-          </div>
-
-          <div class="form-group">
-            <label for="apellido">Apellido</label>
-            <input
-              type="text"
-              name="apellido"
-              class="form-control"
-              >
-              <div class="invalid-feedback">
-                Apellido requerido
-              </div>
-              <div class="invalid-feedback">
-                Debe contener al menos 2 caracteres
-              </div>
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              class="form-control"
-              >
-              <div  class="invalid-feedback">
-                Email requerido
-              </div>
-              <div  class="invalid-feedback">
-                Email no es válido
-              </div>
-          </div>
-
-          <div class="form-group">
-            <label for="saldo">Saldo</label>
-            <input
-              type="number"
-              name="saldo"
-              class="form-control"
-             >
-              <div  class="invalid-feedback">
-                Saldo requerido
-              </div>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>
-
-      </form>
-
-    </div>
-  </div>
-</div>
--->
