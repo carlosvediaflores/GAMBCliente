@@ -12,6 +12,7 @@
                           <th scope="col">Nombre</th>
                           <th scope="col">Nombre Cargo</th>
                           <th scope="col">Agregar Sub</th>
+                          <th scope="col">Ver Sub</th>
                           <th scope="col">Aciones</th>
                         </tr>
                       </thead>
@@ -22,6 +23,9 @@
                           <td>
                             <i [routerLink]="['/subdir-add',  org._id ]" class="fas fa-folder-plus text-primary"></i>
                         </td>
+                        <td>
+                          <i [routerLink]="['/subdir',  org._id]" class="fas fa-align-justify text-primary"></i>
+                      </td>
                           <td>
                               <i [routerLink]="['/organizacion-add', org._id]" class="fas fa-edit text-primary"></i>
                               <i (click)="eliminarUser(org._id)" class="fas fa-trash text-danger"></i>

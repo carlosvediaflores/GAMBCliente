@@ -28,6 +28,7 @@ const routes: Routes = [
   {path:'organizacion-add',component:OrganizacionAddComponent},
   {path:'organizacion-add/:id',component:OrganizacionAddComponent},
   {path:'subdir',component:SubdirComponent},
+  {path:'subdir/:id',component:SubdirComponent},
   {path:'subdir-add',component:SubdirAddComponent},
   {path:'subdir-add/:id',component:SubdirAddComponent},
   {path:'usuarioAdd',component:UsuarioAddComponent},

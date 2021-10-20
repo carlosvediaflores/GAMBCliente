@@ -12,6 +12,7 @@ export class SubdirAddComponent implements OnInit {
   public subdir: Subdir[] = [];
   subdirForm: FormGroup;
   titulo = 'Crear Sub Direccion';
+  nombreSub = "";
   id: string | null;
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -19,7 +20,8 @@ export class SubdirAddComponent implements OnInit {
     private aRouter: ActivatedRoute) {
       this.subdirForm = this.fb.group({
         nombredir: ['', Validators.required],
-        nombrecargo: ['', Validators.required],
+        nombresubdir: ['', Validators.required],
+        nombrecargosubdir: ['', Validators.required],
       })
       this.id = this.aRouter.snapshot.paramMap.get('id');
      }
@@ -31,6 +33,7 @@ export class SubdirAddComponent implements OnInit {
     const SUBDIR: Subdir = {
       nombredir: this.subdirForm.get('nombredir')?.value,
       nombresubdir: this.subdirForm.get('nombresubdir')?.value,
+      nombrecargosubdir: this.subdirForm.get('nombrecargosubdir')?.value,
 
     }
 
@@ -55,14 +58,16 @@ export class SubdirAddComponent implements OnInit {
     }
   }
   esEditar() {
-
     if (this.id !== null) {
-      this.titulo = 'Crear Sub Direccion';
+      //this.titulo = 'Crear Sub Direccion para ';
       this._subdirService.obtenerOrg(this.id).subscribe(data => {
         this.subdirForm.setValue({
-          nombredir: "",
-          nombrecargo:"",
+          nombredir: data.nombredir,
+          nombresubdir: "",
+          nombrecargosubdir:"",
         })
+        this.nombreSub=data.nombredir;
+        this.titulo = 'Crear Sub Direccion para '+ this.nombreSub;
 
       }, error => {
         console.log("no hay id" + error);

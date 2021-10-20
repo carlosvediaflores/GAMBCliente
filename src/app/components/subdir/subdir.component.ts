@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OrganizacionService } from 'src/app/services/organizacion.service';
 import { SubdirService } from 'src/app/services/subdir.service';
 import { Subdir } from 'src/app/models/subdir';
 
@@ -11,63 +11,49 @@ import { Subdir } from 'src/app/models/subdir';
 })
 export class SubdirComponent implements OnInit {
   public subdir: Subdir[] = [];
-  subdirForm: FormGroup;
-  titulo = 'Crear Sub Direccion';
   id: string | null;
-  constructor(private fb: FormBuilder,
-    private router: Router,
+  titulo = 'lista de sub direcciones ';
+  nombreSub = "";
+  constructor(private aRouter: ActivatedRoute,
     private _subdirService: SubdirService,
-    private aRouter: ActivatedRoute) {
-      this.subdirForm = this.fb.group({
-        nombredir: ['', Validators.required],
-        nombrecargo: ['', Validators.required],
-      })
+    private _orgService: OrganizacionService,) {
       this.id = this.aRouter.snapshot.paramMap.get('id');
     }
 
   ngOnInit(): void {
+    //this.getSubdir();
     this.esEditar();
   }
-  registerOrg() {
-    const SUBDIR: Subdir = {
-      nombredir: this.subdirForm.get('nombredir')?.value,
-      nombresubdir: this.subdirForm.get('nombresubdir')?.value,
-
-    }
-
-    if (this.id !== null) {
-      //ediar usuario
-      console.log(SUBDIR);
-      this._subdirService.EditarOrg(this.id, SUBDIR).subscribe(data =>{
-        this.router.navigate(['/organizacion']);
-      }, error => {
-        console.log(error);
-        this.subdirForm.reset();
-      })
-    } else {
-      //agregar usuario
-      console.log(SUBDIR);
-      this._subdirService.register(SUBDIR).subscribe(data => {
-        this.router.navigate(['/organizacion']);
-      }, error => {
-        console.log(error);
-        this.subdirForm.reset();
-      })
-    }
+  getSubdir(){
+    this._subdirService.getSub().subscribe(data => {
+      console.log(data);
+      this.subdir = data;
+    }, error => {
+      console.log(error);
+    })
   }
   esEditar() {
-
     if (this.id !== null) {
-      this.titulo = 'Editar Org';
-      this._subdirService.obtenerOrg(this.id).subscribe(data => {
-        this.subdirForm.setValue({
-          nombredir: data.nombredir,
-          nombrecargo: data.nombrecargo,
-        })
+      //this.titulo = 'Crear Sub Direccion para ';
+      this._orgService.obtenerOrg(this.id).subscribe(data => {
+        console.log(data.subdirecciones);
+        this.subdir = data.subdirecciones;
+        this.nombreSub=data.nombredir;
+        this.titulo = 'lista de sub direcciones de  '+ this.nombreSub;
+
 
       }, error => {
         console.log("no hay id" + error);
       })
     }
+  }
+
+  eliminarUser(id: any) {
+    this._subdirService.eliminarOrg(id).subscribe(data => {
+     //this.toastr.error('El producto fue eliminado con exito' ,'Producto Eliminado');
+      this.getSubdir();
+    }, error => {
+      console.log(error);
+    })
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { Router } from '@angular/router';
 import { Organizacion } from '../models/Organizacion';
+import { Subdir } from '../models/subdir';
 import { Observable } from 'rxjs';
 import { Global } from './global';
 
@@ -18,8 +19,8 @@ export class SubdirService {
   register(org: Organizacion): Observable<any> {
     return this._http.post(this.URL + 'org', org);
   }
-  getOrg():Observable<any>{
-    return this._http.get(this.URL+'org');
+  getSub():Observable<any>{
+    return this._http.get(this.URL+'subdir');
   }
   obtenerOrg(id: string): Observable<any> {
     return this._http.get(this.URL + 'org/' + id);
@@ -27,7 +28,7 @@ export class SubdirService {
   eliminarOrg(id: string): Observable<any> {
     return this._http.delete(this.URL + 'org/' + id);
   }
-  EditarOrg(id: string, org:Organizacion): Observable<any> {
-    return this._http.put(this.URL + 'org/' + id, org);
+  EditarOrg(id: string, sub:Subdir): Observable<any> {
+    return this._http.put(this.URL + 'subdir/' + id, sub);
   }
 }

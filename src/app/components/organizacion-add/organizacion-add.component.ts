@@ -12,7 +12,7 @@ import { Organizacion } from 'src/app/models/Organizacion';
 export class OrganizacionAddComponent implements OnInit {
   public org: Organizacion[] = [];
   orgForm: FormGroup;
-  titulo = 'Crear Usuario';
+  titulo = 'Crear una Unidad';
   id: string | null;
   constructor(private fb: FormBuilder,
     private router: Router,
