@@ -16,6 +16,10 @@ import { OrganizacionComponent } from './components/organizacion/organizacion.co
 import {OrganizacionAddComponent} from './components/organizacion-add/organizacion-add.component';
 import { SubdirComponent } from './components/subdir/subdir.component';
 import { SubdirAddComponent } from './components/subdir-add/subdir-add.component';
+import { HojaAddComponent } from './components/hoja-add/hoja-add.component';
+import { PrintHrComponent } from './components/print-hr/print-hr.component';
+import { SeguimientoAddComponent } from './components/seguimiento-add/seguimiento-add.component';
+import { SeguimientoComponent } from './components/seguimiento/seguimiento.component';
 
 const routes: Routes = [
   {path: '', component: ContenidoComponent},
@@ -23,7 +27,7 @@ const routes: Routes = [
   {path: 'registro', component: RegistroComponent},
   {path: 'configuracion', component: ConfiguracionComponent},
   {path: 'sidebar', component: SidebarComponent},
-  {path:'hoja-ruta',component:HojaRutaComponent},
+  {path:'hoja-ruta',component:HojaRutaComponent,canActivate:[AuthGuard]},
   {path:'organizacion',component:OrganizacionComponent},
   {path:'organizacion-add',component:OrganizacionAddComponent},
   {path:'organizacion-add/:id',component:OrganizacionAddComponent},
@@ -33,7 +37,15 @@ const routes: Routes = [
   {path:'subdir-add/:id',component:SubdirAddComponent},
   {path:'usuarioAdd',component:UsuarioAddComponent},
   {path:'usuarioAdd/:id', component:UsuarioAddComponent},
-  {path: 'usuario', component: UsuarioComponent},
+  {path: 'usuario', component: UsuarioComponent,canActivate:[AuthGuard]},
+  {path:'hoja-add',component:HojaAddComponent},
+  {path:'hoja-add/:id',component:HojaAddComponent},
+  {path:'print-hr',component:PrintHrComponent},
+  {path:'print-hr/:id',component:PrintHrComponent},
+  {path:'seguimiento/:id',component:SeguimientoComponent},
+  {path:'seguimiento',component:SeguimientoComponent},
+  {path:'seguimiento-add',component:SeguimientoAddComponent},
+  {path:'seguimiento-add/:id',component:SeguimientoAddComponent},
   {path: 'panels', component: PanelsComponent,
                     canActivate:[AuthGuard]},
   {path: '**', redirectTo: ''}

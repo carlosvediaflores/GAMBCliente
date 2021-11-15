@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -15,6 +16,9 @@ import { Organizacion } from 'src/app/models/Organizacion';
   providers: [OrganizacionService]
 })
 export class UsuarioAddComponent implements OnInit {
+  subscription: Subscription = new Subscription;
+  params: string = "";
+  orgselec: any []=[] ;
   public org: Organizacion[] = [];
   public users: User[] = [];
   userForm: FormGroup;
@@ -41,6 +45,7 @@ export class UsuarioAddComponent implements OnInit {
   ngOnInit(): void {
     this.getOrga();
     this.esEditar();
+    this.getSub();
   }
   registerUser() {
     const USER: User = {
@@ -97,12 +102,24 @@ export class UsuarioAddComponent implements OnInit {
     }
   }
   getOrga(){
-    this._orgService.getOrg().subscribe(data => {
+    this.subscription = this._orgService.getOrg().subscribe(data => {
       console.log(data);
       this.org = data;
     }, error => {
       console.log(error);
     })
+  }
+  getSub() {
+
+    if (this.params !== null) {
+      this.titulo = 'CREAR SEGUIMIENTO';
+      this.subscription =  this._orgService.obtenerOrg(this.params).subscribe(data => {
+        this.orgselec = data.subdirecciones;
+
+      }, error => {
+        console.log(error);
+      })
+    }
   }
 }
 

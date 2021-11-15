@@ -31,6 +31,10 @@ import { OrganizacionComponent } from './components/organizacion/organizacion.co
 import { OrganizacionAddComponent } from './components/organizacion-add/organizacion-add.component';
 import { SubdirComponent } from './components/subdir/subdir.component';
 import { SubdirAddComponent } from './components/subdir-add/subdir-add.component';
+import { HojaAddComponent } from './components/hoja-add/hoja-add.component';
+import { PrintHrComponent } from './components/print-hr/print-hr.component';
+import { SeguimientoComponent } from './components/seguimiento/seguimiento.component';
+import { SeguimientoAddComponent } from './components/seguimiento-add/seguimiento-add.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,11 @@ import { SubdirAddComponent } from './components/subdir-add/subdir-add.component
     OrganizacionComponent,
     OrganizacionAddComponent,
     SubdirComponent,
-    SubdirAddComponent
+    SubdirAddComponent,
+    HojaAddComponent,
+    PrintHrComponent,
+    SeguimientoComponent,
+    SeguimientoAddComponent
   ],
   imports: [
     BrowserModule,

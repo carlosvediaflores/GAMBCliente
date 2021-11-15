@@ -23,8 +23,8 @@ export class OrganizacionService {
   getOrg():Observable<any>{
     return this._http.get(this.URL+'org');
   }
-  obtenerOrg(id: string): Observable<any> {
-    return this._http.get(this.URL + 'org/' + id);
+  obtenerOrg(params: string): Observable<any> {
+    return this._http.get(this.URL + 'org/' + params);
   }
   eliminarOrg(id: string): Observable<any> {
     return this._http.delete(this.URL + 'org/' + id);

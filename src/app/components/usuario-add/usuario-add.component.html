@@ -53,16 +53,52 @@
                               <span>Password <strong>es obligatoria</strong></span>
                           </div>
                       </div>
-                      <div class="mb-2">
-                        <select class="form-select"  aria-label="Default select example" formControlName="post" >
-                          <option selected>---Seleccione el Cargo---</option>
-                          <option  *ngFor="let orgs of org" > {{ orgs.nombrecargo }}</option>
-                        </select>
-                        <div class="text-danger"
-                            *ngIf="userForm.get('post')?.hasError('required') && userForm.get('post')?.touched">
-                            <span>El cargo  <strong>es obligatoria</strong></span>
+                      <div class="card p-2">
+                        <label for="destino">Seleccionar Cargo</label>
+                        <div class="mb-2">
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            id="destino"
+                            formControlName="post"
+                            [(ngModel)]="params"
+                            (change)="getSub()"
+                          >
+                           <option selected>---Seleccione Destino---</option>
+                            <option *ngFor="let orgs of org">{{ orgs.nombredir }}</option>
+                          </select>
+                          <div
+                            class="text-danger"
+                            *ngIf="
+                            userForm.get('post')?.hasError('required') &&
+                            userForm.get('post')?.touched
+                            "
+                          >
+                            <span>El cargo <strong>es obligatoria</strong></span>
+                          </div>
                         </div>
-                    </div>
+                        <div class="mb-2">
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            formControlName="post"
+                          >
+                            <option selected>{{ params }}</option>
+                            <option *ngFor="let orgselect of orgselec">
+                              {{ orgselect.nombrecargosubdir }}
+                            </option>
+                          </select>
+                          <div
+                            class="text-danger"
+                            *ngIf="
+                            userForm.get('post')?.hasError('required') &&
+                            userForm.get('post')?.touched
+                            "
+                          >
+                            <span>El cargo <strong>es obligatoria</strong></span>
+                          </div>
+                        </div>
+                      </div>
                       <div class="mb-2">
                         <label for="fecha">Fecha de Nacimiento </label>
                         <input type="date" formControlName="birthdate" class="form-control"
