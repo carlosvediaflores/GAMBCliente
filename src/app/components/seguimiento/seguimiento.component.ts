@@ -40,12 +40,12 @@ export class SeguimientoComponent implements OnInit {
     if (this.id !== null) {
       this.titulo = 'Editar Org';
       this.subscription= this._hojaService.obtenerHoja(this.id).subscribe(data => {
-        this.segui=data.seguimiento;
-        this.nuit=data.nuit;
-        this.fecharesepcion=data.fecharesepcion;
-        this.origen=data.origen;
-        this.tipodoc=data.tipodoc;
-        this.referencia=data.referencia;
+        this.segui=data.serverResponse.seguimiento;
+        this.nuit=data.serverResponse.nuit;
+        this.fecharesepcion=data.serverResponse.fecharesepcion;
+        this.origen=data.serverResponse.origen;
+        this.tipodoc=data.serverResponse.tipodoc;
+        this.referencia=data.serverResponse.referencia;
 
 
       }, error => {

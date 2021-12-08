@@ -1,32 +1,67 @@
 <div class="row">
-    <div class="col-md-4 mx-auto">
-        <div class="card">
-            <div class="card-header">
-                REGISTRO
+  <div class="col-md-4 mx-auto">
+    <div class="card">
+      <div class="card-header">REGISTRO</div>
+      <div class="card-body">
+        <form class="mt-3" [formGroup]="userForm" (ngSubmit)="register()">
+          <div class="p-xl-10 p-lg-6 p-md-8 p-sm-10 mb-3">
+            <img src="assets/img/logogamb.png" class="login-logo" />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              formControlName="email"
+              class="form-control form-control-lg"
+              placeholder="email"
+            />
+            <div
+              class="text-danger"
+              *ngIf="
+                userForm.get('email')?.hasError('required') &&
+                userForm.get('email')?.touched
+              "
+            >
+              <span
+                >El nombre del producto <strong>es obligatorio</strong></span
+              >
             </div>
-            <div class="card-body">
-                <form class="mt-3" [formGroup]="userForm" (ngSubmit)="register()">
-                    <div class="form-group">
-                      <input type="text" formControlName="email" class="form-control form-control-lg"
-                          placeholder="email">
-                       <div class="text-danger"
-                          *ngIf="userForm.get('email')?.hasError('required') && userForm.get('email')?.touched">
-                          <span>El nombre del producto <strong>es obligatorio</strong></span>
-                       </div>
-                    </div>
-                    <div class="form-group">
-                      <input type="password" formControlName="password" class="form-control form-control-lg"
-                        placeholder="password">
-                      <div class="text-danger"
-                          *ngIf="userForm.get('password')?.hasError('required') && userForm.get('password')?.touched">
-                          <span>El nombre del producto <strong>es obligatorio</strong></span>
-                   </div>
-                    </div>
-                    <button class="btn btn-success btn-block">
-                        REGISTRATE
-                    </button>
-                </form>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control form-control-lg"
+              placeholder="password"
+            />
+            <div
+              class="text-danger"
+              *ngIf="
+                userForm.get('password')?.hasError('required') &&
+                userForm.get('password')?.touched
+              "
+            >
+              <span
+                >El nombre del producto <strong>es obligatorio</strong></span
+              >
             </div>
-        </div>
+          </div>
+          <div class="d-flex justify-content-around">
+            <button class="btn btn-success btn-block">REGISTRATE</button>
+            <button class="btn btn-success btn-block" routerLink="/login">
+              LOGIN
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
+  <div class="mt-4 extra-page-footer">
+    <div>
+      2021 Copyright &copy; Gobierno Autónoma Municipal de Betanzos<span
+        class="color-red"
+        >❤</span
+      >.
+    </div>
+    <div>Version :</div>
+  </div>
 </div>

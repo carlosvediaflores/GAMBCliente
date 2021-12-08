@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import swal from 'sweetalert';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrganizacionService } from 'src/app/services/organizacion.service';
 import { SubdirService } from 'src/app/services/subdir.service';
@@ -49,11 +50,31 @@ export class SubdirComponent implements OnInit {
   }
 
   eliminarUser(id: any) {
-    this._subdirService.eliminarOrg(id).subscribe(data => {
-     //this.toastr.error('El producto fue eliminado con exito' ,'Producto Eliminado');
-      this.getSubdir();
-    }, error => {
-      console.log(error);
-    })
+     //Alerta
+   swal({
+    title: "¿Estás seguro?",
+    text: "Una vez borrado no podrás recuperarlo!",
+    icon: "warning",
+    buttons: [true, true],
+    dangerMode: true
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+     this._subdirService.eliminarSubDir(id).subscribe(
+        data => {
+          swal("La Unidad ha sido borrado!", {
+            icon: "success",
+          });
+          this.getSubdir();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+
+    } else {
+      swal("Tranquilo, nada se ha borrado!");
+    }
+  });
   }
 }

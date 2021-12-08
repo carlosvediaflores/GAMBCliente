@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizacionService } from 'src/app/services/organizacion.service';
+import swal from 'sweetalert';
 import { Organizacion } from 'src/app/models/Organizacion';
 
 @Component({
@@ -27,13 +28,32 @@ export class OrganizacionComponent implements OnInit {
       console.log(error);
     })
   }
+  eliminarOrg(id: any) {
+    //Alerta
+    swal({
+     title: "¿Estás seguro?",
+     text: "Una vez borrado no podrás recuperarlo!",
+     icon: "warning",
+     buttons: [true, true],
+     dangerMode: true
+   })
+   .then((willDelete) => {
+     if (willDelete) {
+      this._orgService.eliminarOrg(id).subscribe(
+         data => {
+           swal("La Unidad ha sido borrado!", {
+             icon: "success",
+           });
+           this.getOrgs();
+         },
+         error => {
+           console.log(error);
+         }
+       );
 
-  eliminarUser(id: any) {
-    this._orgService.eliminarOrg(id).subscribe(data => {
-     //this.toastr.error('El producto fue eliminado con exito' ,'Producto Eliminado');
-      this.getOrgs();
-    }, error => {
-      console.log(error);
-    })
-  }
+     } else {
+       swal("Tranquilo, nada se ha borrado!");
+     }
+   });
+ }
 }

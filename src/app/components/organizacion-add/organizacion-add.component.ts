@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import swal from 'sweetalert';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrganizacionService } from 'src/app/services/organizacion.service';
@@ -37,10 +38,21 @@ export class OrganizacionAddComponent implements OnInit {
 
     if (this.id !== null) {
       //ediar usuario
-      console.log(ORG);
       this._orgService.EditarOrg(this.id, ORG).subscribe(data =>{
+         //Alerta
+         swal(
+          'Unidad Editado!!',
+          'La Unidad se ha editado correctamente',
+          'success'
+        );
         this.router.navigate(['/organizacion']);
       }, error => {
+        //Alerta
+        swal(
+          'Edición fallida!!',
+          'La Unidad no se ha modificado correctamente',
+          'error'
+        );
         console.log(error);
         this.orgForm.reset();
       })
@@ -48,6 +60,12 @@ export class OrganizacionAddComponent implements OnInit {
       //agregar usuario
       console.log(ORG);
       this._orgService.register(ORG).subscribe(data => {
+        //Alerta
+        swal(
+          'Unidad Creado!!',
+          'La Unidad se ha creado correctamente',
+          'success'
+        );
         this.router.navigate(['/organizacion']);
       }, error => {
         console.log(error);
@@ -59,7 +77,8 @@ export class OrganizacionAddComponent implements OnInit {
 
     if (this.id !== null) {
       this.titulo = 'Editar Org';
-      this._orgService.obtenerOrg(this.id).subscribe(data => {
+      this._orgService.obtenerOrgs(this.id).subscribe(data => {
+        console.log(data)
         this.orgForm.setValue({
           nombredir: data.nombredir,
           nombrecargo: data.nombrecargo,

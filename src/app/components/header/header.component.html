@@ -102,8 +102,16 @@
       <button mat-icon-button (click)="toggleSidebar()">
         <mat-icon>menu</mat-icon>
       </button>
-      <div class="row mr-2 ml-auto">
-        <ul class="row m-0 align-items-center">
+      <div class="d-flex justify-content-end">
+        <ul class=" d-flex nabar-nav nabar-right mt-3" *ngIf="!_authService.loggedIn()">
+          <li class="nav-item activate">
+            <a class="nav-link " [routerLink]="['/login']"> LOGIN</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/registro']"> REGISTRO </a>
+          </li>
+        </ul>
+        <ul class="row m-0 align-items-center" *ngIf="identity && identity.username">
           <li>
             <button
               mat-button
@@ -111,16 +119,15 @@
               class="user mt-2 d-flex align-items-center"
             >
               <img src="./assets/img/quique.jpg" alt="" class="user-image mr-1 p-2" />
-
-              User Name
+                 {{identity.username}} {{identity.surnames}}
               <mat-icon class="user-image-icon ml-1"
                 >keyboard_arrow_down</mat-icon
               >
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>exit_to_app</mat-icon>
-                Logout
+              <button mat-menu-item (click)="_authService.logout()">
+                <mat-icon >exit_to_app</mat-icon>
+                <a class="nav-link" style="cursor: pointer;" (click)="_authService.logout()">Logout</a>
               </button>
             </mat-menu>
           </li>
@@ -128,4 +135,5 @@
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
+
 

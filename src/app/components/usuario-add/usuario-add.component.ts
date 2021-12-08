@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
-import { ToastrService } from 'ngx-toastr';
+import swal from 'sweetalert';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { AuthService } from '../../services/auth.service';
 import { OrganizacionService } from 'src/app/services/organizacion.service';
@@ -63,9 +63,20 @@ export class UsuarioAddComponent implements OnInit {
       //ediar usuario
       console.log(USER);
       this._usuarioService.EditarUser(this.id, USER).subscribe(data =>{
-        console.log("no entro");
+         //Alerta
+         swal(
+          'Usuario Editado!!',
+          'El usuario se ha editado correctamente',
+          'success'
+        );
         this.router.navigate(['/usuario']);
       }, error => {
+        //Alerta
+        swal(
+          'Edición fallida!!',
+          'El Usuario no se ha modificado correctamente',
+          'error'
+        );
         console.log(error);
         this.userForm.reset();
       })
@@ -73,8 +84,20 @@ export class UsuarioAddComponent implements OnInit {
       //agregar usuario
       console.log(USER);
       this._usuarioService.register(USER).subscribe(data => {
+         //Alerta
+         swal(
+          'Usuario Creado!!',
+          'El usuario se ha creado correctamente',
+          'success'
+        );
         this.router.navigate(['/usuario']);
       }, error => {
+        //Alerta
+        swal(
+          'Creacion fallida!!',
+          'El Usuario no se ha creado correctamente',
+          'error'
+        );
         console.log(error);
         this.userForm.reset();
       })
@@ -112,7 +135,6 @@ export class UsuarioAddComponent implements OnInit {
   getSub() {
 
     if (this.params !== null) {
-      this.titulo = 'CREAR SEGUIMIENTO';
       this.subscription =  this._orgService.obtenerOrg(this.params).subscribe(data => {
         this.orgselec = data.subdirecciones;
 

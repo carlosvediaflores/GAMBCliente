@@ -12,7 +12,7 @@ import { Hojaruta } from 'src/app/models/hojaruta';
 export class HojaAddComponent implements OnInit {
   public org: Hojaruta[] = [];
   hojaForm: FormGroup;
-  titulo = 'Crear una Unidad';
+  titulo = 'GENERAR HOJA DE RUTA';
   id: string | null;
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -22,6 +22,7 @@ export class HojaAddComponent implements OnInit {
         origen: ['', Validators.required],
         tipodoc: ['', Validators.required],
         referencia: ['', Validators.required],
+        fechadocumento: ['', Validators.required],
       })
       this.id = this.aRouter.snapshot.paramMap.get('id');
     }
@@ -34,6 +35,7 @@ export class HojaAddComponent implements OnInit {
       origen: this.hojaForm.get('origen')?.value,
       tipodoc: this.hojaForm.get('tipodoc')?.value,
       referencia: this.hojaForm.get('referencia')?.value,
+      fechadocumento: this.hojaForm.get('fechadocumento')?.value,
 
     }
 
@@ -50,7 +52,7 @@ export class HojaAddComponent implements OnInit {
       //agregar usuario
       console.log(HOJA);
       this._hojaService.register(HOJA).subscribe(data => {
-        this.router.navigate(['/print-hr']);
+        this.router.navigate(['/hoja-ruta']);
       }, error => {
         console.log(error);
         this.hojaForm.reset();
@@ -60,11 +62,14 @@ export class HojaAddComponent implements OnInit {
   esEditar() {
 
     if (this.id !== null) {
-      this.titulo = 'Editar Org';
+      this.titulo = 'Editar Hoja de Ruta';
       this._hojaService.obtenerHoja(this.id).subscribe(data => {
+        console.log(data)
         this.hojaForm.setValue({
           origen: data.origen,
           tipodoc: data.tipodoc,
+          referencia: data.referencia,
+          fechadocumento: data.fechadocumento,
         })
 
       }, error => {

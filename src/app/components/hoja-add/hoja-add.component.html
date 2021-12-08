@@ -30,6 +30,15 @@
                         </div>
                       </div>
                       <div class="mb-2">
+                        <label for="fecha" class="mb-0">Fecha de Documento </label>
+                        <input type="date" formControlName="fechadocumento" class="form-control"
+                            placeholder="Fecha de Nacimiento">
+                        <div class="text-danger"
+                            *ngIf="hojaForm.get('fechadocumento')?.hasError('required') && hojaForm.get('fechadocumento')?.touched">
+                            <span>Password <strong>es obligatoria</strong></span>
+                        </div>
+                    </div>
+                      <div class="mb-2">
                           <button routerLink="/hoja-ruta" class="btn btn-secondary btn-lg float-start">VOLVER</button>
                           <button type="submit" [disabled]="hojaForm.invalid" class="btn btn-success btn-lg float-end">ACEPTAR</button>
                       </div>

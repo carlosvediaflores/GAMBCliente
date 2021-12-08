@@ -11,6 +11,7 @@ import { Global } from './global';
 export class AuthService {
 
   public URL: string;
+  //public identity: string | null;
 
   constructor(private http: HttpClient, private router: Router) {
     this.URL=Global.url;
@@ -34,11 +35,19 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('identity');
     this.router.navigate(['/login']);
   }
 
   getToken() {
     return localStorage.getItem('token');
   }
+
+  getIdentity(){
+    return localStorage.getItem('identity');
+  }
+
+
+
 
 }

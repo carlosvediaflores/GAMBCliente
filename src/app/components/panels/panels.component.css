@@ -22,3 +22,30 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.card-stats .card-header.card-header-icon, .card-stats .card-header.card-header-text {
+  text-align: right;
+}
+.card-stats .card-header .card-icon + .card-title, .card-stats .card-header .card-icon + .card-category {
+  padding-top: 10px;
+}
+.card-stats .card-header.card-header-icon .card-title, .card-stats .card-header.card-header-text .card-title, .card-stats .card-header.card-header-icon .card-category, .card-stats .card-header.card-header-text .card-category {
+  margin: 0;
+}
+.card-stats .card-header .card-category {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.card-stats .card-header + .card-footer {
+  border-top: 1px solid #eee;
+  margin-top: 14px;
+}
+.card-stats .card-header.card-header-icon i {
+  font-size: 36px;
+  line-height: 56px;
+  width: 56px;
+  height: 56px;
+  text-align: center;
+}
+.card-stats .card-body {
+  text-align: right;
+}

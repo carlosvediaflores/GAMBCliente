@@ -82,13 +82,13 @@
                           <td>{{ seguis.estado}}</td>
                           <td>{{ seguis.origen}}</td>
                           <td>
-                              <i [routerLink]="['/usuarioAdd']" class="fas fa-edit text-primary"></i>
+                              <i [routerLink]="['/seguimiento-add']" class="fas fa-edit text-primary"></i>
                               <i class="fas fa-trash text-danger"></i>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                    <h5 style="text-align: start; margin-top: 10px;">No hay usuarios para mostrar</h5>
+                    <h5 style="text-align: start; margin-top: 10px;" *ngIf="segui.length == 0">No hay reguistros para mostrar</h5>
               </div>
           </div>
         </div>

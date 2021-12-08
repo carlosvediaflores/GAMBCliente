@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { HojarutaService } from 'src/app/services/hojaruta.service';
+import { Hojaruta } from 'src/app/models/hojaruta';
 import { Organizacion } from 'src/app/models/Organizacion';
 import { OrganizacionService } from 'src/app/services/organizacion.service';
 import { SubdirService } from 'src/app/services/subdir.service';
@@ -19,11 +21,17 @@ export class SeguimientoAddComponent implements OnInit {
   public org: Organizacion[] = [];
   public segui: Segui[] = [];
   seguiForm: FormGroup;
-  titulo = 'Crear Usuario';
+  titulo = 'derivar documento';
   id: string | null;
 
+  origenen: string = "ENVIADO";
+  public hojas: Hojaruta[] = [];
+  public hoja: any  = [];
+  idh: string = "";
+  origenreg: string = "REGISTRADO";
 
   constructor(private fb: FormBuilder,
+    private _hojaService: HojarutaService,
     private router: Router,
     private _seguiService: SeguimientoService,
     private _orgService: OrganizacionService,
@@ -43,7 +51,7 @@ export class SeguimientoAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOrga();
-    this.esEditar();
+    //this.esEditar();
     this.getSub();
 
   }
@@ -59,46 +67,38 @@ export class SeguimientoAddComponent implements OnInit {
       fecharecepcion: this.seguiForm.get('fecharecepcion')?.value,
       //sestado: this.seguiForm.get('estado')?.value,
     }
-
+    const HOJA: Hojaruta = {
+      estado:this.origenen,
+    }
     if (this.id !== null) {
-      //ediar usuario
+      //ediar Hoja de Ruta
       console.log(SEGUI);
       this._seguiService.EditarSegui(this.id, SEGUI).subscribe(data =>{
-        console.log("no entro");
-        this.router.navigate(['/seguimiento']);
+        this.router.navigate(['/hoja-ruta']);
       }, error => {
         console.log(error);
         this.seguiForm.reset();
       })
+      this._hojaService.obtenerHoja(this.id).subscribe(data => {
+        this.hoja = data.serverResponse;
+        this.idh= this.hoja._id;
+        console.log(this.hoja.serverResponse)
+        this._hojaService.EditarHoja  (this.idh, HOJA).subscribe(data =>{
+          console.log(HOJA);
+        }, error => {
+          console.log(error);
+        })
+      }, error => {
+        console.log(error);
+      })
     } else {
-      //agregar usuario
+      //
       console.log(SEGUI);
       this._seguiService.register(SEGUI).subscribe(data => {
         this.router.navigate(['/seguimiento']);
       }, error => {
         console.log(error);
         this.seguiForm.reset();
-      })
-    }
-  }
-  esEditar() {
-
-    if (this.id !== null) {
-      this.titulo = 'Editar producto';
-      this._seguiService.obtenerSegui(this.id).subscribe(data => {
-        console.log(data)
-        this.seguiForm.setValue({
-          username: data.username,
-          surnames: data.surnames,
-          ci: data.ci,
-          email: data.email,
-          numberphone: data.numberphone,
-          password: data.password,
-          birthdate: data.birthdate,
-          //post: data.post,
-        })
-      }, error => {
-        console.log("no hay id" + error);
       })
     }
   }
@@ -114,8 +114,8 @@ export class SeguimientoAddComponent implements OnInit {
   getSub() {
 
     if (this.params !== null) {
-      this.titulo = 'CREAR SEGUIMIENTO';
       this.subscription = this._orgService.obtenerOrg(this.params).subscribe(data => {
+        console.log(data);
         this.orgselec = data.subdirecciones;
 
       }, error => {

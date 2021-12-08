@@ -40,11 +40,11 @@ export class PrintHrComponent implements OnInit {
       this.titulo = 'Editar Org';
       this.subscription = this._hojaService.obtenerHoja(this.id).subscribe(data => {
         console.log(data)
-        this.nuit=data.nuit;
-        this.fecharesepcion=data.fecharesepcion;
-        this.origen=data.origen;
-        this.tipodoc=data.tipodoc;
-        this.referencia=data.referencia
+        this.nuit=data.serverResponse.nuit;
+        this.fecharesepcion=data.serverResponse.fecharesepcion;
+        this.origen=data.serverResponse.origen;
+        this.tipodoc=data.serverResponse.tipodoc;
+        this.referencia=data.serverResponse.referencia
 
       }, error => {
         console.log("no hay id" + error);

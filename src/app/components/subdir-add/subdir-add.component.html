@@ -4,7 +4,7 @@
           <div class="card">
               <div class="card-body text-center">
                   <span class="titulo"> {{ titulo | uppercase }}</span>
-                  <form class="mt-3" [formGroup]="subdirForm" (ngSubmit)="registerOrg()">
+                  <form class="mt-3" [formGroup]="subdirForm" (ngSubmit)="registerSub()">
                       <div class="mb-2">
                           <input type="text" formControlName="nombredir" class="form-control"
                               placeholder="Nombre Org---">

@@ -24,11 +24,11 @@
                             <i [routerLink]="['/subdir-add',  org._id ]" class="fas fa-folder-plus text-primary"></i>
                         </td>
                         <td>
-                          <i [routerLink]="['/subdir',  org._id]" class="fas fa-align-justify text-primary"></i>
+                          <i [routerLink]="['/subdir',  org.nombredir]" class="fas fa-align-justify text-primary"></i>
                       </td>
                           <td>
                               <i [routerLink]="['/organizacion-add', org._id]" class="fas fa-edit text-primary"></i>
-                              <i (click)="eliminarUser(org._id)" class="fas fa-trash text-danger"></i>
+                              <i (click)="eliminarOrg(org._id)" class="fas fa-trash text-danger"></i>
                           </td>
                         </tr>
                       </tbody>

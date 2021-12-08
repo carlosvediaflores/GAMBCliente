@@ -23,10 +23,10 @@ export class SubdirService {
     return this._http.get(this.URL+'subdir');
   }
   obtenerOrg(id: string): Observable<any> {
-    return this._http.get(this.URL + 'org/' + id);
+    return this._http.get(this.URL + 'orgs/' + id);
   }
-  eliminarOrg(id: string): Observable<any> {
-    return this._http.delete(this.URL + 'org/' + id);
+  eliminarSubDir(id: string): Observable<any> {
+    return this._http.delete(this.URL + 'subdir/' + id);
   }
   EditarOrg(id: string, sub:Subdir): Observable<any> {
     return this._http.put(this.URL + 'subdir/' + id, sub);

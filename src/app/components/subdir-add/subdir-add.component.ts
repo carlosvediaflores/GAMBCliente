@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import swal from 'sweetalert';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SubdirService } from 'src/app/services/subdir.service';
@@ -29,7 +30,7 @@ export class SubdirAddComponent implements OnInit {
   ngOnInit(): void {
     this.esEditar();
   }
-  registerOrg() {
+  registerSub() {
     const SUBDIR: Subdir = {
       nombredir: this.subdirForm.get('nombredir')?.value,
       nombresubdir: this.subdirForm.get('nombresubdir')?.value,
@@ -41,8 +42,20 @@ export class SubdirAddComponent implements OnInit {
       //ediar usuario
       console.log(SUBDIR);
       this._subdirService.EditarOrg(this.id, SUBDIR).subscribe(data =>{
+         //Alerta
+         swal(
+          'Sub Unidad Creado!!',
+          'La Sub Unidad se ha creado correctamente',
+          'success'
+        );
         this.router.navigate(['/organizacion']);
       }, error => {
+        //Alerta
+        swal(
+          'CreacióN fallida!!',
+          'La Sub Unidad no se ha crado correctamente',
+          'error'
+        );
         console.log(error);
         this.subdirForm.reset();
       })
@@ -50,8 +63,20 @@ export class SubdirAddComponent implements OnInit {
       //agregar usuario
       console.log(SUBDIR);
       this._subdirService.register(SUBDIR).subscribe(data => {
+        //Alerta
+        swal(
+          'Sub Unidad Creado!!',
+          'La Sub Unidad se ha creado correctamente',
+          'success'
+        );
         this.router.navigate(['/organizacion']);
       }, error => {
+          //Alerta
+          swal(
+            'Creción fallida!!',
+            'La suB Unidad no se ha creado correctamente',
+            'error'
+          );
         console.log(error);
         this.subdirForm.reset();
       })
@@ -61,6 +86,7 @@ export class SubdirAddComponent implements OnInit {
     if (this.id !== null) {
       //this.titulo = 'Crear Sub Direccion para ';
       this._subdirService.obtenerOrg(this.id).subscribe(data => {
+        console.log(data);
         this.subdirForm.setValue({
           nombredir: data.nombredir,
           nombresubdir: "",

@@ -1,4 +1,5 @@
-import {Component, EventEmitter, OnInit, Output } from '@angular/core';
+
+import {Component, EventEmitter, OnInit, Output, DoCheck } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -7,16 +8,29 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, DoCheck {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
-  constructor(public authService: AuthService) {}
+
+  public identity: any ;
+  public token: any ;
+
+  constructor(public _authService: AuthService,) {
+    this.loadUser();
+
+  }
+  ngDoCheck(): void {
+    this.loadUser();
+  }
 
   ngOnInit(): void {
+  }
 
+  loadUser(){
+    this.identity = JSON.parse(localStorage.getItem('identity')|| '{}');
+   // this.token = JSON.parse(localStorage.getItem('token')|| '{}');
 
   }
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
   }
-
 }

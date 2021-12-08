@@ -22,4 +22,12 @@
 .card-body .text-center{
   width: 100% !important;
 }
-
+.fas {
+  cursor: pointer;
+  margin-left: 6px;
+  font-size: 130%;
+}
+.text-danger {
+  text-align: start;
+  margin-left: 7px;
+}

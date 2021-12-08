@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { ToastrService } from 'ngx-toastr';
+import swal from 'sweetalert';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -29,13 +29,31 @@ export class UsuarioComponent implements OnInit {
     })
   }
   eliminarUser(id: any) {
-    this._usuarioService.eliminarUsuario(id).subscribe(data => {
-     //this.toastr.error('El producto fue eliminado con exito' ,'Producto Eliminado');
-      this.getUsers();
-    }, error => {
-      console.log(error);
+     //Alerta
+     swal({
+      title: "¿Estás seguro?",
+      text: "Una vez borrado no podrás recuperarlo!",
+      icon: "warning",
+      buttons: [true, true],
+      dangerMode: true
     })
+    .then((willDelete) => {
+      if (willDelete) {
+        this._usuarioService.eliminarUsuario(id).subscribe(
+          data => {
+            swal("El Usuario ha sido borrado!", {
+              icon: "success",
+            });
+            this.getUsers();
+          },
+          error => {
+            console.log(error);
+          }
+        );
+
+      } else {
+        swal("Tranquilo, nada se ha borrado!");
+      }
+    });
   }
-
-
 }

@@ -1,3 +1,4 @@
+import { User } from 'src/app/models/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { AuthService } from '../../services/auth.service';
@@ -8,6 +9,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  identity: User;
   user = {
     email: "",
     password: ''
@@ -16,7 +19,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {
+    this.identity = JSON.parse(localStorage.getItem('identity')|| '{}');
+
+  }
 
   ngOnInit(): void {
   }
@@ -26,6 +32,7 @@ export class LoginComponent implements OnInit {
         res => {
           console.log(res);
           localStorage.setItem('token', res.token);
+          localStorage.setItem('identity', JSON.stringify(res));
           this.router.navigate(['/panels']);
         },
         err => console.log(err)

@@ -40,4 +40,13 @@ mat-toolbar {
 ::ng-deep .mat-menu-content {
   width: 160px;
 }
+.nav-link{
+  margin-left: 0px !important;
+  margin-right: 0px;
+}
+.d-flex{
+  margin-left: 0px;
+  padding-left: 0px;
+  margin-right: 0px;
+}
 
