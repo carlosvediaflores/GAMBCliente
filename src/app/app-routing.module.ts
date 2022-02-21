@@ -20,6 +20,10 @@ import { HojaAddComponent } from './components/hoja-add/hoja-add.component';
 import { PrintHrComponent } from './components/print-hr/print-hr.component';
 import { SeguimientoAddComponent } from './components/seguimiento-add/seguimiento-add.component';
 import { SeguimientoComponent } from './components/seguimiento/seguimiento.component';
+import { CorrespondenciaComponent } from './components/correspondencia/correspondencia.component';
+import { ListFilesComponent } from './components/list-files/list-files.component';
+import { AddFilesComponent } from './components/add-files/add-files.component';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   {path: '', component: ContenidoComponent},
@@ -39,13 +43,18 @@ const routes: Routes = [
   {path:'usuarioAdd/:id', component:UsuarioAddComponent,canActivate:[AuthGuard]},
   {path: 'usuario', component: UsuarioComponent,canActivate:[AuthGuard]},
   {path:'hoja-add',component:HojaAddComponent,canActivate:[AuthGuard]},
+  {path:'list-files/:id',component:ListFilesComponent,canActivate:[AuthGuard]},
+  {path:'add-files/:id',component:AddFilesComponent,canActivate:[AuthGuard]},
   {path:'hoja-add/:id',component:HojaAddComponent,canActivate:[AuthGuard]},
   {path:'print-hr',component:PrintHrComponent,canActivate:[AuthGuard]},
   {path:'print-hr/:id',component:PrintHrComponent,canActivate:[AuthGuard]},
-  {path:'seguimiento/:id',component:SeguimientoComponent,canActivate:[AuthGuard]},
+  {path:'seguimiento/:id',component:SeguimientoComponent},
+  {path:'search/:search',component:SearchComponent},
   {path:'seguimiento',component:SeguimientoComponent,canActivate:[AuthGuard]},
   {path:'seguimiento-add',component:SeguimientoAddComponent,canActivate:[AuthGuard]},
   {path:'seguimiento-add/:id',component:SeguimientoAddComponent,canActivate:[AuthGuard]},
+  {path:'seguimiento-add/:id/:ids',component:SeguimientoAddComponent,canActivate:[AuthGuard]},
+  {path:'correspondencia',component:CorrespondenciaComponent,canActivate:[AuthGuard]},
   {path: 'panels', component: PanelsComponent,
                     canActivate:[AuthGuard]},
   {path: '**', redirectTo: ''}

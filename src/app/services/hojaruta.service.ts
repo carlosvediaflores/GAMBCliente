@@ -34,4 +34,7 @@ export class HojarutaService {
   EditarHoja(id: string, hoja:Hojaruta): Observable<any> {
     return this._http.put(this.URL + 'hoja/' + id, hoja);
   }
+  buscarHoja(search: string): Observable<any> {
+    return this._http.get(this.URL + 'hojasearch/' + search);
+  }
 }

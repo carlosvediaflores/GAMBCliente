@@ -23,11 +23,14 @@ export class SeguimientoAddComponent implements OnInit {
   seguiForm: FormGroup;
   titulo = 'derivar documento';
   id: string | null;
+  ids: string | null;
 
   origenen: string = "ENVIADO";
+  origendev: string = "DERIVADO";
   public hojas: Hojaruta[] = [];
   public hoja: any  = [];
   idh: string = "";
+  idnuit: string = "";
   origenreg: string = "REGISTRADO";
 
   constructor(private fb: FormBuilder,
@@ -39,42 +42,41 @@ export class SeguimientoAddComponent implements OnInit {
     private aRouter: ActivatedRoute) {
       this.seguiForm = this.fb.group({
         destino: ['', Validators.required],
-       // origen: ['', Validators.required],
         detalles: ['', Validators.required],
         instrucciones: ['', Validators.required],
-        fecharecepcion: ['', Validators.required],
+        //fecharecepcion: ['', Validators.required],
         //estado: ['', Validators.required],
         //post: ['', Validators.required],
       })
       this.id = this.aRouter.snapshot.paramMap.get('id');
+      this.ids = this.aRouter.snapshot.paramMap.get('ids');
+
     }
 
   ngOnInit(): void {
     this.getOrga();
-    //this.esEditar();
+    this.getNuit();
     this.getSub();
-
   }
 
 
   registerSegui() {
     const SEGUI: Segui = {
+      nuit:this.idnuit,
       destino: this.seguiForm.get('destino')?.value,
-      //origen: this.seguiForm.get('origen')?.value,
       detalles: this.seguiForm.get('detalles')?.value,
       instrucciones: this.seguiForm.get('instrucciones')?.value,
-      //fechaderivado: this.seguiForm.get('fechaderivado')?.value,
-      fecharecepcion: this.seguiForm.get('fecharecepcion')?.value,
-      //sestado: this.seguiForm.get('estado')?.value,
     }
     const HOJA: Hojaruta = {
       estado:this.origenen,
     }
+    const SEGUIS: Segui= {
+      estado:this.origendev,
+
+    }
     if (this.id !== null) {
-      //ediar Hoja de Ruta
-      console.log(SEGUI);
       this._seguiService.EditarSegui(this.id, SEGUI).subscribe(data =>{
-        this.router.navigate(['/hoja-ruta']);
+        this.router.navigate(['/correspondencia']);
       }, error => {
         console.log(error);
         this.seguiForm.reset();
@@ -82,8 +84,7 @@ export class SeguimientoAddComponent implements OnInit {
       this._hojaService.obtenerHoja(this.id).subscribe(data => {
         this.hoja = data.serverResponse;
         this.idh= this.hoja._id;
-        console.log(this.hoja.serverResponse)
-        this._hojaService.EditarHoja  (this.idh, HOJA).subscribe(data =>{
+        this._hojaService.EditarHoja (this.idh, HOJA).subscribe(data =>{
           console.log(HOJA);
         }, error => {
           console.log(error);
@@ -91,8 +92,11 @@ export class SeguimientoAddComponent implements OnInit {
       }, error => {
         console.log(error);
       })
-    } else {
-      //
+
+
+    }
+    else
+    {
       console.log(SEGUI);
       this._seguiService.register(SEGUI).subscribe(data => {
         this.router.navigate(['/seguimiento']);
@@ -101,10 +105,19 @@ export class SeguimientoAddComponent implements OnInit {
         this.seguiForm.reset();
       })
     }
+    if (this.ids !== null) {
+        this._seguiService.EditarSeguis (this.ids, SEGUIS).subscribe(data =>{
+          console.log(SEGUIS);
+        }, error => {
+          console.log(error);
+        })
+    }
   }
   getOrga(){
     this.subscription =  this._orgService.getOrg().subscribe(data => {
       console.log(data);
+      //console.log(this.id);
+      console.log(this.idh);
       this.org = data;
 
     }, error => {
@@ -123,7 +136,16 @@ export class SeguimientoAddComponent implements OnInit {
       })
     }
   }
-
+  getNuit(){
+    if (this.id !== null) {
+      this._hojaService.obtenerHoja(this.id).subscribe(data => {
+        this.hoja = data.serverResponse;
+        this.idnuit=this.hoja.nuit;
+      }, error => {
+        console.log(error);
+      })
+    }
+ }
   instruccions: any[] = [
     { value: 'Informar a la MAE ', nombre: 'Informar a la MAE '},
     { value: 'Dar el curso al trámite', nombre: 'Dar el curso al trámite'},

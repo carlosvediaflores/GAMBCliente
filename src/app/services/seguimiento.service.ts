@@ -35,4 +35,7 @@ export class SeguimientoService {
   EditarSegui(id: string, segui:Segui): Observable<any> {
     return this._http.put(this.URL + 'segui/' + id, segui);
   }
+  EditarSeguis(id: string, segui:Segui): Observable<any> {
+    return this._http.put(this.URL + 'seguis/' + id, segui);
+  }
 }

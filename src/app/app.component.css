@@ -6,7 +6,7 @@
 }
 
 mat-drawer {
-  width: 260px;
+  width: 230px;
 
 }
 mat-drawer-container {
@@ -15,6 +15,6 @@ mat-drawer-container {
 }
 
 mat-drawer {
-  background: hsla(220, 100%, 3%, 0.884);
+  background: hsla(221, 86%, 36%, 0.884);
 
 }

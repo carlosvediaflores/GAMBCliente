@@ -11,5 +11,6 @@ export class PanelsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
 
 }

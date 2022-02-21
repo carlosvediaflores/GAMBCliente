@@ -3,54 +3,73 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HojarutaService } from 'src/app/services/hojaruta.service';
 import { Hojaruta } from 'src/app/models/hojaruta';
-
+import { Global } from 'src/app/services/global';
 @Component({
-  selector: 'app-hoja-add',
-  templateUrl: './hoja-add.component.html',
-  styleUrls: ['./hoja-add.component.css']
+  selector: 'app-add-files',
+  templateUrl: './add-files.component.html',
+  styleUrls: ['./add-files.component.css']
 })
-export class HojaAddComponent implements OnInit {
-  public org: Hojaruta[] = [];
+export class AddFilesComponent implements OnInit {
+  public afuConfig: any;
   public hoja: any = [];
-  cant: string = "";
-  total: string = "";
-  ceros: string = "00";
   hojaForm: FormGroup;
-  titulo = 'GENERAR HOJA DE RUTA';
+  titulo = 'ADJUNTAR ARCHIVO';
   id: string | null;
-  constructor(private fb: FormBuilder,
+
+  constructor(
+    private fb: FormBuilder,
     private router: Router,
     private _hojaService: HojarutaService,
-    private aRouter: ActivatedRoute) {
-      this.hojaForm = this.fb.group({
-        origen: ['', Validators.required],
-        tipodoc: ['', Validators.required],
-        referencia: ['', Validators.required],
-        fechadocumento: ['', Validators.required],
-      })
-      this.id = this.aRouter.snapshot.paramMap.get('id');
-    }
+    private aRouter: ActivatedRoute
 
+  ) {
+    this.hojaForm = this.fb.group({
+      origen: ['', Validators.required],
+      tipodoc: ['', Validators.required],
+      referencia: ['', Validators.required],
+      fechadocumento: ['', Validators.required],
+    })
+    this.id = this.aRouter.snapshot.paramMap.get('id');
+
+    this.afuConfig = {
+      multiple: false,
+      formatsAllowed: ".jpg,.png, .gif, .jpeg, .pdf",
+      //maxSize: "50",
+      uploadAPI: {
+        url: Global.url + 'uploadhojaruta/'+ this.id
+      },
+      theme: "attachPin",
+      hideProgressBar: true,
+      hideResetBtn: true,
+      hideSelectBtn: false,
+      fileNameIndex: true,
+      replaceTexts: {
+        selectFileBtn: 'Select Files',
+        resetBtn: 'Reset',
+        uploadBtn: 'Upload',
+        dragNDropBox: 'Drag N Drop',
+        attachPinBtn: 'Sube tu archivo',
+        afterUploadMsg_success: 'Successfully Uploaded !',
+        afterUploadMsg_error: 'Upload Failed !',
+        sizeLimit: 'Size Limit'
+      }
+    };
+  }
   ngOnInit(): void {
     this.esEditar();
     this.getHojas();
   }
   registerHojas() {
-    this.cant= this.cant+1
-    this.total= this.ceros+this.cant+"-22";
     const HOJA: Hojaruta = {
       origen: this.hojaForm.get('origen')?.value,
       tipodoc: this.hojaForm.get('tipodoc')?.value,
       referencia: this.hojaForm.get('referencia')?.value,
       fechadocumento: this.hojaForm.get('fechadocumento')?.value,
-      nuit:this.total
-
     }
-
     if (this.id !== null) {
       //ediar usuario
       console.log(HOJA);
-      this._hojaService.EditarHoja  (this.id, HOJA).subscribe(data =>{
+      this._hojaService.EditarHoja(this.id, HOJA).subscribe(data => {
         this.router.navigate(['/hoja-ruta']);
       }, error => {
         console.log(error);
@@ -68,11 +87,10 @@ export class HojaAddComponent implements OnInit {
     }
   }
   esEditar() {
-
     if (this.id !== null) {
       this.titulo = 'Editar Hoja de Ruta';
       this._hojaService.obtenerHoja(this.id).subscribe(data => {
-        console.log(data.serverResponse)
+        this.hoja=data.serverResponse
         this.hojaForm.setValue({
           origen: data.serverResponse.origen,
           tipodoc: data.serverResponse.tipodoc,
@@ -88,15 +106,15 @@ export class HojaAddComponent implements OnInit {
   getHojas() {
     this._hojaService.getHojas().subscribe(data => {
       console.log(data.serverResponse);
-      console.log(data.serverResponse.length + " " + "esto es el cantidad de documentos");
-      this.cant = data.serverResponse.length
+
 
     }, error => {
       console.log(error);
     })
   }
 
-  imprimir(){
-
+  fileUpload(data: any) {
+    //this.hoja.urihoja = data.body.image;
+    //console.log(this.hoja.urihoja)
   }
 }

@@ -14,15 +14,10 @@ import { Segui } from 'src/app/models/seguimiento';
 })
 export class SeguimientoComponent implements OnInit {
   subscription: Subscription = new Subscription;
-  fecharesepcion: string='';
-  nuit: string='';
-  origen: string ='';
-  tipodoc: string= '';
-  referencia: string = '';
   id: string | null;
   titulo = 'Crear una Unidad';
-  segui: any [] = [];
-  ruta: any [] = [];
+  segui: any  = [];
+  ruta: any = [];
   constructor(private fb: FormBuilder,
     private router: Router,
     private _seguiService: SeguimientoService,
@@ -40,16 +35,16 @@ export class SeguimientoComponent implements OnInit {
     if (this.id !== null) {
       this.titulo = 'Editar Org';
       this.subscription= this._hojaService.obtenerHoja(this.id).subscribe(data => {
-        this.segui=data.serverResponse.seguimiento;
-        this.nuit=data.serverResponse.nuit;
-        this.fecharesepcion=data.serverResponse.fecharesepcion;
-        this.origen=data.serverResponse.origen;
-        this.tipodoc=data.serverResponse.tipodoc;
-        this.referencia=data.serverResponse.referencia;
-
-
+        this.ruta=data.serverResponse;
       }, error => {
         console.log("no hay id" + error);
+      })
+      this.subscription =  this._seguiService.getsegui().subscribe(data => {
+        console.log(data);
+        this.segui = data;
+
+      }, error => {
+        console.log(error);
       })
     }
   }

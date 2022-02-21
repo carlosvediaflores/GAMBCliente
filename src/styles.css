@@ -423,7 +423,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-.modal {
+/*.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -443,4 +443,4 @@ body {
   background-clip: padding-box;
   outline: 0;
 }
-
+*/

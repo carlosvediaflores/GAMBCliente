@@ -14,13 +14,7 @@ import { Hojaruta } from 'src/app/models/hojaruta';
 })
 export class PrintHrComponent implements OnInit {
   subscription: Subscription = new Subscription;
-  fecharesepcion: any;
-  nuit: any;
-  origen: string | undefined;
-  tipodoc: string= '';
-  referencia: string = '';
-
-  public hoja: Hojaruta[] = [];
+  ruta: any = [];
   titulo = 'Crear una Unidad';
   id: string | null;
   constructor(private fb: FormBuilder,
@@ -39,13 +33,8 @@ export class PrintHrComponent implements OnInit {
     if (this.id !== null) {
       this.titulo = 'Editar Org';
       this.subscription = this._hojaService.obtenerHoja(this.id).subscribe(data => {
+        this.ruta=data.serverResponse;
         console.log(data)
-        this.nuit=data.serverResponse.nuit;
-        this.fecharesepcion=data.serverResponse.fecharesepcion;
-        this.origen=data.serverResponse.origen;
-        this.tipodoc=data.serverResponse.tipodoc;
-        this.referencia=data.serverResponse.referencia
-
       }, error => {
         console.log("no hay id" + error);
       })

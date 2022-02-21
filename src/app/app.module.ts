@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { AngularFileUploaderModule } from "angular-file-uploader";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +35,11 @@ import { HojaAddComponent } from './components/hoja-add/hoja-add.component';
 import { PrintHrComponent } from './components/print-hr/print-hr.component';
 import { SeguimientoComponent } from './components/seguimiento/seguimiento.component';
 import { SeguimientoAddComponent } from './components/seguimiento-add/seguimiento-add.component';
+import { CorrespondenciaComponent } from './components/correspondencia/correspondencia.component';
+import { ListFilesComponent } from './components/list-files/list-files.component';
+import { AddFilesComponent } from './components/add-files/add-files.component';
+import { SearchComponent } from './components/search/search.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -57,7 +62,11 @@ import { SeguimientoAddComponent } from './components/seguimiento-add/seguimient
     HojaAddComponent,
     PrintHrComponent,
     SeguimientoComponent,
-    SeguimientoAddComponent
+    SeguimientoAddComponent,
+    CorrespondenciaComponent,
+    ListFilesComponent,
+    AddFilesComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +75,7 @@ import { SeguimientoAddComponent } from './components/seguimiento-add/seguimient
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxPaginationModule,
     // * MATERIAL IMPORTS
     MatSidenavModule,
     MatToolbarModule,
@@ -73,6 +83,7 @@ import { SeguimientoAddComponent } from './components/seguimiento-add/seguimient
     MatIconModule,
     MatDividerModule,
     MatListModule,
+    AngularFileUploaderModule,
 
   ],
   providers: [

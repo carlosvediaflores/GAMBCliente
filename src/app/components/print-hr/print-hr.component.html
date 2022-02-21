@@ -23,7 +23,7 @@
           </div>
           <div class="p-3 mt-4">
             <h5 class="text-center mb-0">NUIT</h5>
-            <div  class="alert-success sizeAlert text-center">N°:<strong></strong>{{nuit | uppercase}}</div>
+            <div  class="alert-success sizeAlert text-center">N°:<strong></strong>{{ruta.nuit | uppercase}}</div>
           </div>
         </div>
         <hr class="mt-0" />
@@ -32,23 +32,23 @@
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <p class="card-text">
-                <span>Fecha de recepcion: </span>{{ fecharesepcion | date:'dd/MM/yyyy'}}
+                <span>Fecha de recepcion: </span>{{ ruta.fecharesepcion | date:'dd/MM/yyyy'}}
               </p>
-              <p class="card-text" ><span>Hora: </span>{{fecharesepcion | date:'HH:MM:ss'}}</p>
+              <p class="card-text" ><span>Hora: </span>{{ruta.fecharesepcion | date:'HH:MM:ss'}}</p>
               <p class="card-text">
-                <span>Fecha de documento: </span>{{fecharesepcion | date:'HH:MM:ss'}}
+                <span>Fecha de documento: </span>{{ruta.fechadocumento | date:'dd/MM/yyyy'}}
               </p>
             </div>
             <hr class="mt-0" />
             <div class="d-flex justify-content-between">
               <p class="card-text">
-                <span>Origen: </span>{{origen}}
+                <span>Origen: </span>{{ruta.origen}}
               </p>
-              <p class="card-text"><span>Tipo de documento: </span>{{tipodoc}}</p>
+              <p class="card-text"><span>Tipo de documento: </span>{{ruta.tipodoc}}</p>
             </div>
             <hr class="mt-0" />
             <p  class="card-text text-break">
-              <span>Referencia: </span>{{referencia}}
+              <span>Referencia: </span>{{ruta.referencia}}
             </p>
             <hr class="mt-0" />
           </div>

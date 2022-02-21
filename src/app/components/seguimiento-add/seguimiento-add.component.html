@@ -9,52 +9,52 @@
             [formGroup]="seguiForm"
             (ngSubmit)="registerSegui()"
           >
-          <div class="card p-2">
-            <label for="destino">Destino</label>
-            <div class="mb-2">
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                id="destino"
-                formControlName="destino"
-                [(ngModel)]="params"
-                (change)="getSub()"
-              >
-               <option selected>---Seleccione Destino---</option>
-                <option *ngFor="let orgs of org">{{ orgs.nombredir }}</option>
-              </select>
-              <div
-                class="text-danger"
-                *ngIf="
-                  seguiForm.get('destino')?.hasError('required') &&
-                  seguiForm.get('destino')?.touched
-                "
-              >
-                <span>El cargo <strong>es obligatoria</strong></span>
+            <div class="card p-2">
+              <label for="destino">Destino</label>
+              <div class="mb-2">
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  id="destino"
+                  formControlName="destino"
+                  [(ngModel)]="params"
+                  (change)="getSub()"
+                >
+                  <option selected>---Seleccione Destino---</option>
+                  <option *ngFor="let orgs of org">{{ orgs.nombredir }}</option>
+                </select>
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    seguiForm.get('destino')?.hasError('required') &&
+                    seguiForm.get('destino')?.touched
+                  "
+                >
+                  <span>El cargo <strong>es obligatoria</strong></span>
+                </div>
+              </div>
+              <div class="mb-2">
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="destino"
+                >
+                  <option selected>{{ params }}</option>
+                  <option *ngFor="let orgselect of orgselec">
+                    {{ orgselect.nombresubdir }}
+                  </option>
+                </select>
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    seguiForm.get('destino')?.hasError('required') &&
+                    seguiForm.get('destino')?.touched
+                  "
+                >
+                  <span>El cargo <strong>es obligatoria</strong></span>
+                </div>
               </div>
             </div>
-            <div class="mb-2">
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="destino"
-              >
-                <option selected>{{ params }}</option>
-                <option *ngFor="let orgselect of orgselec">
-                  {{ orgselect.nombresubdir }}
-                </option>
-              </select>
-              <div
-                class="text-danger"
-                *ngIf="
-                  seguiForm.get('destino')?.hasError('required') &&
-                  seguiForm.get('destino')?.touched
-                "
-              >
-                <span>El cargo <strong>es obligatoria</strong></span>
-              </div>
-            </div>
-          </div>
             <div class="mb-2 mt-2">
               <select
                 class="form-select"
@@ -81,7 +81,6 @@
                 formControlName="detalles"
                 class="form-control"
                 placeholder="Escriba el detalle de instrucción"
-
               ></textarea>
               <div
                 class="text-danger"
@@ -93,25 +92,6 @@
                 <span
                   >Detalle de Instrucción <strong>es obligatoria</strong></span
                 >
-              </div>
-            </div>
-
-            <div class="mb-2">
-              <label class="mb-0" for="fecha">Fecha de Resepción </label>
-              <input
-                type="date"
-                formControlName="fecharecepcion"
-                class="form-control"
-                placeholder="Fecha de Recepcion"
-              />
-              <div
-                class="text-danger"
-                *ngIf="
-                  seguiForm.get('fecharecepcion')?.hasError('required') &&
-                  seguiForm.get('fecharecepcion')?.touched
-                "
-              >
-                <span>Fecha de recepción<strong>es obligatoria</strong></span>
               </div>
             </div>
             <div class="mb-2">

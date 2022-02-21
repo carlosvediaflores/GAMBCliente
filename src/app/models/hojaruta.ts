@@ -8,5 +8,7 @@ export interface Hojaruta{
   estado?: string;
   referencia?:string;
   archivo?:string;
+  urihoja?: string;
+  pathhoja?: string;
 
 }

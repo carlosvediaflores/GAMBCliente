@@ -23,7 +23,7 @@
           </div>
           <div class="p-3 mt-4">
             <h5 class="text-center mb-0">NUIT</h5>
-            <div  class="alert-success sizeAlert">N°:<strong>{{nuit }}</strong></div>
+            <div  class="alert-success sizeAlert">N°:<strong>{{ruta.nuit}}</strong></div>
           </div>
         </div>
         <hr class="mt-0" />
@@ -32,23 +32,23 @@
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <p class="card-text">
-                <span>Fecha de recepcion: </span>{{ fecharesepcion | date:'dd/MM/yyyy'}}
+                <span>Fecha de recepcion: </span>{{ ruta.fecharesepcion |  date:'dd/MM/yyyy'}}
               </p>
-              <p class="card-text" ><span>Hora: </span>{{fecharesepcion | date:'HH:MM:ss'}}</p>
+              <p class="card-text" ><span>Hora: </span>{{ruta.fecharesepcion |  date:'HH:MM:ss'}}</p>
               <p class="card-text">
-                <span>Fecha de documento: </span>{{fecharesepcion | date:'HH:MM:ss'}}
+                <span>Fecha de documento: </span>{{ruta.fechadocumento |  date:'dd/MM/yyyy'}}
               </p>
             </div>
             <hr class="mt-0" />
             <div class="d-flex justify-content-between">
               <p class="card-text">
-                <span>Origen: </span>{{origen}}
+                <span>Origen: </span>{{ruta.origen}}
               </p>
-              <p class="card-text"><span>Tipo de documento: </span>{{tipodoc}}</p>
+              <p class="card-text"><span>Tipo de documento: </span>{{ruta.tipodoc}}</p>
             </div>
             <hr class="mt-0" />
             <p  class="card-text text-break">
-              <span>Referencia: </span>{{referencia}}
+              <span>Referencia: </span>{{ruta.referencia}}
             </p>
             <hr class="mt-0" />
           </div>
@@ -58,33 +58,45 @@
           <div class="card">
               <div class="card-body text-center">
                   <span class="titulo">LISTA DE SEGUIMIENTO </span>
-                  <button class="btn btn-success float-end" routerLink="/hoja-ruta">VOLVER</button>
+                  <button class="btn btn-success float-end" routerLink="/correspondencia">VOLVER</button>
                   <table  class="table table-striped mt-3">
                       <thead>
                         <tr>
-                          <th scope="col">Derivado</th>
+                          <th scope="col">Derivado A...</th>
                           <th scope="col">Instrucciones</th>
                           <th scope="col">Detalles</th>
                           <th scope="col">Fecha Recepcion</th>
                           <th scope="col">Fecha Derivado</th>
                           <th scope="col">Estado</th>
-                          <th scope="col">Origen</th>
-                          <th scope="col">Aciones</th>
+                         
+
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody >
                         <tr *ngFor="let seguis of segui">
-                          <td>{{ seguis.destino}}</td>
-                          <td>{{ seguis.instrucciones}}</td>
-                          <td>{{ seguis.detalles}}</td>
-                          <td>{{ seguis.fecharecepcion| date:'dd/MM/yyyy HH:MM:ss'}}</td>
-                          <td>{{ seguis.fechaderivado}}</td>
-                          <td>{{ seguis.estado}}</td>
-                          <td>{{ seguis.origen}}</td>
+                          <td *ngIf="id===seguis.idhj">{{ seguis.destino}}</td>
+                          <td *ngIf="id===seguis.idhj">{{ seguis.instrucciones}}</td>
+                          <td *ngIf="id===seguis.idhj">{{ seguis.detalles}}</td>
+                          <td *ngIf="id===seguis.idhj">
+                            <i  [ngClass]= "seguis.fecharecepcion === 'SIN RESEPCIONAR' ? 'badge badge-danger' : '' ">
+                              <span *ngIf="seguis.fecharecepcion === 'SIN RESEPCIONAR'"> {{seguis.fecharecepcion}} </span>
+                              <span *ngIf="seguis.fecharecepcion != 'SIN RESEPCIONAR'"> {{seguis.fecharecepcion | date: "dd/MM/yyyy HH:MM:ss"}} </span>
+                            </i>
+                          </td>
+                          <td *ngIf="id===seguis.idhj">{{ seguis.fechaderivado | date:'dd/MM/yyyy HH:MM:ss'}}</td>
+                          <td *ngIf="id===seguis.idhj" [ngSwitch]="seguis.estado">
+                            <span *ngSwitchCase="'ENVIADO'" class="badge badge-danger">{{ seguis.estado }}</span>
+                            <span *ngSwitchCase="'RECIBIDO'" class="badge badge-success">{{ seguis.estado }}</span>
+                            <span *ngSwitchCase="'DERIVADO'" class="badge badge-info">{{ seguis.estado }}</span>
+                            <span *ngSwitchCase="'FINALIZADO'" class="badge badge-warning">{{ seguis.estado }}</span>
+                          </td>
+                          <td *ngIf="id===seguis.idhj">{{ seguis.origen}}</td>
+                          <!--
                           <td>
                               <i [routerLink]="['/seguimiento-add']" class="fas fa-edit text-primary"></i>
                               <i class="fas fa-trash text-danger"></i>
                           </td>
+                          -->
                         </tr>
                       </tbody>
                     </table>
@@ -92,17 +104,8 @@
               </div>
           </div>
         </div>
-
       </div>
-
-
-
-
     </div>
-
-
-
-
   </div>
 </div>
 
