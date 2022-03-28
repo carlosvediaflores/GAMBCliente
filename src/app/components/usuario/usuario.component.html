@@ -1,7 +1,10 @@
 
 <div class="container mt-5">
-  <div class="row">
-          <div class="card">
+  <div class="row" >
+    <div class="alert alert-danger" role="alert" *ngIf="identity.roles!='SUPER_ADMIN'">
+      Usted... no tiene privilegios para navegar en este sitio!
+     </div>
+          <div class="card" *ngIf="identity.roles=='SUPER_ADMIN'">
               <div class="card-body text-center">
                   <span class="titulo">LISTADO DE USUARIOS </span>
                   <button class="btn btn-success float-end" routerLink="/usuarioAdd">NUEVO</button>
@@ -15,6 +18,7 @@
                           <th scope="col">Telefono</th>
                           <th scope="col">Fecha de Nacimiento</th>
                           <th scope="col">Cargo</th>
+                          <th scope="col">Roles</th>
                           <th scope="col">Aciones</th>
                         </tr>
                       </thead>
@@ -27,9 +31,11 @@
                           <td>{{ user.numberphone }}</td>
                           <td>{{ user.birthdate  | date:'dd/MM/yyyy' }}</td>
                           <td>{{ user.post }}</td>
+                          <td>{{ user.roles }}</td>
                           <td>
                               <i [routerLink]="['/usuarioAdd', user._id]" class="fas fa-edit text-primary"></i>
                               <i (click)="eliminarUser(user._id)" class="fas fa-trash text-danger"></i>
+                              <i [routerLink]="['/credenciales', user._id]" class="fas fa-user-lock text-primary"></i>
                           </td>
                         </tr>
                       </tbody>

@@ -10,6 +10,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+
+  alert = "";
+
   identity: User;
   user = {
     email: "",
@@ -20,7 +23,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-    this.identity = JSON.parse(localStorage.getItem('identity')|| '{}');
+    this.identity = JSON.parse(localStorage.getItem('identity') || '{}');
 
   }
 
@@ -30,13 +33,17 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.user)
       .subscribe(
         res => {
-          console.log(res);
+          this.alert = res.serverResponse
+          //console.log(this.alert);
           localStorage.setItem('token', res.token);
           localStorage.setItem('identity', JSON.stringify(res));
-          this.router.navigate(['/panels']);
+
+          this.router.navigate(['/panels']) ;
         },
         err => console.log(err)
       )
+
+
   }
 
 }

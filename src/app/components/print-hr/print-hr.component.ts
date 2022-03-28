@@ -40,12 +40,6 @@ export class PrintHrComponent implements OnInit {
       })
     }
   }
-
-
-
-
-
-
   ImprimirPDF() {
     const DATA:any = document.getElementById('htmlData');
     const doc = new jsPDF('p', 'pt', 'letter');
@@ -57,7 +51,7 @@ export class PrintHrComponent implements OnInit {
       const img = canvas.toDataURL('image/PNG');
 
       // Add image Canvas to PDF
-      const bufferX = 15;
+      const bufferX = 3;
       const bufferY = 15;
       const imgProps = (doc as any).getImageProperties(img);
       const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
@@ -86,7 +80,7 @@ export class PrintHrComponent implements OnInit {
       const img = canvas.toDataURL('image/PNG');
 
       // Add image Canvas to PDF
-      const bufferX = 15;
+      const bufferX = 4;
       const bufferY = 15;
       const imgProps = (doc as any).getImageProperties(img);
       const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;

@@ -36,4 +36,7 @@ export class UsuarioService {
   EditarUser(id: string, user:User): Observable<any> {
     return this._http.put(this.URL + 'users/' + id, user);
   }
+  getroles():Observable<any>{
+    return this._http.get(this.URL+'roles');
+  }
 }

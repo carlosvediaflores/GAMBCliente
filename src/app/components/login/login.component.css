@@ -1,8 +1,5 @@
-.language-menu {
-  position: absolute;
-  right: 0px;
-  padding: 10px;
-  margin-top: 0px;
+.card{
+  background-color: rgba(67, 226, 128, 0.5);
 }
 
 .btn{

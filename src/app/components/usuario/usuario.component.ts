@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router, ActivatedRoute, Params } from '@angular/router'
 import { UsuarioService } from 'src/app/services/usuario.service';
 import swal from 'sweetalert';
 import { User } from 'src/app/models/user';
@@ -11,14 +13,23 @@ import { User } from 'src/app/models/user';
 })
 export class UsuarioComponent implements OnInit {
 
+  public identity: any ;
   public users: User[] = [];
 
   constructor(
+    public _authService: AuthService,
+    private _router: Router,
+    private _route: ActivatedRoute,
     private _usuarioService: UsuarioService
-  ) { }
+  ) {this.loadUser(); }
 
   ngOnInit(): void {
     this.getUsers();
+  }
+  loadUser(){
+    this.identity = JSON.parse(localStorage.getItem('identity')|| '{}');
+   // this.token = JSON.parse(localStorage.getItem('token')|| '{}');
+
   }
   getUsers(){
     this._usuarioService.getusers().subscribe(data => {

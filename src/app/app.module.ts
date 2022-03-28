@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgChartsModule } from 'ng2-charts';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -40,6 +41,8 @@ import { ListFilesComponent } from './components/list-files/list-files.component
 import { AddFilesComponent } from './components/add-files/add-files.component';
 import { SearchComponent } from './components/search/search.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CredencialesComponent } from './components/credenciales/credenciales.component';
+import { AjustesComponent } from './components/ajustes/ajustes.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CorrespondenciaComponent,
     ListFilesComponent,
     AddFilesComponent,
-    SearchComponent
+    SearchComponent,
+    CredencialesComponent,
+    AjustesComponent
   ],
   imports: [
     BrowserModule,
@@ -76,6 +81,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxPaginationModule,
+    NgChartsModule,
     // * MATERIAL IMPORTS
     MatSidenavModule,
     MatToolbarModule,
@@ -85,7 +91,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatListModule,
     AngularFileUploaderModule,
 
+
   ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
+
   providers: [
     AuthGuard,{
       provide: HTTP_INTERCEPTORS,

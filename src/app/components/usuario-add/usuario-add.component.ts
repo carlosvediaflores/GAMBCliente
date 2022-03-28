@@ -18,6 +18,7 @@ import { Organizacion } from 'src/app/models/Organizacion';
 export class UsuarioAddComponent implements OnInit {
   subscription: Subscription = new Subscription;
   params: string = "";
+  public identity: any ;
   orgselec: any []=[] ;
   public org: Organizacion[] = [];
   public users: User[] = [];
@@ -41,11 +42,17 @@ export class UsuarioAddComponent implements OnInit {
       post: ['', Validators.required],
     })
     this.id = this.aRouter.snapshot.paramMap.get('id');
+    this.loadUser();
   }
   ngOnInit(): void {
     this.getOrga();
     this.esEditar();
     this.getSub();
+  }
+  loadUser(){
+    this.identity = JSON.parse(localStorage.getItem('identity')|| '{}');
+   // this.token = JSON.parse(localStorage.getItem('token')|| '{}');
+
   }
   registerUser() {
     const USER: User = {

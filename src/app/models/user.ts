@@ -9,5 +9,6 @@ export interface User{
   password?:string;
   birthdate?: any;
   post?: string;
+  roles?: string;
   date?:any;
 }
