@@ -4,11 +4,11 @@
           <div class="card">
               <div class="card-body text-center">
                   <span class="titulo">LISTA DE HOJAS DE RUTA </span>
-                  <button class="btn btn-success float-end" routerLink="/hoja-add">NUEVO</button>
+                  <button class="btn btn-success float-end" routerLink="/hoja-add" *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">NUEVO</button>
                   <table *ngIf="hojas.length > 0" class="table table-striped mt-3">
                       <thead>
                         <tr>
-                          <th  scope="col">Enviar</th>
+                          <th  scope="col" *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">Enviar</th>
                           <th scope="col">NUIT</th>
                           <th scope="col">Fecha de Resepcion</th>
                           <th scope="col">HORA</th>
@@ -18,14 +18,14 @@
                           <th scope="col">Referencia</th>
                           <th scope="col">Estado</th>
                           <th scope="col">Seguimiento</th>
-                          <th scope="col">Imprimir</th>
+                          <th scope="col" *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">Imprimir</th>
                           <th scope="col">Adjunto</th>
-                          <th scope="col">Acciones</th>
+                          <th scope="col" *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr [ngClass]= "hoja.estado === 'ENVIADO' ? 'table-success' : 'table-light' "  *ngFor="let hoja of hojas | paginate: {itemsPerPage: 7, currentPage: pageActual}">
-                        <td >
+                        <tr [ngClass]= "hoja.estado === 'ENVIADO' ? 'table-success' : 'table-light' "  *ngFor="let hoja of hojas | paginate: {itemsPerPage: 10  , currentPage: pageActual}">
+                        <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">
                             <i [routerLink]="['/seguimiento-add',  hoja._id,] " class="fas fa-space-shuttle text-primary " *ngIf="hoja.estado === 'RECIBIDO'" ></i>
                             <i [routerLink]="null " class="fas fa-space-shuttle text-primary" style="color:rgb(171, 178, 241) !important" *ngIf="hoja.estado === 'ENVIADO'"  ></i>
                         </td>
@@ -44,13 +44,13 @@
                         <td>
                           <i [routerLink]="['/seguimiento',  hoja._id ]" class="fas fa-align-justify text-primary"></i>
                       </td>
-                      <td>
+                      <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">
                         <i [routerLink]="['/print-hr',  hoja._id ]" class="fas fa-print text-primary"></i>
                     </td>
                       <td>
-                        <i [routerLink]="['/list-files',  hoja._id ]" class="fas fa-file-alt text-primary"></i>
+                        <i [routerLink]="['/list-files',  hoja._id ]" class="fas fa-cloud-download-alt" style="color:rgb(29, 14, 248) !important"></i>
                     </td>
-                          <td>
+                          <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">
                               <i [routerLink]="['/hoja-add', hoja._id]" class="fas fa-edit text-primary" *ngIf="hoja.estado === 'REGISTRADO'"  ></i>
                               <i [routerLink]="null" class="fas fa-edit text-primary" style="color:rgb(124, 150, 235) !important" *ngIf="hoja.estado === 'ENVIADO'" ></i>
                               <i [routerLink]="null" class="fas fa-edit text-primary"style="color:rgb(124, 150, 235) !important" *ngIf="hoja.estado === 'RECIBIDO'" ></i>
@@ -62,7 +62,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+                    <pagination-controls *ngIf="hojas.length > 10" (pageChange)="pageActual = $event"></pagination-controls>
                     <h5 style="text-align: start; margin-top: 10px;" *ngIf="hojas.length == 0">No hay usuarios para mostrar</h5>
               </div>
           </div>

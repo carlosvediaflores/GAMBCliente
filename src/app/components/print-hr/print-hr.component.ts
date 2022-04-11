@@ -90,7 +90,7 @@ export class PrintHrComponent implements OnInit {
     }).then((docResult) => {
 
       //docResult.output('dataurlnewwindow', {filename: 'comprobante.pdf'});
-      docResult.save(`${new Date().toISOString()}_HojaDeRuta.pdf`);
+      docResult.save(`${new Date().toISOString()}_GAMB_HojaDeRuta.pdf`);
     });
 
 

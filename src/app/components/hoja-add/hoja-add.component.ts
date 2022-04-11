@@ -14,7 +14,7 @@ export class HojaAddComponent implements OnInit {
   public hoja: any = [];
   cant: string = "";
   total: string = "";
-  ceros: string = "00";
+  ceros: string = "0";
   hojaForm: FormGroup;
   titulo = 'GENERAR HOJA DE RUTA';
   id: string | null;
@@ -24,9 +24,8 @@ export class HojaAddComponent implements OnInit {
     private aRouter: ActivatedRoute) {
       this.hojaForm = this.fb.group({
         origen: ['', Validators.required],
-        tipodoc: ['', Validators.required],
         referencia: ['', Validators.required],
-        fechadocumento: ['', Validators.required],
+
       })
       this.id = this.aRouter.snapshot.paramMap.get('id');
     }
@@ -37,7 +36,7 @@ export class HojaAddComponent implements OnInit {
   }
   registerHojas() {
     this.cant= this.cant+1
-    this.total= this.ceros+this.cant+"-22";
+    this.total= this.cant+"-22";
     const HOJA: Hojaruta = {
       origen: this.hojaForm.get('origen')?.value,
       tipodoc: this.hojaForm.get('tipodoc')?.value,

@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgChartsModule } from 'ng2-charts';
 import { AngularFileUploaderModule } from "angular-file-uploader";
+import { MomentModule } from 'angular2-moment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -90,6 +91,7 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     MatDividerModule,
     MatListModule,
     AngularFileUploaderModule,
+    MomentModule
 
 
   ],

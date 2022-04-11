@@ -9,51 +9,50 @@
   <div class="row">
     <div id="htmlData">
       <div class="mt-0 ml-4 mr-2">
-        <div  class="d-flex justify-content-between ml-3">
-          <div>
-            <img src="assets/img/logo1.png" class="logo ml-4" />
+        <div  class="d-flex justify-content-between ml-3 mb-0">
+          <div >
+            <img src="assets/img/logo1.png" class="logo ml-4 mb-0" />
           </div>
-          <div class="text-center ml-5 mt-3">
-            <h5 class="mb-0">GOBIERNO AUTÓNOMO MUNICIPAL DE BETANZOS</h5>
-            <h6 class="mb-0">
+          <div class="text-center ml-5 mt-3 mb-0">
+            <p class="mb-0 fs-5">GOBIERNO AUTÓNOMO MUNICIPAL DE BETANZOS</p>
+            <p class="mb-0">
               Primera Sección Municipal Provincial Cornelio Saavedra
-            </h6>
+            </p>
             <samp>Betanzos - Potosí - Bolivia</samp>
-            <h5 class="text-muted">HOJA DE RUTA</h5>
+            <p class="mb-0 fs-4">HOJA DE RUTA</p>
           </div>
           <div class="p-3 mt-4">
-            <h5 class="text-center mb-0">NUIT</h5>
-            <div  class="alert-success sizeAlert text-center">N°:<strong></strong>{{ruta.nuit | uppercase}}</div>
+            <h5 class="text-center mb-0 fs-5 mb-1 ">NUIT</h5>
+            <div  class="badge badge-success text-center fs-5">N°:&nbsp;&nbsp;<strong></strong>{{ruta.nuit | uppercase}}</div>
           </div>
         </div>
-        <hr class="mt-0" />
 
-        <div class="card">
+        <div class="card pl-2 pr-2 border-3 border-primary mb-1">
           <div class="card-body">
             <div class="d-flex justify-content-between">
-              <p class="card-text">
-                <span>Fecha de recepcion: </span>{{ ruta.fecharesepcion | date:'dd/MM/yyyy'}}
+              <p class="card-text fw-normal">
+                <span >Fecha de recepcion: </span>{{ ruta.fecharesepcion | date:'dd/MM/yyyy'}}
               </p>
-              <p class="card-text" ><span>Hora: </span>{{ruta.fecharesepcion | date:'HH:MM:ss'}}</p>
-              <p class="card-text">
+              <p class="card-text fw-normal" ><span>Hora: </span>{{ruta.fecharesepcion | date:'HH:MM:ss'}}</p>
+              <p class="card-text fw-normal">
                 <span>Fecha de documento: </span>{{ruta.fechadocumento | date:'dd/MM/yyyy'}}
               </p>
             </div>
             <hr class="mt-0" />
             <div class="d-flex justify-content-between">
-              <p class="card-text">
+              <p class="card-text fw-normal" >
                 <span>Origen: </span>{{ruta.origen}}
               </p>
-              <p class="card-text"><span>Tipo de documento: </span>{{ruta.tipodoc}}</p>
+              <p class="card-text fw-normal"><span>Tipo de documento: </span>{{ruta.tipodoc}}</p>
             </div>
             <hr class="mt-0" />
-            <p  class="card-text text-break">
-              <span>Referencia: </span>{{ruta.referencia}}
+            <p  class="card-text text-break lh-1 pt-1 mb-1 fw-normal">
+              <span >Referencia: </span>{{ruta.referencia}}
             </p>
-            <hr class="mt-0" />
           </div>
         </div>
-        <div class="card mr-0">
+
+        <div class="card border-3 border-primary mr-0">
           <div class="row">
             <div class="col">
               <p class="text-center mb-0">
@@ -315,98 +314,138 @@
           </div>
         </div>
 
-        <div class="mt-2">
-          <div class="row">
-            <div class="col">
-              <div class="card p-2">
-                <label class="form-check-label"> Fecha de recepción:.............../................./................Hora:.............:............ </label>
+        <div class="mt-2  ">
+          <div class="row ">
+            <div class="col mr-0 pr-0 pl-3">
+              <div class="card border-3 border-primary p-2 pb-0">
+                <label class="form-check-label mt-1 "> Fecha de recepción:.............../................./........................
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Hora:.............:............ </label>
                 <br>
                 <br>
-                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:........................................ </label>
-                <label class="form-check-label"> Instrucción:......................................................................................................... </label>
-                <label class="form-check-label">................................................................................................................................. </label>
+                <br>
+                <br>
+                <br>
+                <br>
+                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:................................................................. </label>
+                <label class="form-check-label"> Instrucción:............................................................................................................................. </label>
+                <label class="form-check-label">................................................................................................................................................. </label>
               </div>
             </div>
-            <div class="col">
-              <div class="card p-2">
-                <label class="form-check-label"> Fecha de recepción:.............../................./................Hora:.............:............ </label>
+            <div class="col pl-1">
+              <div class="card border-3 border-primary p-2 pb-0">
+                <label class="form-check-label mt-1 "> Fecha de recepción:.............../................./........................
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Hora:.............:............ </label>
                 <br>
                 <br>
-                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:........................................ </label>
-                <label class="form-check-label"> Instrucción:......................................................................................................... </label>
-                <label class="form-check-label">................................................................................................................................. </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="mt-2">
-          <div class="row">
-            <div class="col">
-              <div class="card p-2">
-                <label class="form-check-label"> Fecha de recepción:.............../................./................Hora:.............:............ </label>
                 <br>
                 <br>
-                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:........................................ </label>
-                <label class="form-check-label"> Instrucción:......................................................................................................... </label>
-                <label class="form-check-label">................................................................................................................................. </label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card p-2">
-                <label class="form-check-label"> Fecha de recepción:.............../................./................Hora:.............:............ </label>
                 <br>
                 <br>
-                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:........................................ </label>
-                <label class="form-check-label"> Instrucción:......................................................................................................... </label>
-                <label class="form-check-label">................................................................................................................................. </label>
+                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:................................................................. </label>
+                <label class="form-check-label"> Instrucción:............................................................................................................................. </label>
+                <label class="form-check-label">................................................................................................................................................. </label>
               </div>
             </div>
           </div>
         </div>
         <div class="mt-2">
-          <div class="row">
-            <div class="col">
-              <div class="card p-2">
-                <label class="form-check-label"> Fecha de recepción:.............../................./................Hora:.............:............ </label>
+          <div class="row ">
+            <div class="col mr-0 pr-0 pl-3">
+              <div class="card border-3 border-primary p-2 pb-0">
+                <label class="form-check-label mt-1 "> Fecha de recepción:.............../................./........................
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Hora:.............:............ </label>
                 <br>
                 <br>
-                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:........................................ </label>
-                <label class="form-check-label"> Instrucción:......................................................................................................... </label>
-                <label class="form-check-label">................................................................................................................................. </label>
+                <br>
+                <br>
+                <br>
+                <br>
+                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:................................................................. </label>
+                <label class="form-check-label"> Instrucción:............................................................................................................................. </label>
+                <label class="form-check-label">................................................................................................................................................. </label>
               </div>
             </div>
-            <div class="col">
-              <div class="card p-2">
-                <label class="form-check-label"> Fecha de recepción:.............../................./................Hora:.............:............ </label>
+            <div class="col pl-1">
+              <div class="card border-3 border-primary p-2 pb-0">
+                <label class="form-check-label mt-1 "> Fecha de recepción:.............../................./........................
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Hora:.............:............ </label>
                 <br>
                 <br>
-                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:........................................ </label>
-                <label class="form-check-label"> Instrucción:......................................................................................................... </label>
-                <label class="form-check-label">................................................................................................................................. </label>
+                <br>
+                <br>
+                <br>
+                <br>
+                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:................................................................. </label>
+                <label class="form-check-label"> Instrucción:............................................................................................................................. </label>
+                <label class="form-check-label">................................................................................................................................................. </label>
               </div>
             </div>
           </div>
         </div>
         <div class="mt-2">
-          <div class="row">
-            <div class="col">
-              <div class="card p-2">
-                <label class="form-check-label"> Fecha de recepción:.............../................./................Hora:.............:............ </label>
+          <div class="row ">
+            <div class="col mr-0 pr-0 pl-3">
+              <div class="card border-3 border-primary p-2 pb-0">
+                <label class="form-check-label mt-1 "> Fecha de recepción:.............../................./........................
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Hora:.............:............ </label>
                 <br>
                 <br>
-                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:........................................ </label>
-                <label class="form-check-label"> Instrucción:......................................................................................................... </label>
-                <label class="form-check-label">................................................................................................................................. </label>
+                <br>
+                <br>
+                <br>
+                <br>
+                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:................................................................. </label>
+                <label class="form-check-label"> Instrucción:............................................................................................................................. </label>
+                <label class="form-check-label">................................................................................................................................................. </label>
               </div>
             </div>
-            <div class="col">
-              <div class="card p-2">
-                <label class="form-check-label"> Fecha de recepción:.............../................./................Hora:.............:............ </label>
+            <div class="col pl-1">
+              <div class="card border-3 border-primary p-2 pb-0">
+                <label class="form-check-label mt-1 "> Fecha de recepción:.............../................./........................
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Hora:.............:............ </label>
                 <br>
                 <br>
-                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:........................................ </label>
-                <label class="form-check-label"> Instrucción:......................................................................................................... </label>
-                <label class="form-check-label">................................................................................................................................. </label>
+                <br>
+                <br>
+                <br>
+                <br>
+                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:................................................................. </label>
+                <label class="form-check-label"> Instrucción:............................................................................................................................. </label>
+                <label class="form-check-label">................................................................................................................................................. </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-2">
+          <div class="row ">
+            <div class="col mr-0 pr-0 pl-3">
+              <div class="card border-3 border-primary p-2 pb-0">
+                <label class="form-check-label mt-1 "> Fecha de recepción:.............../................./........................
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Hora:.............:............ </label>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:................................................................. </label>
+                <label class="form-check-label"> Instrucción:............................................................................................................................. </label>
+                <label class="form-check-label">................................................................................................................................................. </label>
+              </div>
+            </div>
+            <div class="col pl-1">
+              <div class="card border-3 border-primary p-2 pb-0">
+                <label class="form-check-label mt-1 "> Fecha de recepción:.............../................./........................
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Hora:.............:............ </label>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <label class="form-check-label"> Fecha:....../......../..........Hora:......:......Derivado A:................................................................. </label>
+                <label class="form-check-label"> Instrucción:............................................................................................................................. </label>
+                <label class="form-check-label">................................................................................................................................................. </label>
               </div>
             </div>
           </div>

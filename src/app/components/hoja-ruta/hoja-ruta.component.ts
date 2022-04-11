@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert';
+import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HojarutaService } from 'src/app/services/hojaruta.service';
 import { Hojaruta } from 'src/app/models/hojaruta';
@@ -11,23 +12,30 @@ import { Hojaruta } from 'src/app/models/hojaruta';
   styleUrls: ['./hoja-ruta.component.css']
 })
 export class HojaRutaComponent implements OnInit {
+  public identity: any ;
   public hojas: Hojaruta[] = [];
   public hoja: any = [];
   idh: string = "";
   cant: string = "";
+  canten:number = 0;
   estadoreg: string = "REGISTRADO";
   estadorec: string = "RECIBIDO";
   estadoenv: string = 'ENVIADO';
   pageActual: number = 1;
   constructor(
+    public _authService: AuthService,
     private _hojaService: HojarutaService,
     private router: Router,
 
-  ) { }
+  ) {this.loadUser();  }
 
   ngOnInit(): void {
     this.getHojas();
-    //this.getHoja("61ba347a921bc4001520366f");
+  }
+  loadUser(){
+    this.identity = JSON.parse(localStorage.getItem('identity')|| '{}');
+   // this.token = JSON.parse(localStorage.getItem('token')|| '{}');
+
   }
   getHoja(id: any) {
     this._hojaService.obtenerHoja(id).subscribe(data => {
@@ -39,11 +47,9 @@ export class HojaRutaComponent implements OnInit {
   }
   getHojas() {
     this._hojaService.getHojas().subscribe(data => {
-      console.log(data.serverResponse);
-      console.log(data.serverResponse.length + " " + "esto es el cantidad de documentos");
       this.hojas = data.serverResponse;
-      this.cant = data.serverResponse.length
-
+      this.canten = this.hojas.filter(list => list.estado === 'REGISTRADO').length;
+      console.log(this.canten);
     }, error => {
       console.log(error);
     })

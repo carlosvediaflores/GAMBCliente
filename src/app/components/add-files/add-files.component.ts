@@ -24,15 +24,11 @@ export class AddFilesComponent implements OnInit {
 
   ) {
     this.hojaForm = this.fb.group({
-      origen: ['', Validators.required],
-      tipodoc: ['', Validators.required],
-      referencia: ['', Validators.required],
-      fechadocumento: ['', Validators.required],
     })
     this.id = this.aRouter.snapshot.paramMap.get('id');
 
     this.afuConfig = {
-      multiple: false,
+      multiple: true,
       formatsAllowed: ".jpg,.png, .gif, .jpeg, .pdf",
       //maxSize: "50",
       uploadAPI: {
@@ -88,7 +84,7 @@ export class AddFilesComponent implements OnInit {
   }
   esEditar() {
     if (this.id !== null) {
-      this.titulo = 'Editar Hoja de Ruta';
+      this.titulo = 'ADJUNTAR ARCHIVO';
       this._hojaService.obtenerHoja(this.id).subscribe(data => {
         this.hoja=data.serverResponse
         this.hojaForm.setValue({

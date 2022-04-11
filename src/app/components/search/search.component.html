@@ -18,7 +18,6 @@
                           <th scope="col">Referencia</th>
                           <th scope="col">Estado</th>
                           <th scope="col">Seguimiento</th>
-                          <th scope="col">Imprimir</th>
                           <th scope="col">Adjunto</th>
 
                         </tr>
@@ -42,16 +41,13 @@
                           <i [routerLink]="['/seguimiento',  hoja._id ]" class="fas fa-align-justify text-primary"></i>
                       </td>
                       <td>
-                        <i [routerLink]="['/print-hr',  hoja._id ]" class="fas fa-print text-primary"></i>
-                    </td>
-                      <td>
-                        <i [routerLink]="['/list-files',  hoja._id ]" class="fas fa-file-alt text-primary"></i>
+                        <i [routerLink]="['/list-files',  hoja._id ]"class="fas fa-cloud-download-alt" style="color:rgb(29, 14, 248) !important"></i>
                     </td>
 
                         </tr>
                       </tbody>
                     </table>
-                    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+                    <pagination-controls *ngIf="hojas.length > 10" (pageChange)="pageActual = $event"></pagination-controls>
                     <h5 style="text-align: start; margin-top: 10px;" *ngIf="hojas.length == 0">No se pudo encontrar lo q buscas</h5>
               </div>
           </div>

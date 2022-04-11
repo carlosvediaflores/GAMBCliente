@@ -1,11 +1,11 @@
 
-<div class="container mt-5">
+<div class="container mt-2">
   <div class="row">
-    <div class="col-lg-6 offset-lg-3">
+    <div class="col-lg-8 offset-lg-2">
           <div class="card">
               <div class="card-body text-center">
                   <span class="titulo">LISTA DE HOJAS DE RUTA </span>
-                  <button   class="btn btn-success float-end" [routerLink]="['/add-files',  hoja._id,] " >NUEVO</button>
+                  <button   class="btn btn-success float-end" [routerLink]="['/add-files',  hoja._id,] " *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA' || identity.roles==='SUPER_USER' || identity.roles==='USER' || identity.roles==='ADMIN'" >NUEVO</button>
                   <table *ngIf="hojas.length > 0" class="table table-striped mt-3">
                       <thead>
                         <tr>
@@ -15,17 +15,17 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr  >
+                        <tr *ngFor="let file of files" >
                         <td >
                           <div class="image-wrap">
 
-                            <a href="{{url1 + hoja.urihoja}}"  *ngIf="hoja.urihoja" target="_blank">
+                            <a href="{{url + file.urihoja}}"  *ngIf="file.urihoja" target="_blank">
                               <img src="assets/img/pdf.png" alt="{{hoja.nuit}}" >
                               </a>
                         </div>
 
                         </td>
-                          <td>{{ hoja.nuit }}</td>
+                          <td>{{ file.namefile }}</td>
                         </tr>
                       </tbody>
                     </table>

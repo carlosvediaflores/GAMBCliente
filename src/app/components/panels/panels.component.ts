@@ -1,7 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild,OnInit  } from '@angular/core';
 import { ChartConfiguration, ChartEvent, ChartType, ChartData } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
+import { HojarutaService } from 'src/app/services/hojaruta.service';
+import { Hojaruta } from 'src/app/models/hojaruta';
 
 
 @Component({
@@ -9,8 +11,35 @@ import DatalabelsPlugin from 'chartjs-plugin-datalabels';
   templateUrl: './panels.component.html',
   styleUrls: ['./panels.component.css']
 })
-export class PanelsComponent {
+export class PanelsComponent implements OnInit {
+  public hojas: Hojaruta[] = [];
+  public hoja: any = [];
 
+  cant: string = "";
+  canten:number = 0;
+  cantre:number = 0;
+  cantrec:number = 0;
+  cantpro:number = 0;
+
+
+  constructor(
+    private _hojaService: HojarutaService,
+
+
+  ) { }
+  ngOnInit(): void {
+    this.getHojas();
+  }
+  getHojas() {
+    this._hojaService.getHojas().subscribe(data => {
+      this.hojas = data.serverResponse;
+      this.cantre = this.hojas.filter(list => list.estado === 'REGISTRADO').length;
+      this.canten = this.hojas.filter(list => list.estado === 'ENVIADO').length;
+      this.cantrec = this.hojas.filter(list => list.estado === 'RECIBIDO').length;
+    }, error => {
+      console.log(error);
+    })
+  }
 
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
@@ -265,7 +294,7 @@ export class PanelsComponent {
   public pieChartType: ChartType = 'pie';
   public pieChartPlugins = [ DatalabelsPlugin ];
 
- 
+
 
 
 }

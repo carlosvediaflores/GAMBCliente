@@ -25,7 +25,7 @@
           <tbody
             *ngFor="
               let seguis of segui
-                | paginate: { itemsPerPage: 7, currentPage: pageActual }
+                | paginate: { itemsPerPage: 10, currentPage: pageActual }
             "
           >
             <tr *ngIf="identity.post == seguis.destino">
@@ -48,7 +48,7 @@
               </td>
               <td>{{ seguis.instrucciones }}</td>
               <td>{{ seguis.detalles }}</td>
-              <td>{{ seguis.fechaderivado | date: "dd/MM/yyyy HH:MM:ss" }}</td>
+              <td>{{ seguis.fechaderivado | amLocal | amDateFormat: 'YYYY-MM-DD HH:mm' }}</td>
               <td>
                 <i
                   (click)="cambiarestado(seguis._id)"
@@ -62,7 +62,7 @@
                     Recibir
                   </span>
                   <span *ngIf="seguis.fecharecepcion != 'SIN RESEPCIONAR'">
-                    {{ seguis.fecharecepcion | date: "dd/MM/yyyy HH:MM:ss" }}
+                    {{ seguis.fecharecepcion | amLocale: 'es' | amTimeAgo }}
                   </span>
                 </i>
               </td>
@@ -90,8 +90,8 @@
               </td>
               <td>
                 <i
-                  [routerLink]="['/print-hr', seguis.idhj]"
-                  class="fas fa-cloud-download-alt"
+                  [routerLink]="['/list-files', seguis.idhj]"
+                  class="fas fa-cloud-download-alt" style="color:rgb(29, 14, 248) !important"
                 ></i>
               </td>
               <td>
@@ -104,7 +104,7 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls
+        <pagination-controls *ngIf="segui.length > 10"
           (pageChange)="pageActual = $event"
         ></pagination-controls>
         <h5

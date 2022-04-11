@@ -9,28 +9,7 @@
             [formGroup]="hojaForm"
             (ngSubmit)="registerHojas()"
           >
-            <div class="mb-2">
-              <input
-                type="text"
-                formControlName="origen"
-                class="form-control"
-                placeholder="Origen"
-              />
-              <div
-                class="text-danger"
-                *ngIf="
-                  hojaForm.get('origen')?.hasError('required') &&
-                  hojaForm.get('origen')?.touched
-                "
-              >
-                <span>El origen <strong>es obligatorio</strong></span>
-              </div>
-            </div>
-
             <div>
-              <label for="formFileLg" class="form-label"
-                >Large file input example</label
-              >
               <angular-file-uploader
                 [config]="afuConfig"
                 (ApiResponse)="fileUpload($event)"
