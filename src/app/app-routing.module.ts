@@ -23,6 +23,7 @@ import { SeguimientoComponent } from './components/seguimiento/seguimiento.compo
 import { CorrespondenciaComponent } from './components/correspondencia/correspondencia.component';
 import { ListFilesComponent } from './components/list-files/list-files.component';
 import { AddFilesComponent } from './components/add-files/add-files.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { SearchComponent } from './components/search/search.component';
 import { CredencialesComponent } from './components/credenciales/credenciales.component';
 
@@ -50,8 +51,9 @@ const routes: Routes = [
   {path:'print-hr',component:PrintHrComponent,canActivate:[AuthGuard]},
   {path:'print-hr/:id',component:PrintHrComponent,canActivate:[AuthGuard]},
   {path:'seguimiento/:id',component:SeguimientoComponent},
-  {path:'credenciales/:id',component:CredencialesComponent},
+  {path:'credenciales/:id',component:CredencialesComponent,canActivate:[AuthGuard]},
   {path:'search/:search',component:SearchComponent},
+  {path:'edit-user/:email',component:EditUserComponent,canActivate:[AuthGuard]},
   {path:'seguimiento',component:SeguimientoComponent,canActivate:[AuthGuard]},
   {path:'seguimiento-add',component:SeguimientoAddComponent,canActivate:[AuthGuard]},
   {path:'seguimiento-add/:id',component:SeguimientoAddComponent,canActivate:[AuthGuard]},

@@ -25,6 +25,8 @@ export class HojaAddComponent implements OnInit {
       this.hojaForm = this.fb.group({
         origen: ['', Validators.required],
         referencia: ['', Validators.required],
+        fechadocumento: ['', Validators.required],
+        tipodoc: [''],
 
       })
       this.id = this.aRouter.snapshot.paramMap.get('id');
@@ -43,13 +45,19 @@ export class HojaAddComponent implements OnInit {
       referencia: this.hojaForm.get('referencia')?.value,
       fechadocumento: this.hojaForm.get('fechadocumento')?.value,
       nuit:this.total
-
     }
+    const HOJA1: Hojaruta = {
+      origen: this.hojaForm.get('origen')?.value,
+      tipodoc: this.hojaForm.get('tipodoc')?.value,
+      referencia: this.hojaForm.get('referencia')?.value,
+      fechadocumento: this.hojaForm.get('fechadocumento')?.value,
+    }
+
 
     if (this.id !== null) {
       //ediar usuario
-      console.log(HOJA);
-      this._hojaService.EditarHoja  (this.id, HOJA).subscribe(data =>{
+      console.log(HOJA1);
+      this._hojaService.EditarHoja  (this.id, HOJA1).subscribe(data =>{
         this.router.navigate(['/hoja-ruta']);
       }, error => {
         console.log(error);
@@ -86,8 +94,7 @@ export class HojaAddComponent implements OnInit {
   }
   getHojas() {
     this._hojaService.getHojas().subscribe(data => {
-      console.log(data.serverResponse);
-      console.log(data.serverResponse.length + " " + "esto es el cantidad de documentos");
+      
       this.cant = data.serverResponse.length
 
     }, error => {

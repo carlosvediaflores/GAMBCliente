@@ -22,24 +22,27 @@
           </li>
         </ul>
         <ul class="row m-0 align-items-center" *ngIf="identity && identity.email">
-          <li>
-            <button
-              mat-button
-              [matMenuTriggerFor]="menu"
-              class="user mt-2 d-flex align-items-center"
-            >
+          <li  class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle fs-6" data-toggle="dropdown">
               <img src="./assets/img/user.png" alt="" class="user-image mr-1 p-2" />
-                 {{identity.username}} {{identity.surnames}}
-              <mat-icon class="user-image-icon ml-1"
-                >keyboard_arrow_down</mat-icon
-              >
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="_authService.logout()">
-                <mat-icon >exit_to_app</mat-icon>
-                <a class="nav-link" style="cursor: pointer;" (click)="_authService.logout()">Logout</a>
+              {{identity.username}} {{identity.surnames}}
+            </a>
+
+            <div class="dropdown-menu">
+              <a [routerLink]="['/edit-user', identity.email]" class="dropdown-item">
+                <i class="fas fa-user-cog text-primary"></i> Mi Perfíl
+              </a>
+              <div class="dropdown-divider"></div>
+              <a routerLink="/configuracion" class="dropdown-item">
+                <i class="fas fa-cog text-primary"></i> Configuración
+              </a>
+              <div class="dropdown-divider"></div>
+              <a  class="dropdown-item">
+                <button >
+                <i class="fas fa-arrow-right text-primary" (click)="[_authService.logout()]">   Cerrar Sesión</i>
               </button>
-            </mat-menu>
+              </a>
+            </div>
           </li>
         </ul>
       </div>

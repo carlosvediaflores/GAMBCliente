@@ -1,5 +1,5 @@
 
-<div class="container mt-5">
+<div class="container">
   <div class="row">
           <div class="card">
               <div class="card-body text-center">
@@ -24,7 +24,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr [ngClass]= "hoja.estado === 'ENVIADO' ? 'table-success' : 'table-light' "  *ngFor="let hoja of hojas | paginate: {itemsPerPage: 10  , currentPage: pageActual}">
+                        <tr [ngClass]= "hoja.estado === 'REGISTRADO' ? 'table-danger border-2 border-danger' : 'table-success border-2 border-success'"   *ngFor="let hoja of hojas | paginate: {itemsPerPage: 10  , currentPage: pageActual}">
                         <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">
                             <i [routerLink]="['/seguimiento-add',  hoja._id,] " class="fas fa-space-shuttle text-primary " *ngIf="hoja.estado === 'RECIBIDO'" ></i>
                             <i [routerLink]="null " class="fas fa-space-shuttle text-primary" style="color:rgb(171, 178, 241) !important" *ngIf="hoja.estado === 'ENVIADO'"  ></i>
@@ -36,12 +36,18 @@
                           <td>{{ hoja.origen }}</td>
                           <td>{{ hoja.tipodoc }}</td>
                           <td>{{ hoja.referencia }}</td>
-                          <td (click)="cambiarestado(hoja._id)" [ngSwitch]="hoja.estado">
-                            <span *ngSwitchCase="'REGISTRADO'" class="badge badge-danger">{{ hoja.estado }}</span>
-                            <span *ngSwitchCase="'RECIBIDO'" class="badge badge-success">{{ hoja.estado }}</span>
-                            <span *ngSwitchCase="'ENVIADO'" class="badge badge-info">{{ hoja.estado }}</span>
-                            </td>
+                          <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'" (click)="cambiarestado(hoja._id)" [ngSwitch]="hoja.estado" >
+                            <span *ngSwitchCase="'REGISTRADO'" class="badge est badge-danger">{{ hoja.estado }}</span>
+                            <span *ngSwitchCase="'RECIBIDO'" class="badge est badge-success">{{ hoja.estado }}</span>
+                            <span *ngSwitchCase="'ENVIADO'" class="badge est badge-info">{{ hoja.estado }}</span>
+                          </td>
+                          <td [ngSwitch]="hoja.estado" *ngIf="identity.roles==='ADMIN' || identity.roles==='SUPER_USER' || identity.roles==='USER'">
+                              <span *ngSwitchCase="'REGISTRADO'" class="badge  badge-danger">{{ hoja.estado }}</span>
+                              <span *ngSwitchCase="'RECIBIDO'" class="badge badge-success">{{ hoja.estado }}</span>
+                              <span *ngSwitchCase="'ENVIADO'" class="badge badge-info">{{ hoja.estado }}</span>
+                          </td>
                         <td>
+
                           <i [routerLink]="['/seguimiento',  hoja._id ]" class="fas fa-align-justify text-primary"></i>
                       </td>
                       <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">

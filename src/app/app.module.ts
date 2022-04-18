@@ -44,6 +44,7 @@ import { SearchComponent } from './components/search/search.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CredencialesComponent } from './components/credenciales/credenciales.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     AddFilesComponent,
     SearchComponent,
     CredencialesComponent,
-    AjustesComponent
+    AjustesComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

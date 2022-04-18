@@ -36,6 +36,7 @@ export class UsuarioAddComponent implements OnInit {
       surnames: ['', Validators.required],
       ci: ['', Validators.required],
       email: ['', Validators.required],
+      numberphone: [''],
       password: ['', Validators.required],
       post: ['', Validators.required],
     })
