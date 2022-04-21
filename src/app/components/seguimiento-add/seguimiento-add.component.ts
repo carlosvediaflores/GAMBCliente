@@ -147,10 +147,10 @@ export class SeguimientoAddComponent implements OnInit {
     }
  }
   instruccions: any[] = [
-    { value: 'Informar a la MAE ', nombre: 'Informar a la MAE '},
+    { value: 'Remita informe ', nombre: 'Remita informe '},
     { value: 'Dar el curso al trámite', nombre: 'Dar el curso al trámite'},
     { value: 'Supervisé', nombre: 'Supervisé'},
-    { value: 'Prepare el informe', nombre: 'Prepare el informe'},
+    { value: 'Proceda a su registro', nombre: 'Proceda a su registro'},
     { value: 'Prepare el documento', nombre: 'Prepare el documento'},
     { value: 'Revíse', nombre: 'Revíse'},
     { value: 'Resuelva', nombre: 'Resuelva'},

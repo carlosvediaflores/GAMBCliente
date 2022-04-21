@@ -105,7 +105,7 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls *ngIf="segui.length > 10"
+        <pagination-controls *ngIf="identity.post == segui.length > 10"
           (pageChange)="pageActual = $event"
         ></pagination-controls>
         <h5
