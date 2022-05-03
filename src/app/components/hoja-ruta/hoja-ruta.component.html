@@ -10,11 +10,11 @@
                         <tr>
                           <th  scope="col" *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">Enviar</th>
                           <th scope="col">NUIT</th>
-                          <th scope="col">Fecha de Resepcion</th>
+                          <th scope="col">Fecha de Recepción</th>
                           <th scope="col">HORA</th>
                           <th scope="col">Fecha de Documento</th>
                           <th scope="col">Origen</th>
-                          <th scope="col">Tipo de Documento</th>
+
                           <th scope="col">Referencia</th>
                           <th scope="col">Estado</th>
                           <th scope="col">Seguimiento</th>
@@ -34,7 +34,7 @@
                           <td>{{ hoja.fecharesepcion | date:'HH:MM:ss'}}</td>
                           <td>{{ hoja.fechadocumento | date:'dd/MM/yyyy'}}</td>
                           <td>{{ hoja.origen }}</td>
-                          <td>{{ hoja.tipodoc }}</td>
+
                           <td>{{ hoja.referencia }}</td>
                           <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'" (click)="cambiarestado(hoja._id)" [ngSwitch]="hoja.estado" >
                             <span *ngSwitchCase="'REGISTRADO'" class="badge est badge-danger">{{ hoja.estado }}</span>

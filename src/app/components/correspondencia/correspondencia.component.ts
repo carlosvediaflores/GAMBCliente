@@ -25,8 +25,9 @@ export class CorrespondenciaComponent implements OnInit {
   estadorec: string = "RECIBIDO";
   estadofin: string = "FINALIZADO";
   ids: string = "";
+  destino: string="";
   pageActual: number = 1;
-  public identity: any;
+  public identity: any = [];
   public token: any;
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -37,32 +38,37 @@ export class CorrespondenciaComponent implements OnInit {
     private aRouter: ActivatedRoute) {
     this.loadUser();
   }
+  radioButtonSeleccionado = 'Todos';
   ngOnInit(): void {
 
     this.getSegui();
     this.getHoja();
+    this.getSeguiO();
   }
   loadUser() {
     this.identity = JSON.parse(localStorage.getItem('identity') || '{}');
-    // this.token = JSON.parse(localStorage.getItem('token')|| '{}');
 
   }
   getSegui() {
     this._seguiService.getsegui().subscribe(data => {
-      console.log(data);
-
-      this.segui = data;
-
+      //this.segui = data;
+    }, error => {
+      console.log(error);
+    })
+  }
+  getSeguiO(){
+     let RegExp = /[^()]*/g
+     this.destino = this.identity.post;
+     let destino1: any = RegExp.exec(this.destino);
+     this._seguiService.obtenerSeguiO(destino1).subscribe(data => {
+     this.segui = data;
     }, error => {
       console.log(error);
     })
   }
   getHoja() {
     this._hojaService.getHojas().subscribe(data => {
-      console.log(data);
-
       this.hoja = data.serverResponse;
-
     }, error => {
       console.log(error);
     })
@@ -80,10 +86,9 @@ export class CorrespondenciaComponent implements OnInit {
       this.ids = this.seguiss._id;
       if (this.seguiss.fecharecepcion === "SIN RESEPCIONAR") {
         this._seguiService.EditarSeguis(this.ids, SEGUI).subscribe(data => {
-          console.log(SEGUI);
           this.router.navigate(['/correspondencia']);
 
-          this.getSegui();
+          this.getSeguiO();
         }, error => {
           console.log(error);
         })
@@ -118,7 +123,7 @@ export class CorrespondenciaComponent implements OnInit {
                 console.log(SEGUI);
                 this.router.navigate(['/correspondencia']);
 
-                this.getSegui();
+                this.getSeguiO();
               }, error => {
                 console.log(error);
               })

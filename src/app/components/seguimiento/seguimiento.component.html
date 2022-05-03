@@ -23,7 +23,7 @@
           </div>
           <div class="p-3 mt-4">
             <h5 class="text-center mb-0 fs-5 mb-1 ">NUIT</h5>
-            <div  class="badge badge-success text-center fs-5">N°:&nbsp;&nbsp;<strong></strong>{{ruta.nuit | uppercase}}</div>
+            <div  class="badge badge-info text-dark text-center fs-5">N°:&nbsp;&nbsp;<strong></strong>{{ruta.nuit | uppercase}}</div>
           </div>
         </div>
 
@@ -62,7 +62,7 @@
                         <tr>
                           <th scope="col">Derivado A...</th>
                           <th scope="col">Instrucciones</th>
-                          <th scope="col">Detalles</th>
+                          <th scope="col">Detalle</th>
                           <th scope="col">Fecha Recepcion</th>
                           <th scope="col">Fecha Derivado</th>
                           <th scope="col">Estado</th>
@@ -78,10 +78,14 @@
                           <td *ngIf="id===seguis.idhj">
                             <i  [ngClass]= "seguis.fecharecepcion === 'SIN RESEPCIONAR' ? 'badge badge-danger' : '' ">
                               <span *ngIf="seguis.fecharecepcion === 'SIN RESEPCIONAR'"> {{seguis.fecharecepcion}} </span>
-                              <span *ngIf="seguis.fecharecepcion != 'SIN RESEPCIONAR'"> {{seguis.fecharecepcion | amLocale: 'es' | amTimeAgo}} </span>
+                              <span *ngIf="seguis.fecharecepcion != 'SIN RESEPCIONAR'"> {{seguis.fecharecepcion | amLocale: 'es' | amTimeAgo}} </span><br>
+                              <span *ngIf="seguis.fecharecepcion != 'SIN RESEPCIONAR'"> {{seguis.fecharecepcion | amLocal | amDateFormat: 'DD-MM-YYYY HH:mm'}} </span>
                             </i>
                           </td>
-                          <td *ngIf="id===seguis.idhj">{{ seguis.fechaderivado | amLocale: 'es' | amTimeAgo}}</td>
+                          <td *ngIf="id===seguis.idhj">
+                              <span *ngIf="seguis.fechaderivado != 'SIN RESEPCIONAR'"> {{seguis.fechaderivado | amLocale: 'es' | amTimeAgo}} </span><br>
+                              <span *ngIf="seguis.fechaderivado != 'SIN RESEPCIONAR'"> {{seguis.fechaderivado | amLocal | amDateFormat: 'DD-MM-YYYY HH:mm'}} </span>
+                          </td>
                           <td *ngIf="id===seguis.idhj" [ngSwitch]="seguis.estado">
                             <span *ngSwitchCase="'ENVIADO'" class="badge badge-danger">{{ seguis.estado }}</span>
                             <span *ngSwitchCase="'RECIBIDO'" class="badge badge-success">{{ seguis.estado }}</span>

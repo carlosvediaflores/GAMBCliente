@@ -28,6 +28,9 @@ export class SeguimientoService {
   obtenerSegui(id: string): Observable<any> {
     return this._http.get(this.URL + 'segui/' + id);
   }
+  obtenerSeguiO(destino: string): Observable<any> {
+    return this._http.get(this.URL + 'seguiO/' + destino);
+  }
 
   eliminarSegui(id: string): Observable<any> {
     return this._http.delete(this.URL + 'segui/' + id);

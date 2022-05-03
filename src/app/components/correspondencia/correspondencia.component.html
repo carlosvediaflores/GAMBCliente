@@ -2,6 +2,39 @@
   <div class="row">
     <div class="card">
       <div class="card-body text-center">
+
+        <div class=" card-body float-start p-0">
+          <div class="form-check form-check-inline  mr-3">
+            <input class="form-check-input" [(ngModel)]="radioButtonSeleccionado"
+               type="radio" name="estado" id="todos" value="Todos" >
+            <label class="form-check-label badge badge-secondary text-dark" for="todos">Todos
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary text-dark">
+                99+
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </label>
+          </div>
+          <div class="form-check form-check-inline mr-3">
+            <input class="form-check-input" [(ngModel)]="radioButtonSeleccionado"
+                type="radio" name="estado" id="femenino" value="Femenino" >
+            <label class="form-check-label badge badge-info" for="femenino">Derivado
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info">
+                99+
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </label>
+          </div>
+          <div class="form-check form-check-inline  mr-3">
+            <input class="form-check-input" [(ngModel)]="radioButtonSeleccionado"
+              type="radio" name="estado" id="masculino" value="Masculino">
+            <label class="form-check-label badge badge-success" for="masculino">Recibido
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-success">
+                99+
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </label>
+          </div>
+        </div>
         <span class="titulo">LISTA DE SEGUIMIENTO </span>
         <button class="btn btn-success float-end" routerLink="/hoja-ruta">
           VOLVER
@@ -11,24 +44,19 @@
             <tr>
               <th scope="col">Derivar</th>
               <th scope="col">N°</th>
-              <th scope="col">Instrucciones</th>
-              <th scope="col">Detalles</th>
+              <th scope="col">Referencia</th>
+              <th scope="col">Detalle de Instrucción</th>
               <th scope="col">Fecha Derivado</th>
               <th scope="col">Fecha Recepcion</th>
               <th scope="col">Estado</th>
               <th scope="col">Seguimiento</th>
               <th scope="col">Adjunto</th>
-         <!--     <th scope="col">Aciones</th> -->
+              <!--     <th scope="col">Aciones</th> -->
             </tr>
           </thead>
 
-          <tbody
-            *ngFor="
-              let seguis of segui
-                | paginate: { itemsPerPage: 10, currentPage: pageActual }
-            "
-          >
-            <tr *ngIf="identity.post == seguis.destino">
+          <tbody *ngFor="let seguis of segui">
+            <tr *ngIf="identity.post == seguis.destino && seguis.estado!='DERIVADO'">
               <td>
                 <i
                   [routerLink]="['/seguimiento-add', seguis.idhj, seguis._id]"
@@ -46,9 +74,15 @@
               <td>
                 {{ seguis.nuit }}
               </td>
-              <td>{{ seguis.instrucciones }}</td>
+              <td>{{ seguis.referencia}}</td>
               <td>{{ seguis.detalles }}</td>
-              <td>{{ seguis.fechaderivado | amLocal | amDateFormat: 'YYYY-MM-DD HH:mm' }}</td>
+              <td>
+                {{
+                  seguis.fechaderivado
+                    | amLocal
+                    | amDateFormat: "YYYY-MM-DD HH:mm"
+                }}
+              </td>
               <td>
                 <i
                   (click)="cambiarestado(seguis._id)"
@@ -62,7 +96,7 @@
                     Recibir
                   </span>
                   <span *ngIf="seguis.fecharecepcion != 'SIN RESEPCIONAR'">
-                    {{ seguis.fecharecepcion | amLocale: 'es' | amTimeAgo }}
+                    {{ seguis.fecharecepcion | amLocale: "es" | amTimeAgo }}
                   </span>
                 </i>
               </td>
@@ -91,10 +125,11 @@
               <td>
                 <i
                   [routerLink]="['/list-files', seguis.idhj]"
-                  class="fas fa-cloud-download-alt" style="color:rgb(29, 14, 248) !important"
+                  class="fas fa-cloud-download-alt"
+                  style="color: rgb(29, 14, 248) !important"
                 ></i>
               </td>
-<!--
+              <!--
               <td>
                 <i
                   class="fas fa-edit text-primary"
@@ -105,9 +140,7 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls *ngIf="identity.post == segui.length > 10"
-          (pageChange)="pageActual = $event"
-        ></pagination-controls>
+
         <h5
           style="text-align: start; margin-top: 10px"
           *ngIf="segui.length == 0"

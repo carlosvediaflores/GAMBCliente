@@ -31,6 +31,7 @@ export class SeguimientoAddComponent implements OnInit {
   public hoja: any  = [];
   idh: string = "";
   idnuit: string = "";
+  ref: string = "";
   origenreg: string = "REGISTRADO";
 
   constructor(private fb: FormBuilder,
@@ -63,6 +64,7 @@ export class SeguimientoAddComponent implements OnInit {
   registerSegui() {
     const SEGUI: Segui = {
       nuit:this.idnuit,
+      referencia:this.ref,
       destino: this.seguiForm.get('destino')?.value,
       detalles: this.seguiForm.get('detalles')?.value,
       instrucciones: this.seguiForm.get('instrucciones')?.value,
@@ -141,6 +143,7 @@ export class SeguimientoAddComponent implements OnInit {
       this._hojaService.obtenerHoja(this.id).subscribe(data => {
         this.hoja = data.serverResponse;
         this.idnuit=this.hoja.nuit;
+        this.ref=this.hoja.referencia;
       }, error => {
         console.log(error);
       })
