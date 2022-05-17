@@ -4,32 +4,62 @@
       <div class="card-body text-center">
 
         <div class=" card-body float-start p-0">
-          <div class="form-check form-check-inline  mr-3">
-            <input class="form-check-input" [(ngModel)]="radioButtonSeleccionado"
+          <div class="form-check form-check-inline mr-4">
+            <input class="form-check-input mr-0" [(ngModel)]="radioButtonSeleccionado"
                type="radio" name="estado" id="todos" value="Todos" >
             <label class="form-check-label badge badge-secondary text-dark" for="todos">Todos
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary text-dark">
-                99+
+                {{total}}
                 <span class="visually-hidden">unread messages</span>
               </span>
             </label>
           </div>
-          <div class="form-check form-check-inline mr-3">
-            <input class="form-check-input" [(ngModel)]="radioButtonSeleccionado"
-                type="radio" name="estado" id="femenino" value="Femenino" >
-            <label class="form-check-label badge badge-info" for="femenino">Derivado
+          <div class="form-check form-check-inline mr-4">
+            <input class="form-check-input mr-0" [(ngModel)]="radioButtonSeleccionado"
+                type="radio" name="estado" id="derivado" value="DERIVADO" >
+            <label class="form-check-label badge badge-info" for="derivado">Derivados
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info">
-                99+
+                {{cantder}}
                 <span class="visually-hidden">unread messages</span>
               </span>
             </label>
           </div>
-          <div class="form-check form-check-inline  mr-3">
-            <input class="form-check-input" [(ngModel)]="radioButtonSeleccionado"
-              type="radio" name="estado" id="masculino" value="Masculino">
-            <label class="form-check-label badge badge-success" for="masculino">Recibido
+          <div class="form-check form-check-inline  mr-4">
+            <input class="form-check-input mr-0" [(ngModel)]="radioButtonSeleccionado"
+              type="radio" name="estado" id="recibido" value="RECIBIDO">
+            <label class="form-check-label badge badge-success" for="recibido">Recibidos
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-success">
-                99+
+                {{cantrec}}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </label>
+          </div>
+          <div class="form-check form-check-inline  mr-4">
+            <input class="form-check-input mr-0" [(ngModel)]="radioButtonSeleccionado"
+              type="radio" name="estado" id="sinrecibir" value="ENVIADO">
+            <label class="form-check-label badge badge-danger" for="sinrecibir">Sin Recibir
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">
+                {{canten}}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </label>
+          </div>
+          <div class="form-check form-check-inline  mr-4">
+            <input class="form-check-input mr-0" [(ngModel)]="radioButtonSeleccionado"
+              type="radio" name="estado" id="maletin" value="MALETIN">
+          <label class="form-check-label badge badge-warning " for="maletin">Mi Maletin
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-warning ">
+                {{cantfin}}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </label>
+          </div>
+          <div class="form-check form-check-inline  mr-4">
+            <input class="form-check-input mr-0" [(ngModel)]="radioButtonSeleccionado"
+              type="radio" name="estado" id="archivado" value="ARCHIVADO">
+            <label class="form-check-label badge badge-primary " for="archivado">Archivados
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-primary ">
+                {{totalarc}}
                 <span class="visually-hidden">unread messages</span>
               </span>
             </label>
@@ -56,7 +86,7 @@
           </thead>
 
           <tbody *ngFor="let seguis of segui">
-            <tr *ngIf="identity.post == seguis.destino && seguis.estado!='DERIVADO'">
+            <tr *ngIf="radioButtonSeleccionado == 'Todos' || radioButtonSeleccionado == seguis.estado">
               <td>
                 <i
                   [routerLink]="['/seguimiento-add', seguis.idhj, seguis._id]"
@@ -106,15 +136,19 @@
                 }}</span>
                 <span *ngSwitchCase="'RECIBIDO'" class="badge badge-success">{{
                   seguis.estado
-                }}</span>
+                }}
+                <i class="fasre fas fa-file-download ml-0" style="color: rgb(204, 78, 29) !important"></i>
+              </span>
                 <span *ngSwitchCase="'DERIVADO'" class="badge badge-info">{{
                   seguis.estado
                 }}</span>
                 <span
-                  *ngSwitchCase="'FINALIZADO'"
+                  *ngSwitchCase="'MALETIN'"
                   class="badge badge-warning"
-                  >{{ seguis.estado }}</span
-                >
+                  >{{ seguis.estado }}
+                </span>
+                <i (click)="reactivar(seguis._id)"  *ngSwitchCase="'MALETIN'" class="fasre fas fa-file-upload " style="color: rgb(230, 70, 176) !important"></i>
+                <i *ngSwitchCase="'MALETIN'" class="fasar fas fa-folder-minus p-0 mt-0" style="color: rgb(3, 126, 40) !important"></i>
               </td>
               <td>
                 <i

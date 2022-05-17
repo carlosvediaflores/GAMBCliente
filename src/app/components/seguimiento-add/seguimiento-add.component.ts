@@ -78,7 +78,7 @@ export class SeguimientoAddComponent implements OnInit {
     }
     if (this.id !== null) {
       this._seguiService.EditarSegui(this.id, SEGUI).subscribe(data =>{
-        this.router.navigate(['/hoja-ruta']);
+        this.router.navigate(['/correspondencia']);
       }, error => {
         console.log(error);
         this.seguiForm.reset();

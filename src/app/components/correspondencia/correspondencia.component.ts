@@ -23,12 +23,19 @@ export class CorrespondenciaComponent implements OnInit {
   ruta: any[] = [];
   today = new Date();
   estadorec: string = "RECIBIDO";
-  estadofin: string = "FINALIZADO";
+  estadofin: string = "MALETIN";
   ids: string = "";
   destino: string="";
   pageActual: number = 1;
+  cantder:number = 0;
+  canten:number = 0;
+  cantrec:number = 0;
+  cantfin:number = 0;
+  total:number = 0;
+  totalarc:number = 0;
   public identity: any = [];
   public token: any;
+  radioButtonSeleccionado = 'Todos';
   constructor(private fb: FormBuilder,
     private router: Router,
 
@@ -38,12 +45,13 @@ export class CorrespondenciaComponent implements OnInit {
     private aRouter: ActivatedRoute) {
     this.loadUser();
   }
-  radioButtonSeleccionado = 'Todos';
+
   ngOnInit(): void {
 
     this.getSegui();
     this.getHoja();
     this.getSeguiO();
+    this.obtenertotal();
   }
   loadUser() {
     this.identity = JSON.parse(localStorage.getItem('identity') || '{}');
@@ -76,6 +84,22 @@ export class CorrespondenciaComponent implements OnInit {
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
   }
+  obtenertotal(){
+    let RegExp = /[^()]*/g
+    this.destino = this.identity.post;
+    let destino1: any = RegExp.exec(this.destino);
+    this._seguiService.obtenerSeguiO(destino1).subscribe(data => {
+    this.seguis = data;
+    this.total = this.seguis.length;
+    this.cantrec = this.seguis.filter(list => list.estado === 'RECIBIDO').length;
+    this.cantder = this.seguis.filter(list => list.estado === 'DERIVADO').length;
+    this.canten = this.seguis.filter(list => list.estado === 'ENVIADO').length;
+    this.cantfin = this.seguis.filter(list => list.estado === 'MALETIN').length;
+    this.totalarc = this.seguis.filter(list => list.estado === 'ARCHIVADO').length;
+   }, error => {
+     console.log(error);
+   })
+  }
   cambiarestado(id: any) {
     const SEGUI: Segui = {
       fecharecepcion: this.today,
@@ -89,6 +113,7 @@ export class CorrespondenciaComponent implements OnInit {
           this.router.navigate(['/correspondencia']);
 
           this.getSeguiO();
+          this.obtenertotal();
         }, error => {
           console.log(error);
         })
@@ -98,7 +123,6 @@ export class CorrespondenciaComponent implements OnInit {
     })
   }
   finalizar(id: any) {
-
     this._seguiService.obtenerSegui(id).subscribe(data => {
       this.seguiss = data;
       this.ids = this.seguiss._id;
@@ -124,6 +148,7 @@ export class CorrespondenciaComponent implements OnInit {
                 this.router.navigate(['/correspondencia']);
 
                 this.getSeguiO();
+                this.obtenertotal();
               }, error => {
                 console.log(error);
               })
@@ -136,4 +161,44 @@ export class CorrespondenciaComponent implements OnInit {
       console.log(error);
     })
   }
+  reactivar(id: any) {
+    this._seguiService.obtenerSegui(id).subscribe(data => {
+      this.seguiss = data;
+      this.ids = this.seguiss._id;
+
+    const SEGUI: Segui = {
+      estado: this.estadorec,
+    }
+    if (this.seguiss.estado === "MALETIN") {
+    swal({
+      title: "¿Estás seguro Reactivar????",
+      text: "Esta seguro de reactivar el trámite?????????",
+      icon: "warning",
+      buttons: [true, true],
+      dangerMode: true
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+              this._seguiService.EditarSeguis(this.ids, SEGUI).subscribe(data => {
+                swal("El tramite fue finalizado", {
+                  icon: "success",
+                });
+                console.log(SEGUI);
+                this.router.navigate(['/correspondencia']);
+
+                this.getSeguiO();
+                this.obtenertotal();
+              }, error => {
+                console.log(error);
+              })
+        } else {
+          swal("Ha cancelado la finalizacion del tramite");
+        }
+      });
+    }
+    }, error => {
+      console.log(error);
+    })
+  }
+
 }

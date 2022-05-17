@@ -16,7 +16,7 @@ export class HojaRutaComponent implements OnInit {
   public hojas: Hojaruta[] = [];
   public hoja: any = [];
   idh: string = "";
-  cant: string = "";
+  cant: number = 0;
   canten:number = 0;
   estadoreg: string = "REGISTRADO";
   estadorec: string = "RECIBIDO";
@@ -84,24 +84,39 @@ export class HojaRutaComponent implements OnInit {
       });
   }
   cambiarestado(id: any) {
-    const HOJA: Hojaruta = {
-      estado: this.estadorec,
-    }
     this._hojaService.obtenerHoja(id).subscribe(data => {
       this.hoja = data.serverResponse;
       this.idh = this.hoja._id;
-      console.log(this.hoja)
-      if (this.hoja.estado === "REGISTRADO") {
-        this._hojaService.EditarHoja(this.idh, HOJA).subscribe(data => {
-          console.log(HOJA);
-          this.router.navigate(['/hoja-ruta']);
 
-          this.getHojas();
-        }, error => {
-          console.log(error);
-        })
-      }
+    const HOJA: Hojaruta = {
+      estado: this.estadorec,
+    }
+    if (this.hoja.estado === "REGISTRADO") {
+    swal({
+      title: "¿Estás seguro Recibir???",
+      text: "Esta seguro de reciber el trámite?????????",
+      icon: "warning",
+      buttons: [true, true],
+      dangerMode: true
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+              this._hojaService.EditarHoja(this.idh, HOJA).subscribe(data => {
+                swal("El tramite fue finalizado", {
+                  icon: "success",
+                });
+                console.log(HOJA);
+                this.router.navigate(['/hoja-ruta']);
 
+                this.getHojas();
+              }, error => {
+                console.log(error);
+              })
+        } else {
+          swal("Ha cancelado la finalizacion del tramite");
+        }
+      });
+    }
     }, error => {
       console.log(error);
     })

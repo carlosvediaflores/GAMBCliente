@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import swal from 'sweetalert';
 import { HojarutaService } from 'src/app/services/hojaruta.service';
 import { Hojaruta } from 'src/app/models/hojaruta';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -9,13 +11,19 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+  public identity: any ;
   public hojas: Hojaruta[] = [];
   public hoja: any = [];
+  idh: string = "";
+  estadoreg: string = "REGISTRADO";
+  estadorec: string = "RECIBIDO";
+  estadoenv: string = 'ENVIADO';
   public search: string="";
   pageActual: number = 1;
   constructor(
+    private router: Router,
     private _hojaService: HojarutaService,
-    private aRouter: ActivatedRoute) { }
+    private aRouter: ActivatedRoute) {this.loadUser(); }
 
   ngOnInit(): void {
     this.aRouter.params.subscribe (params => {
@@ -39,6 +47,46 @@ export class SearchComponent implements OnInit {
       )
     });
   }
+  loadUser(){
+    this.identity = JSON.parse(localStorage.getItem('identity')|| '{}');
+   // this.token = JSON.parse(localStorage.getItem('token')|| '{}');
 
+  }
+  cambiarestado(id: any) {
+    this._hojaService.obtenerHoja(id).subscribe(data => {
+      this.hoja = data.serverResponse;
+      this.idh = this.hoja._id;
+
+    const HOJA: Hojaruta = {
+      estado: this.estadorec,
+    }
+    if (this.hoja.estado === "REGISTRADO") {
+    swal({
+      title: "¿Estás seguro Recibir???",
+      text: "Esta seguro de reciber el trámite?????????",
+      icon: "warning",
+      buttons: [true, true],
+      dangerMode: true
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+              this._hojaService.EditarHoja(this.idh, HOJA).subscribe(data => {
+                swal("El tramite fue finalizado", {
+                  icon: "success",
+                });
+                console.log(HOJA);
+                this.router.navigate(['/hoja-ruta']);
+              }, error => {
+                console.log(error);
+              })
+        } else {
+          swal("Ha cancelado la finalizacion del tramite");
+        }
+      });
+    }
+    }, error => {
+      console.log(error);
+    })
+  }
 
 }

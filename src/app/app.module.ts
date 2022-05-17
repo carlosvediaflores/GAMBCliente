@@ -75,7 +75,9 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     CredencialesComponent,
     AjustesComponent,
     EditUserComponent
-  ],
+
+
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

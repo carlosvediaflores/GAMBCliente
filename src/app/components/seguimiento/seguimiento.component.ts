@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Subscription } from 'rxjs';
@@ -14,20 +15,30 @@ import { Segui } from 'src/app/models/seguimiento';
 })
 export class SeguimientoComponent implements OnInit {
   subscription: Subscription = new Subscription;
+  public identity: any ;
   id: string | null;
   titulo = 'Crear una Unidad';
   segui: any  = [];
   ruta: any = [];
+  date: Date= new(Date);
   constructor(private fb: FormBuilder,
+    public _authService: AuthService,
     private router: Router,
     private _seguiService: SeguimientoService,
     private _hojaService: HojarutaService,
     private aRouter: ActivatedRoute) {
       this.id = this.aRouter.snapshot.paramMap.get('id');
+      this.loadUser();
      }
 
   ngOnInit(): void {
     this.esEditar();
+    this.loadUser();
+  }
+  loadUser(){
+    this.identity = JSON.parse(localStorage.getItem('identity')|| '{}');
+   // this.token = JSON.parse(localStorage.getItem('token')|| '{}');
+
   }
 
   esEditar() {

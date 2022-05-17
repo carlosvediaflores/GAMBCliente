@@ -9,6 +9,9 @@
   font-size: 90%;
 
 }
+.est {
+  cursor: pointer;
+}
 
 .modal {
   background-color: rgba(0, 0, 0, 0.7);

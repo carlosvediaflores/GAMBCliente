@@ -14,7 +14,6 @@
                           <th scope="col">HORA</th>
                           <th scope="col">Fecha de Documento</th>
                           <th scope="col">Origen</th>
-
                           <th scope="col">Referencia</th>
                           <th scope="col">Estado</th>
                           <th scope="col">Seguimiento</th>
@@ -47,8 +46,8 @@
                               <span *ngSwitchCase="'ENVIADO'" class="badge badge-info">{{ hoja.estado }}</span>
                           </td>
                         <td>
-
                           <i [routerLink]="['/seguimiento',  hoja._id ]" class="fas fa-align-justify text-primary"></i>
+                          <i *ngIf="cant>0" class="fas fa-paperclip text-primary"></i>
                       </td>
                       <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">
                         <i [routerLink]="['/print-hr',  hoja._id ]" class="fas fa-print text-primary"></i>
@@ -64,12 +63,13 @@
                               <i (click)="eliminarHoja(hoja._id)" class="fas fa-trash text-danger" *ngIf="hoja.estado === 'REGISTRADO'"></i>
                               <i  class="fas fa-trash text-danger" style="color:rgb(216, 139, 103) !important" *ngIf="hoja.estado === 'ENVIADO'"></i>
                               <i  class="fas fa-trash text-danger" style="color:rgb(250, 146, 98) !important" *ngIf="hoja.estado === 'RECIBIDO'"></i>
+                              <i class="fas fa-paste text-primary " *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'"></i>
                           </td>
                         </tr>
                       </tbody>
                     </table>
                     <pagination-controls *ngIf="hojas.length > 10" (pageChange)="pageActual = $event"></pagination-controls>
-                    <h5 style="text-align: start; margin-top: 10px;" *ngIf="hojas.length == 0">No hay usuarios para mostrar</h5>
+                    <h5 style="text-align: start; margin-top: 10px;" *ngIf="hojas.length == 0">No hay conte para mostrar</h5>
               </div>
           </div>
   </div>

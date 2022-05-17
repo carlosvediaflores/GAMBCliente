@@ -105,6 +105,10 @@
                     <h5 style="text-align: start; margin-top: 10px;" *ngIf="segui.length == 0">No hay reguistros para mostrar</h5>
               </div>
           </div>
+          <div>
+            <i class="ml-3">Usuario: {{ identity.username}} {{ identity.surnames}}</i>
+            <i class="mr-3 float-end">Fecha Descarga: {{ date| amLocal | amDateFormat: 'DD-MM-YYYY HH:mm'}} </i>
+          </div>
         </div>
       </div>
     </div>

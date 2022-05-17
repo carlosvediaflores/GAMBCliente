@@ -8,7 +8,7 @@
                   <table *ngIf="hojas.length > 0" class="table table-striped mt-3">
                       <thead>
                         <tr>
-
+                          <th  scope="col" *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">Enviar</th>
                           <th scope="col">NUIT</th>
                           <th scope="col">Fecha de Resepcion</th>
                           <th scope="col">HORA</th>
@@ -24,6 +24,10 @@
                       </thead>
                       <tbody>
                         <tr [ngClass]= "hoja.estado === 'ENVIADO' ? 'table-success' : 'table-light' "  *ngFor="let hoja of hojas | paginate: {itemsPerPage: 5, currentPage: pageActual}">
+                          <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">
+                            <i [routerLink]="['/seguimiento-add',  hoja._id,] " class="fas fa-space-shuttle text-primary " *ngIf="hoja.estado === 'RECIBIDO'" ></i>
+                            <i [routerLink]="null " class="fas fa-space-shuttle text-primary" style="color:rgb(171, 178, 241) !important" *ngIf="hoja.estado === 'ENVIADO'"  ></i>
+                        </td>
                           <td>{{ hoja.nuit }}</td>
                           <td>{{ hoja.fecharesepcion | date:'dd/MM/yyyy'}}</td>
                           <td>{{ hoja.fecharesepcion | date:'HH:MM:ss'}}</td>
@@ -31,10 +35,17 @@
                           <td>{{ hoja.origen }}</td>
                           <td>{{ hoja.tipodoc }}</td>
                           <td>{{ hoja.referencia }}</td>
-                          <td [ngSwitch]="hoja.estado">
-                            <span *ngSwitchCase="'REGISTRADO'" class="badge badge-danger">{{ hoja.estado }}</span>
-                            <span *ngSwitchCase="'RECIBIDO'" class="badge badge-success">{{ hoja.estado }}</span>
-                            <span *ngSwitchCase="'ENVIADO'" class="badge badge-info">{{ hoja.estado }}</span>
+                          <td >
+                            <div *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'" (click)="cambiarestado(hoja._id)" [ngSwitch]="hoja.estado">
+                              <span *ngSwitchCase="'REGISTRADO'" class="badge est badge-danger">{{ hoja.estado }}</span>
+                              <span *ngSwitchCase="'RECIBIDO'" class="badge  est badge-success">{{ hoja.estado }}</span>
+                              <span *ngSwitchCase="'ENVIADO'" class="badge est badge-info">{{ hoja.estado }}</span>
+                            </div>
+                            <div *ngIf="identity==null" [ngSwitch]="hoja.estado">
+                              <span *ngSwitchCase="'REGISTRADO'" class="badge badge-danger">{{ hoja.estado }}</span>
+                              <span *ngSwitchCase="'RECIBIDO'" class="badge badge-success">{{ hoja.estado }}</span>
+                              <span *ngSwitchCase="'ENVIADO'" class="badge badge-info">{{ hoja.estado }}</span>
+                            </div>
                             </td>
 
                         <td>
