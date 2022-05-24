@@ -45,6 +45,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CredencialesComponent } from './components/credenciales/credenciales.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { AsociarComponent } from './components/asociar/asociar.component';
+import { ListAsociarComponent } from './components/list-asociar/list-asociar.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,9 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     SearchComponent,
     CredencialesComponent,
     AjustesComponent,
-    EditUserComponent
+    EditUserComponent,
+    AsociarComponent,
+    ListAsociarComponent
 
 
     ],

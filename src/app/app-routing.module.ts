@@ -24,6 +24,8 @@ import { CorrespondenciaComponent } from './components/correspondencia/correspon
 import { ListFilesComponent } from './components/list-files/list-files.component';
 import { AddFilesComponent } from './components/add-files/add-files.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { AsociarComponent } from './components/asociar/asociar.component';
+import { ListAsociarComponent } from './components/list-asociar/list-asociar.component';
 import { SearchComponent } from './components/search/search.component';
 import { CredencialesComponent } from './components/credenciales/credenciales.component';
 
@@ -59,6 +61,8 @@ const routes: Routes = [
   {path:'seguimiento-add/:id',component:SeguimientoAddComponent,canActivate:[AuthGuard]},
   {path:'seguimiento-add/:id/:ids',component:SeguimientoAddComponent,canActivate:[AuthGuard]},
   {path:'correspondencia',component:CorrespondenciaComponent,canActivate:[AuthGuard]},
+  {path:'asociar/:nuit',component:AsociarComponent,canActivate:[AuthGuard]},
+  {path:'list-asociar/:id',component:ListAsociarComponent,canActivate:[AuthGuard]},
   {path: 'panels', component: PanelsComponent,
                     canActivate:[AuthGuard]},
   {path: '**', redirectTo: ''}

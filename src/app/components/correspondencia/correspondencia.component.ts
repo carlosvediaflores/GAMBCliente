@@ -35,7 +35,7 @@ export class CorrespondenciaComponent implements OnInit {
   totalarc:number = 0;
   public identity: any = [];
   public token: any;
-  radioButtonSeleccionado = 'Todos';
+  radioButtonSeleccionado = 'RECIBIDO';
   constructor(private fb: FormBuilder,
     private router: Router,
 

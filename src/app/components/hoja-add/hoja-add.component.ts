@@ -75,14 +75,13 @@ export class HojaAddComponent implements OnInit {
     }
   }
   esEditar() {
-
     if (this.id !== null) {
       this.titulo = 'Editar Hoja de Ruta';
       this._hojaService.obtenerHoja(this.id).subscribe(data => {
         console.log(data.serverResponse)
         this.hojaForm.setValue({
           origen: data.serverResponse.origen,
-          tipodoc: data.serverResponse.tipodoc,
+
           referencia: data.serverResponse.referencia,
           fechadocumento: data.serverResponse.fechadocumento,
         })
@@ -94,7 +93,7 @@ export class HojaAddComponent implements OnInit {
   }
   getHojas() {
     this._hojaService.getHojas().subscribe(data => {
-      
+
       this.cant = data.serverResponse.length
 
     }, error => {

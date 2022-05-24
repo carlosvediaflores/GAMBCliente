@@ -87,7 +87,6 @@ export class SeguimientoAddComponent implements OnInit {
         this.hoja = data.serverResponse;
         this.idh= this.hoja._id;
         this._hojaService.EditarHoja (this.idh, HOJA).subscribe(data =>{
-          console.log(HOJA);
         }, error => {
           console.log(error);
         })
@@ -109,7 +108,6 @@ export class SeguimientoAddComponent implements OnInit {
     }
     if (this.ids !== null) {
         this._seguiService.EditarSeguis (this.ids, SEGUIS).subscribe(data =>{
-          console.log(SEGUIS);
         }, error => {
           console.log(error);
         })
@@ -117,9 +115,6 @@ export class SeguimientoAddComponent implements OnInit {
   }
   getOrga(){
     this.subscription =  this._orgService.getOrg().subscribe(data => {
-      console.log(data);
-      //console.log(this.id);
-      console.log(this.idh);
       this.org = data;
 
     }, error => {
@@ -130,7 +125,6 @@ export class SeguimientoAddComponent implements OnInit {
 
     if (this.params !== null) {
       this.subscription = this._orgService.obtenerOrg(this.params).subscribe(data => {
-        console.log(data);
         this.orgselec = data.subdirecciones;
 
       }, error => {

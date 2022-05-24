@@ -47,7 +47,7 @@
                           </td>
                         <td>
                           <i [routerLink]="['/seguimiento',  hoja._id ]" class="fas fa-align-justify text-primary"></i>
-                          <i *ngIf="cant>0" class="fas fa-paperclip text-primary"></i>
+                          <i  [routerLink]="['/list-asociar', hoja._id]" *ngIf="hoja.asociado.length>0" class="fas fa-paperclip text-primary"></i>
                       </td>
                       <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">
                         <i [routerLink]="['/print-hr',  hoja._id ]" class="fas fa-print text-primary"></i>
@@ -63,7 +63,7 @@
                               <i (click)="eliminarHoja(hoja._id)" class="fas fa-trash text-danger" *ngIf="hoja.estado === 'REGISTRADO'"></i>
                               <i  class="fas fa-trash text-danger" style="color:rgb(216, 139, 103) !important" *ngIf="hoja.estado === 'ENVIADO'"></i>
                               <i  class="fas fa-trash text-danger" style="color:rgb(250, 146, 98) !important" *ngIf="hoja.estado === 'RECIBIDO'"></i>
-                              <i class="fas fa-paste text-primary " *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'"></i>
+                              <i [routerLink]="['/asociar',  hoja.nuit ]"  class="fas fa-paste text-primary " *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'"></i>
                           </td>
                         </tr>
                       </tbody>

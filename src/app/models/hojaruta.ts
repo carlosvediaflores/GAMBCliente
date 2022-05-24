@@ -10,5 +10,6 @@ export interface Hojaruta{
   archivo?:string;
   urihoja?: string;
   pathhoja?: string;
+  asociado?:string;
 
 }

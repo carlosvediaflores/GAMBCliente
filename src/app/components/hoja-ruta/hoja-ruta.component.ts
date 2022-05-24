@@ -13,7 +13,7 @@ import { Hojaruta } from 'src/app/models/hojaruta';
 })
 export class HojaRutaComponent implements OnInit {
   public identity: any ;
-  public hojas: Hojaruta[] = [];
+  public hojas: any = [];
   public hoja: any = [];
   idh: string = "";
   cant: number = 0;
@@ -35,12 +35,11 @@ export class HojaRutaComponent implements OnInit {
   loadUser(){
     this.identity = JSON.parse(localStorage.getItem('identity')|| '{}');
    // this.token = JSON.parse(localStorage.getItem('token')|| '{}');
-
   }
   getHoja(id: any) {
     this._hojaService.obtenerHoja(id).subscribe(data => {
-      console.log(data.serverResponse.seguimiento);
       this.hoja = data;
+      this.cant = this.hoja.asociado.length
     }, error => {
       console.log(error);
     })
@@ -48,13 +47,10 @@ export class HojaRutaComponent implements OnInit {
   getHojas() {
     this._hojaService.getHojas().subscribe(data => {
       this.hojas = data.serverResponse;
-      this.canten = this.hojas.filter(list => list.estado === 'REGISTRADO').length;
-      console.log(this.canten);
     }, error => {
       console.log(error);
     })
   }
-
   eliminarHoja(id: any) {
     //Alerta
     swal({
