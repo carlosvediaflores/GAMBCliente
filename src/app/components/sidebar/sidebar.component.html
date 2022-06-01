@@ -35,6 +35,9 @@
   </a>
   <a mat-list-item *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA' || identity.roles==='SUPER_USER' || identity.roles==='USER' || identity.roles==='ADMIN'"> <mat-icon>insert_chart</mat-icon > Graficos</a>
   <a mat-list-item> <mat-icon>storage</mat-icon> Páginas </a>
-  <a mat-list-item *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA' || identity.roles==='SUPER_USER' || identity.roles==='USER' || identity.roles==='ADMIN'"> <mat-icon>view_list</mat-icon> Reportes </a>
+  <a mat-list-item
+  routerLinkActive="list-item-active"
+  routerLink="/reportes"
+  *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA' || identity.roles==='SUPER_USER' || identity.roles==='USER' || identity.roles==='ADMIN'"> <mat-icon>view_list</mat-icon> Reportes </a>
   <a mat-list-item> <mat-icon>edit</mat-icon> Link 6 </a>
 </mat-nav-list>

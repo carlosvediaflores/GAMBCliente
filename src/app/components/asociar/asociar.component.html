@@ -5,10 +5,9 @@
         <div class="card-body text-center">
           <span class="titulo"> {{ titulo | uppercase }} {{nuit}}</span>
           <form
-
-           
-
-
+          class="mt-3"
+          [formGroup]="hojaForm"
+          
           >
             <div class="mb-2">
               <input

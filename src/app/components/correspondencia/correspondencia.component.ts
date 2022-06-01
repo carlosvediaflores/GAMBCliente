@@ -90,6 +90,7 @@ export class CorrespondenciaComponent implements OnInit {
     let destino1: any = RegExp.exec(this.destino);
     this._seguiService.obtenerSeguiO(destino1).subscribe(data => {
     this.seguis = data;
+    console.log(this.seguis)
     this.total = this.seguis.length;
     this.cantrec = this.seguis.filter(list => list.estado === 'RECIBIDO').length;
     this.cantder = this.seguis.filter(list => list.estado === 'DERIVADO').length;

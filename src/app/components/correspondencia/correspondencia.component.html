@@ -35,13 +35,14 @@
             </label>
           </div>
           <div class="form-check form-check-inline  mr-4">
-            <input class="form-check-input mr-0" [(ngModel)]="radioButtonSeleccionado"
+            <input class="form-check-input mr-0"  [(ngModel)]="radioButtonSeleccionado"
               type="radio" name="estado" id="sinrecibir" value="ENVIADO">
             <label class="form-check-label badge badge-danger" for="sinrecibir">Sin Recibir
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-danger">
                 {{canten}}
                 <span class="visually-hidden">unread messages</span>
               </span>
+              <div *ngIf="canten > 0 " class="spinner-grow spinner-grow-sm text-danger" style="color: rgb(200, 248, 6) !important" role="status"></div>
             </label>
           </div>
           <div class="form-check form-check-inline  mr-4">
@@ -74,6 +75,7 @@
             <tr>
               <th scope="col">Derivar</th>
               <th scope="col">N°</th>
+              <th scope="col">Origen</th>
               <th scope="col">Referencia</th>
               <th scope="col">Detalle de Instrucción</th>
               <th scope="col">Fecha Derivado</th>
@@ -93,7 +95,8 @@
                   class="fas fa-share text-primary"
                   *ngIf="seguis.estado === 'RECIBIDO'"
                 ></i>
-
+                <div  *ngIf="seguis.estado === 'ENVIADO'" class="spinner-grow spinner-grow-sm text-danger" role="status">
+                </div>
                 <i
                   [routerLink]="null"
                   class="fas fa-share text-primary"
@@ -104,6 +107,7 @@
               <td>
                 {{ seguis.nuit }}
               </td>
+              <td>{{ seguis.origenhr}}</td>
               <td>{{ seguis.referencia}}</td>
               <td>{{ seguis.detalles }}</td>
               <td>

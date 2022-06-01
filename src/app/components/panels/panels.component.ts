@@ -1,10 +1,12 @@
 import { Component, ViewChild,OnInit  } from '@angular/core';
 import { ChartConfiguration, ChartEvent, ChartType, ChartData } from 'chart.js';
+import { AuthService } from 'src/app/services/auth.service';
 import { BaseChartDirective } from 'ng2-charts';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { HojarutaService } from 'src/app/services/hojaruta.service';
+import { SeguimientoService } from 'src/app/services/seguimiento.service';
 import { Hojaruta } from 'src/app/models/hojaruta';
-
+import { Segui } from 'src/app/models/seguimiento';
 
 @Component({
   selector: 'app-panels',
@@ -14,21 +16,53 @@ import { Hojaruta } from 'src/app/models/hojaruta';
 export class PanelsComponent implements OnInit {
   public hojas: Hojaruta[] = [];
   public hoja: any = [];
-
+  public seguis: Segui[] = [];
   cant: string = "";
   canten:number = 0;
   cantre:number = 0;
   cantrec:number = 0;
   cantpro:number = 0;
+  destino: string="";
+  cantderp:number = 0;
+  cantenp:number = 0;
+  cantrecp:number = 0;
+  cantfinp:number = 0;
+  totalp:number = 0;
+  totalarcp:number = 0;
+  public identity: any = [];
+  public token: any;
 
 
   constructor(
     private _hojaService: HojarutaService,
+    private _seguiService: SeguimientoService,
+    public _authService: AuthService,
 
 
-  ) { }
+  ) { this.loadUser();}
   ngOnInit(): void {
     this.getHojas();
+    this.obtenertotal();
+  }
+  loadUser() {
+    this.identity = JSON.parse(localStorage.getItem('identity') || '{}');
+
+  }
+  obtenertotal(){
+    let RegExp = /[^()]*/g
+    this.destino = this.identity.post;
+    let destino1: any = RegExp.exec(this.destino);
+    this._seguiService.obtenerSeguiO(destino1).subscribe(data => {
+    this.seguis = data;
+    this.totalp = this.seguis.length;
+    this.cantrecp = this.seguis.filter(list => list.estado === 'RECIBIDO').length;
+    this.cantderp = this.seguis.filter(list => list.estado === 'DERIVADO').length;
+    this.cantenp = this.seguis.filter(list => list.estado === 'ENVIADO').length;
+    this.cantfinp = this.seguis.filter(list => list.estado === 'MALETIN').length;
+    this.totalarcp = this.seguis.filter(list => list.estado === 'ARCHIVADO').length;
+   }, error => {
+     console.log(error);
+   })
   }
   getHojas() {
     this._hojaService.getHojas().subscribe(data => {

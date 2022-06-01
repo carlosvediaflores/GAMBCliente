@@ -32,6 +32,7 @@ export class SeguimientoAddComponent implements OnInit {
   idh: string = "";
   idnuit: string = "";
   ref: string = "";
+  orhr: string="";
   origenreg: string = "REGISTRADO";
 
   constructor(private fb: FormBuilder,
@@ -44,7 +45,7 @@ export class SeguimientoAddComponent implements OnInit {
       this.seguiForm = this.fb.group({
         destino: ['', Validators.required],
         detalles: ['', Validators.required],
-        instrucciones: ['', Validators.required],
+        instrucciones: [''],
         //fecharecepcion: ['', Validators.required],
         //estado: ['', Validators.required],
         //post: ['', Validators.required],
@@ -65,6 +66,7 @@ export class SeguimientoAddComponent implements OnInit {
     const SEGUI: Segui = {
       nuit:this.idnuit,
       referencia:this.ref,
+      origenhr:this.orhr,
       destino: this.seguiForm.get('destino')?.value,
       detalles: this.seguiForm.get('detalles')?.value,
       instrucciones: this.seguiForm.get('instrucciones')?.value,
@@ -93,8 +95,6 @@ export class SeguimientoAddComponent implements OnInit {
       }, error => {
         console.log(error);
       })
-
-
     }
     else
     {
@@ -138,6 +138,7 @@ export class SeguimientoAddComponent implements OnInit {
         this.hoja = data.serverResponse;
         this.idnuit=this.hoja.nuit;
         this.ref=this.hoja.referencia;
+        this.orhr=this.hoja.origen;
       }, error => {
         console.log(error);
       })

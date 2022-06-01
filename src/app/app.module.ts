@@ -47,6 +47,8 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { AsociarComponent } from './components/asociar/asociar.component';
 import { ListAsociarComponent } from './components/list-asociar/list-asociar.component';
+import { PruebasComponent } from './components/pruebas/pruebas.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import { ListAsociarComponent } from './components/list-asociar/list-asociar.com
     AjustesComponent,
     EditUserComponent,
     AsociarComponent,
-    ListAsociarComponent
+    ListAsociarComponent,
+    PruebasComponent,
+    ReportesComponent
 
 
     ],

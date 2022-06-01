@@ -7,6 +7,7 @@ export interface Segui{
   referencia?: string;
   detalles?: string;
   instrucciones?: number;
+  origenhr?: string
   fechaderivado ?:Date;
   fecharecepcion?:Date;
   estado?: string;
