@@ -120,7 +120,7 @@ export class UsuarioAddComponent implements OnInit {
           surnames: data.surnames,
           ci: data.ci,
           email: data.email,
-          numberphone: data.numberphone,
+          numberphone: null,
           password: data.password,
           birthdate: data.birthdate,
           post: data.post,

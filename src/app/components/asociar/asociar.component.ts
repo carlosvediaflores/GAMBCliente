@@ -32,14 +32,15 @@ export class AsociarComponent implements OnInit {
   ngOnInit(): void {
   }
   asociar(){
-      this.nuitA= this.hojaForm.get('nuit')?.value
-      console.log(this.nuit)
-      console.log(this.nuitA)
+
+      this.nuitA = this.hojaForm.get('nuit')?.value
+      const asocia:Hojaruta = {
+        asociado: this.nuitA
+      }
     if(this.nuit !== null && this.nuitA !== null ){
-      console.log(" no es null")
       console.log(this.nuit)
       console.log(this.nuitA)
-      this._hojaService.Asociar(this.nuit, this.nuitA).subscribe(data =>{
+      this._hojaService.Asociar(this.nuit, asocia).subscribe(data =>{
         this.router.navigate(['/hoja-ruta']);
       }, error => {
         console.log(error);

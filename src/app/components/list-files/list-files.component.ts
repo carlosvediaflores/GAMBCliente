@@ -45,6 +45,7 @@ export class ListFilesComponent implements OnInit {
        this._hojaService.obtenerHoja(this.id).subscribe(data => {
         this.hoja=data.serverResponse;
         this.files=data.serverResponse.archivo;
+        console.log(this.files)
       }, error => {
         console.log("no hay id" + error);
       })

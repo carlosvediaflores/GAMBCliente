@@ -12,7 +12,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
   public identity: any ;
-  public hojas: Hojaruta[] = [];
+  public hojas: any = [];
   public hoja: any = [];
   idh: string = "";
   estadoreg: string = "REGISTRADO";
@@ -31,10 +31,8 @@ export class SearchComponent implements OnInit {
       this.search = search;
       this._hojaService.buscarHoja(this.search).subscribe(
         data => {
-          console.log(data.serverResponse)
           if(data.serverResponse){
             this.hojas = data.serverResponse;
-            console.log(this.hojas);
           }else{
             this.hojas = [];
           }
@@ -87,6 +85,34 @@ export class SearchComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+  eliminarHoja(id: any) {
+    //Alerta
+    swal({
+      title: "¿Estás seguro?",
+      text: "Una vez borrado no podrás recuperarlo!",
+      icon: "warning",
+      buttons: [true, true],
+      dangerMode: true
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          this._hojaService.eliminarHoja(id).subscribe(
+            data => {
+              swal("La Unidad ha sido borrado!", {
+                icon: "success",
+              });
+
+            },
+            error => {
+              console.log(error);
+            }
+          );
+
+        } else {
+          swal("Tranquilo, nada se ha borrado!");
+        }
+      });
   }
 
 }

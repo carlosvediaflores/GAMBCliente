@@ -37,7 +37,7 @@ export class HojarutaService {
   buscarHoja(search: string): Observable<any> {
     return this._http.get(this.URL + 'hojasearch/' + search);
   }
-  Asociar(nuit: string, nuitA:any): Observable<any> {
-    return this._http.put(this.URL + 'asociar/' + nuit, nuitA);
+  Asociar(nuit: string, hoja:Hojaruta): Observable<any> {
+    return this._http.put(this.URL + 'asociar/' + nuit, hoja);
   }
 }

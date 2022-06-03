@@ -78,10 +78,9 @@ export class HojaAddComponent implements OnInit {
     if (this.id !== null) {
       this.titulo = 'Editar Hoja de Ruta';
       this._hojaService.obtenerHoja(this.id).subscribe(data => {
-        console.log(data.serverResponse)
         this.hojaForm.setValue({
           origen: data.serverResponse.origen,
-
+          tipodoc: null,
           referencia: data.serverResponse.referencia,
           fechadocumento: data.serverResponse.fechadocumento,
         })
