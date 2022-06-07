@@ -27,6 +27,8 @@ export class HojaAddComponent implements OnInit {
         referencia: ['', Validators.required],
         fechadocumento: ['', Validators.required],
         tipodoc: [''],
+        contacto: [''],
+
 
       })
       this.id = this.aRouter.snapshot.paramMap.get('id');
@@ -42,6 +44,7 @@ export class HojaAddComponent implements OnInit {
     const HOJA: Hojaruta = {
       origen: this.hojaForm.get('origen')?.value,
       tipodoc: this.hojaForm.get('tipodoc')?.value,
+      contacto: this.hojaForm.get('contacto')?.value,
       referencia: this.hojaForm.get('referencia')?.value,
       fechadocumento: this.hojaForm.get('fechadocumento')?.value,
       nuit:this.total
@@ -49,6 +52,7 @@ export class HojaAddComponent implements OnInit {
     const HOJA1: Hojaruta = {
       origen: this.hojaForm.get('origen')?.value,
       tipodoc: this.hojaForm.get('tipodoc')?.value,
+      contacto: this.hojaForm.get('contacto')?.value,
       referencia: this.hojaForm.get('referencia')?.value,
       fechadocumento: this.hojaForm.get('fechadocumento')?.value,
     }
@@ -81,6 +85,7 @@ export class HojaAddComponent implements OnInit {
         this.hojaForm.setValue({
           origen: data.serverResponse.origen,
           tipodoc: null,
+          contacto: null,
           referencia: data.serverResponse.referencia,
           fechadocumento: data.serverResponse.fechadocumento,
         })

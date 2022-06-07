@@ -58,7 +58,7 @@
           <div class="form-check form-check-inline  mr-4">
             <input class="form-check-input mr-0" [(ngModel)]="radioButtonSeleccionado"
               type="radio" name="estado" id="archivado" value="ARCHIVADO">
-            <label class="form-check-label badge badge-primary " for="archivado">Archivados
+            <label class="form-check-label badge badge-primary " for="archivado">Archivo Central
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-primary ">
                 {{totalarc}}
                 <span class="visually-hidden">unread messages</span>
@@ -178,13 +178,7 @@
             </tr>
           </tbody>
         </table>
-
-        <h5
-          style="text-align: start; margin-top: 10px"
-          *ngIf="segui.length == 0"
-        >
-          No hay reguistros para mostrar
-        </h5>
+        <app-spiner *ngIf="loading"></app-spiner>
       </div>
     </div>
   </div>

@@ -31,7 +31,9 @@ export class SeguimientoService {
   obtenerSeguiO(destino: string): Observable<any> {
     return this._http.get(this.URL + 'seguiO/' + destino);
   }
-
+  buscarnuit(nuit: string): Observable<any> {
+    return this._http.get(this.URL + 'seguias/' + nuit);
+  }
   eliminarSegui(id: string): Observable<any> {
     return this._http.delete(this.URL + 'segui/' + id);
   }

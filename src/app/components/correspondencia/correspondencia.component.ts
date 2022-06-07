@@ -18,6 +18,7 @@ export class CorrespondenciaComponent implements OnInit {
   subscription: Subscription = new Subscription;
   public seguis: Segui[] = [];
   segui: any = [];
+  loading: boolean=true;
   hoja: any = [];
   seguiss: any = [];
   ruta: any[] = [];
@@ -44,6 +45,7 @@ export class CorrespondenciaComponent implements OnInit {
     public _authService: AuthService,
     private aRouter: ActivatedRoute) {
     this.loadUser();
+    this.loading = false;
   }
 
   ngOnInit(): void {
@@ -65,10 +67,12 @@ export class CorrespondenciaComponent implements OnInit {
     })
   }
   getSeguiO(){
+    this.loading = true;
      let RegExp = /[^()]*/g
      this.destino = this.identity.post;
      let destino1: any = RegExp.exec(this.destino);
      this._seguiService.obtenerSeguiO(destino1).subscribe(data => {
+      this.loading = false;
      this.segui = data;
     }, error => {
       console.log(error);
@@ -85,10 +89,12 @@ export class CorrespondenciaComponent implements OnInit {
     this.toggleSidebarForMe.emit();
   }
   obtenertotal(){
+    this.loading = true;
     let RegExp = /[^()]*/g
     this.destino = this.identity.post;
     let destino1: any = RegExp.exec(this.destino);
     this._seguiService.obtenerSeguiO(destino1).subscribe(data => {
+      this.loading = false;
     this.seguis = data;
     this.total = this.seguis.length;
     this.cantrec = this.seguis.filter(list => list.estado === 'RECIBIDO').length;

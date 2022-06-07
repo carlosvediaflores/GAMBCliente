@@ -34,7 +34,6 @@ export class PrintHrComponent implements OnInit {
       this.titulo = 'Editar Org';
       this.subscription = this._hojaService.obtenerHoja(this.id).subscribe(data => {
         this.ruta=data.serverResponse;
-        console.log(data)
       }, error => {
         console.log("no hay id" + error);
       })

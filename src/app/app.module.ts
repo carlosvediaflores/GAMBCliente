@@ -49,6 +49,7 @@ import { AsociarComponent } from './components/asociar/asociar.component';
 import { ListAsociarComponent } from './components/list-asociar/list-asociar.component';
 import { PruebasComponent } from './components/pruebas/pruebas.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
+import { SpinerComponent } from './components/spiner/spiner.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { ReportesComponent } from './components/reportes/reportes.component';
     AsociarComponent,
     ListAsociarComponent,
     PruebasComponent,
-    ReportesComponent
+    ReportesComponent,
+    SpinerComponent
 
 
     ],

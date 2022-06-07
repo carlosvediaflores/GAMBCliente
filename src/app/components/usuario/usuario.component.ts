@@ -33,7 +33,6 @@ export class UsuarioComponent implements OnInit {
   }
   getUsers(){
     this._usuarioService.getusers().subscribe(data => {
-      console.log(data);
       this.users = data;
     }, error => {
       console.log(error);

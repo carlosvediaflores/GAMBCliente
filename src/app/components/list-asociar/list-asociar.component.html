@@ -23,6 +23,7 @@
           </div>
           <div class="p-3 mt-4">
             <h5 class="text-center mb-0 fs-5 mb-1 ">NUIT</h5>
+            <i (click)="refresh()" class="fas fa-retweet text-primary"></i>
             <div  class="badge badge-info text-dark text-center fs-5">N°:&nbsp;&nbsp;<strong></strong>{{ruta.nuit | uppercase}}</div>
           </div>
         </div>
@@ -64,13 +65,15 @@
                 <p class="card-text fw-normal">
                   <span>Fecha de documento: </span>{{asos.fechadocumento | date:'dd/MM/yyyy'}}
                 </p>
+                <div  class="badge badge-info text-dark text-center">N°:&nbsp;&nbsp;<strong></strong>{{asos.nuit | uppercase}}</div>
+                <i [routerLink]="['/list-asociar', asos._id]" class="fas fa-retweet text-primary"></i>
               </div>
               <hr class="mt-0" />
               <div class="d-flex justify-content-between">
                 <p class="card-text fw-normal" >
                   <span>Origen: </span>{{asos.origen}}
                 </p>
-                <p class="card-text fw-normal"><span>Tipo de documento: </span>{{aso.tipodoc}}</p>
+                <p class="card-text fw-normal"><span>Tipo de documento: </span>{{asos.tipodoc}}</p>
               </div>
               <hr class="mt-0" />
               <p  class="card-text text-break lh-1 pt-1 mb-1 fw-normal">

@@ -48,6 +48,7 @@
                         <td>
                           <i [routerLink]="['/seguimiento',  hoja._id ]" class="fas fa-align-justify text-primary"></i>
                           <i  [routerLink]="['/list-asociar', hoja._id]" *ngIf="hoja.asociado.length>0" class="fas fa-paperclip text-primary"></i>
+                          <i [routerLink]="['/asociar',  hoja.nuit ]"  class="fas fa-paste text-primary " *ngIf="identity &&  identity.roles==='SUPER_USER'"></i>
                       </td>
                       <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">
                         <i [routerLink]="['/print-hr',  hoja._id ]" class="fas fa-print text-primary"></i>
@@ -69,7 +70,8 @@
                       </tbody>
                     </table>
                     <pagination-controls *ngIf="hojas.length > 10" (pageChange)="pageActual = $event"></pagination-controls>
-                    <h5 style="text-align: start; margin-top: 10px;" *ngIf="hojas.length == 0">No hay conte para mostrar</h5>
+                    <app-spiner *ngIf="loading"></app-spiner>
+
               </div>
           </div>
   </div>

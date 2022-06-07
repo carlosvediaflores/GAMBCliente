@@ -85,7 +85,13 @@ export class ListAsociarComponent implements OnInit {
 
 
   }
-
+  recargar(id:any): void{
+    this.router.navigate(['/list-asociar'],id);
+    window.location.reload();
+  }
+refresh(){
+  window.location.reload();
+}
   ///Descargar
 
   downloadPDF() {

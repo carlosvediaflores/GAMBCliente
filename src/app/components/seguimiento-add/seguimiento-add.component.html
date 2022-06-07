@@ -3,7 +3,7 @@
     <div class="col-lg-6 offset-lg-3">
       <div class="card">
         <div class="card-body text-center">
-          <span class="titulo"> {{ titulo | uppercase}} <p class="fw-bold">{{idnuit}}</p></span>
+          <span class="titulo"> {{ titulo | uppercase}} <p class="fw-bold fa-2x">{{idnuit}}</p></span>
           <form
             class="mt-3"
             [formGroup]="seguiForm"
@@ -53,27 +53,6 @@
                 >
                   <span>El cargo <strong>es obligatoria</strong></span>
                 </div>
-              </div>
-            </div>
-            <div class="mb-2 mt-2">
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="instrucciones"
-              >
-                <option selected>---Seleccione Instrucción---</option>
-                <option *ngFor="let instruccion of instruccions">
-                  {{ instruccion.nombre }}
-                </option>
-              </select>
-              <div
-                class="text-danger"
-                *ngIf="
-                  seguiForm.get('instrucciones')?.hasError('required') &&
-                  seguiForm.get('instrucciones')?.touched
-                "
-              >
-                <span>El cargo <strong>es obligatoria</strong></span>
               </div>
             </div>
             <div class="mb-2">

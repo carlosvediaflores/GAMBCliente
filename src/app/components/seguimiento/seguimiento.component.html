@@ -37,6 +37,7 @@
               <p class="card-text fw-normal">
                 <span>Fecha de documento: </span>{{ruta.fechadocumento | date:'dd/MM/yyyy'}}
               </p>
+              <p class="card-text fw-normal"><span>Telefono: </span>{{ruta.contacto}}</p>
             </div>
             <hr class="mt-0" />
             <div class="d-flex justify-content-between">
@@ -101,7 +102,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    <h5 style="text-align: start; margin-top: 10px;" *ngIf="segui.length == 0">No hay reguistros para mostrar</h5>
+                    <app-spiner *ngIf="loading"></app-spiner>
               </div>
           </div>
           <div>

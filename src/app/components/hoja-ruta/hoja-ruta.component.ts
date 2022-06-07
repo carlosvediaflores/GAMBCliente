@@ -15,6 +15,7 @@ export class HojaRutaComponent implements OnInit {
   public identity: any ;
   public hojas: any = [];
   public hoja: any = [];
+  loading: boolean=true;
   idh: string = "";
   cant: number = 0;
   canten:number = 0;
@@ -27,7 +28,8 @@ export class HojaRutaComponent implements OnInit {
     private _hojaService: HojarutaService,
     private router: Router,
 
-  ) {this.loadUser();  }
+  ) {this.loadUser();
+    this.loading = false;}
 
   ngOnInit(): void {
     this.getHojas();
@@ -37,17 +39,23 @@ export class HojaRutaComponent implements OnInit {
    // this.token = JSON.parse(localStorage.getItem('token')|| '{}');
   }
   getHoja(id: any) {
+    this.loading = true;
     this._hojaService.obtenerHoja(id).subscribe(data => {
+      this.loading = false;
       this.hoja = data;
       this.cant = this.hoja.asociado.length
     }, error => {
+      this.loading = false;
       console.log(error);
     })
   }
   getHojas() {
+    this.loading = true;
     this._hojaService.getHojas().subscribe(data => {
+      this.loading = false;
       this.hojas = data.serverResponse;
     }, error => {
+      this.loading = false;
       console.log(error);
     })
   }

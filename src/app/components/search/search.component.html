@@ -24,7 +24,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr [ngClass]= "hoja.estado === 'ENVIADO' ? 'table-success' : 'table-light' "  *ngFor="let hoja of hojas | paginate: {itemsPerPage: 5, currentPage: pageActual}">
+                        <tr [ngClass]= "hoja.estado === 'ENVIADO' ? 'table-success' : 'table-light' "  *ngFor="let hoja of hojas">
                           <td *ngIf="identity && identity.roles==='SUPER_ADMIN' || identity.roles==='SECRETARIA'">
                             <i [routerLink]="['/seguimiento-add',  hoja._id,] " class="fas fa-space-shuttle text-primary " *ngIf="hoja.estado === 'RECIBIDO'" ></i>
                             <i [routerLink]="null " class="fas fa-space-shuttle text-primary" style="color:rgb(171, 178, 241) !important" *ngIf="hoja.estado === 'ENVIADO'"  ></i>
@@ -69,7 +69,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    <pagination-controls *ngIf="hojas.length > 10" (pageChange)="pageActual = $event"></pagination-controls>
+                    
                     <h5 style="text-align: start; margin-top: 10px;" *ngIf="hojas.length == 0">No se pudo encontrar lo q buscas</h5>
               </div>
           </div>

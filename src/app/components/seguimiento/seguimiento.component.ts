@@ -16,6 +16,7 @@ import { Segui } from 'src/app/models/seguimiento';
 export class SeguimientoComponent implements OnInit {
   subscription: Subscription = new Subscription;
   public identity: any ;
+  loading: boolean=true;
   id: string | null;
   titulo = 'Crear una Unidad';
   segui: any  = [];
@@ -29,6 +30,7 @@ export class SeguimientoComponent implements OnInit {
     private aRouter: ActivatedRoute) {
       this.id = this.aRouter.snapshot.paramMap.get('id');
       this.loadUser();
+      this.loading = false;
      }
 
   ngOnInit(): void {
@@ -44,8 +46,10 @@ export class SeguimientoComponent implements OnInit {
   esEditar() {
 
     if (this.id !== null) {
+      this.loading = true;
       this.titulo = 'Editar Org';
       this.subscription= this._hojaService.obtenerHoja(this.id).subscribe(data => {
+        this.loading = false;
         this.ruta=data.serverResponse;
       }, error => {
         console.log("no hay id" + error);

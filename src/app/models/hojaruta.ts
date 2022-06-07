@@ -6,6 +6,7 @@ export interface Hojaruta{
   tipodoc?: string;
   origen?: string;
   estado?: string;
+  contacto?: string;
   referencia?:string;
   archivo?:string;
   urihoja?: string;

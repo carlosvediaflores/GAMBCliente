@@ -40,4 +40,7 @@ export class HojarutaService {
   Asociar(nuit: string, hoja:Hojaruta): Observable<any> {
     return this._http.put(this.URL + 'asociar/' + nuit, hoja);
   }
+  busacrnuit(nuit: string): Observable<any> {
+    return this._http.get(this.URL + 'asociar/' + nuit);
+  }
 }
