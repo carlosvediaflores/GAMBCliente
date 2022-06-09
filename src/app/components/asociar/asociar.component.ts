@@ -5,6 +5,7 @@ import { HojarutaService } from 'src/app/services/hojaruta.service';
 import { SeguimientoService } from 'src/app/services/seguimiento.service';
 import { Hojaruta } from 'src/app/models/hojaruta';
 import { AuthService } from 'src/app/services/auth.service';
+import { Segui } from 'src/app/models/seguimiento';
 
 
 @Component({
@@ -13,10 +14,15 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./asociar.component.css']
 })
 export class AsociarComponent implements OnInit {
+  public seguis: Segui[] = [];
   asociarProcesada: boolean;
   loading: boolean;
   mostrarError: boolean;
   textError: string;
+  today = new Date();
+  estadoaso: string = "ASOCIADO CON";
+  seguiss: any = [];
+  ids: string = "";
   public org: Hojaruta[] = [];
   public hoja: any = [];
   segui: any = [];
@@ -79,6 +85,7 @@ export class AsociarComponent implements OnInit {
                       if (this.nuit !== null && this.nuitB == this.nuitA && this.asociarProcesada == true) {
                         this._hojaService.Asociar(this.nuit, asocia).subscribe(data => {
                           this.router.navigate(['/hoja-ruta']);
+                          this.cambiarestado(this.idsegui)
                         }, error => {
                           console.log({ error: "no se pudo registrar" });
                           this.hojaForm.reset();
@@ -97,12 +104,14 @@ export class AsociarComponent implements OnInit {
                 return;
               })
             }
-            //console.log(this.res)
+
           }
         } else {
           this.error('los parametros no son requeridos');
           return;
         }
+        this.error('el documento debe estar en su oficina con estado recibido');
+                return;
       })
     } else {
       this.error('hubo un error');
@@ -117,5 +126,25 @@ export class AsociarComponent implements OnInit {
     setTimeout(() => {
       this.mostrarError = false;
     }, 4000);
+  }
+  cambiarestado(id: any) {
+    const SEGUI: Segui = {
+      estado: this.estadoaso +" "+ this.nuit,
+    }
+    console.log(id)
+    this._seguiService.obtenerSegui(id).subscribe(data => {
+      this.seguiss = data;
+      this.ids = this.seguiss._id;
+      if (this.seguiss.estado === "RECIBIDO") {
+        this._seguiService.EditarSeguis(this.ids, SEGUI).subscribe(data => {
+        //  this.router.navigate(['/correspondencia']);
+
+        }, error => {
+          console.log(error);
+        })
+      }
+    }, error => {
+      console.log(error);
+    })
   }
 }

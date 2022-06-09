@@ -70,6 +70,9 @@
         <button class="btn btn-success float-end" routerLink="/hoja-ruta">
           VOLVER
         </button>
+        <div class="form-group">
+          <input type="text" class="form-control" name="filterSeg" placeholder="Filtrar..." [(ngModel)]="filterSeg">
+        </div>
         <table class="table table-striped mt-3">
           <thead>
             <tr>
@@ -87,7 +90,7 @@
             </tr>
           </thead>
 
-          <tbody *ngFor="let seguis of segui">
+          <tbody *ngFor="let seguis of segui | filter:filterSeg">
             <tr *ngIf="radioButtonSeleccionado == 'Todos' || radioButtonSeleccionado == seguis.estado">
               <td>
                 <i
@@ -159,6 +162,8 @@
                   [routerLink]="['/seguimiento', seguis.idhj]"
                   class="fas fa-align-justify text-primary"
                 ></i>
+                <i [routerLink]="" *ngIf="seguis.nuit===nuithr"  class="fas fa-paperclip text-primary" ></i>
+
               </td>
               <td>
                 <i

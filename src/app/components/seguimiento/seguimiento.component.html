@@ -61,8 +61,7 @@
                       <thead>
                         <tr>
                           <th scope="col">Derivado A...</th>
-                          <th scope="col">Instrucciones</th>
-                          <th scope="col">Detalle</th>
+                          <th scope="col">Detalle de Instrucion</th>
                           <th scope="col">Fecha Recepcion</th>
                           <th scope="col">Fecha Derivado</th>
                           <th scope="col">Estado</th>
@@ -73,7 +72,6 @@
                       <tbody >
                         <tr *ngFor="let seguis of segui">
                           <td *ngIf="id===seguis.idhj">{{ seguis.destino}}</td>
-                          <td *ngIf="id===seguis.idhj">{{ seguis.instrucciones}}</td>
                           <td *ngIf="id===seguis.idhj">{{ seguis.detalles}}</td>
                           <td *ngIf="id===seguis.idhj">
                             <i  [ngClass]= "seguis.fecharecepcion === 'SIN RESEPCIONAR' ? 'badge badge-danger' : '' ">
@@ -91,6 +89,7 @@
                             <span *ngSwitchCase="'RECIBIDO'" class="badge badge-success">{{ seguis.estado }}</span>
                             <span *ngSwitchCase="'DERIVADO'" class="badge badge-info">{{ seguis.estado }}</span>
                             <span *ngSwitchCase="'MALETIN'" class="badge badge-warning">{{ seguis.estado }}</span>
+                            <span *ngIf="seguis.estado != 'DERIVADO' && seguis.estado != 'MALETIN' && seguis.estado != 'RECIBIDO' && seguis.estado != 'ENVIADO'" class="badge badge-secondary text-dark">{{ seguis.estado }}</span>
                           </td>
                           <td *ngIf="id===seguis.idhj">{{ seguis.origen}}</td>
                           <!--

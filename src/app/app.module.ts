@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgChartsModule } from 'ng2-charts';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { MomentModule } from 'angular2-moment';
+import { FilterPipe } from './components/filter.pipe';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,6 +52,7 @@ import { PruebasComponent } from './components/pruebas/pruebas.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { SpinerComponent } from './components/spiner/spiner.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +86,8 @@ import { SpinerComponent } from './components/spiner/spiner.component';
     ListAsociarComponent,
     PruebasComponent,
     ReportesComponent,
-    SpinerComponent
+    SpinerComponent,
+    FilterPipe
 
 
     ],

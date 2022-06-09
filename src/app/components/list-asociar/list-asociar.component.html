@@ -122,6 +122,7 @@
                             <span *ngSwitchCase="'RECIBIDO'" class="badge badge-success">{{ seguis.estado }}</span>
                             <span *ngSwitchCase="'DERIVADO'" class="badge badge-info">{{ seguis.estado }}</span>
                             <span *ngSwitchCase="'MALETIN'" class="badge badge-warning">{{ seguis.estado }}</span>
+                            <span *ngIf="seguis.estado != 'DERIVADO' && seguis.estado != 'MALETIN' && seguis.estado != 'RECIBIDO' && seguis.estado != 'ENVIADO'" class="badge badge-secondary text-dark">{{ seguis.estado }}</span>
                           </td>
                           <td *ngIf="id===seguis.idhj">{{ seguis.origen}}</td>
                           <!--

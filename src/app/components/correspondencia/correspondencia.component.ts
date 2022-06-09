@@ -18,14 +18,17 @@ export class CorrespondenciaComponent implements OnInit {
   subscription: Subscription = new Subscription;
   public seguis: Segui[] = [];
   segui: any = [];
+  filterSeg: any = [];
   loading: boolean=true;
   hoja: any = [];
+  res: any = {};
   seguiss: any = [];
   ruta: any[] = [];
   today = new Date();
   estadorec: string = "RECIBIDO";
   estadofin: string = "MALETIN";
   ids: string = "";
+  nuithr:string="";
   destino: string="";
   pageActual: number = 1;
   cantder:number = 0;
@@ -34,6 +37,7 @@ export class CorrespondenciaComponent implements OnInit {
   cantfin:number = 0;
   total:number = 0;
   totalarc:number = 0;
+  canaso:number = 0;
   public identity: any = [];
   public token: any;
   radioButtonSeleccionado = 'RECIBIDO';
@@ -74,6 +78,18 @@ export class CorrespondenciaComponent implements OnInit {
      this._seguiService.obtenerSeguiO(destino1).subscribe(data => {
       this.loading = false;
      this.segui = data;
+     for(let i = 0; i < this.segui.length; i++){
+      this.res = this.segui[i];
+      this.nuithr=this.res.nuit;
+      this._hojaService.busacrnuit(this.nuithr).subscribe(data => {
+        this.hoja = data.serverResponse;
+        this.canaso = this.hoja.asociado.length
+      }, error => {
+        console.log(error);
+      })
+      console.log(this.nuithr)
+     }
+     console.log(this.segui)
     }, error => {
       console.log(error);
     })
