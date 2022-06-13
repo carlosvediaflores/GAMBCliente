@@ -54,36 +54,14 @@
         </div>
         <p class="mb-0 fs-4 text-center" >ASOCIADOS</p>
 
-        <div  *ngFor="let asos of aso">
+
           <div class="card pl-2 pr-2 border-3 border-primary mb-1">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <p class="card-text fw-normal">
-                  <span >Fecha de recepcion: </span>{{ asos.fecharesepcion | date:'dd/MM/yyyy'}}
-                </p>
-                <p class="card-text fw-normal" ><span>Hora: </span>{{asos.fecharesepcion | date:'HH:MM:ss'}}</p>
-                <p class="card-text fw-normal">
-                  <span>Fecha de documento: </span>{{asos.fechadocumento | date:'dd/MM/yyyy'}}
-                </p>
-                <div  class="badge badge-info text-dark text-center">N°:&nbsp;&nbsp;<strong></strong>{{asos.nuit | uppercase}}</div>
-                <i [routerLink]="['/list-asociar', asos._id]" class="fas fa-retweet text-primary"></i>
+            <div *ngFor="let asos of aso" class="card-body">
+              <div [routerLink]="['/list-asociar',  asos._id,] "  class="d-flex justify-content-around">
+                <span class=" bagnuit badge badge-info text-dark text-center">N°:&nbsp;&nbsp;<strong></strong>{{asos.nuit | uppercase}}</span>
               </div>
-              <hr class="mt-0" />
-              <div class="d-flex justify-content-between">
-                <p class="card-text fw-normal" >
-                  <span>Origen: </span>{{asos.origen}}
-                </p>
-                <p class="card-text fw-normal"><span>Tipo de documento: </span>{{asos.tipodoc}}</p>
-              </div>
-              <hr class="mt-0" />
-              <p  class="card-text text-break lh-1 pt-1 mb-1 fw-normal">
-                <span >Referencia: </span>{{asos.referencia}}
-              </p>
             </div>
           </div>
-        </div>
-
-
         <div class=" ">
           <div class="card border-3 border-primary mb-1">
               <div class="card-body text-center">
@@ -97,8 +75,6 @@
                           <th scope="col">Fecha Recepcion</th>
                           <th scope="col">Fecha Derivado</th>
                           <th scope="col">Estado</th>
-
-
                         </tr>
                       </thead>
                       <tbody >

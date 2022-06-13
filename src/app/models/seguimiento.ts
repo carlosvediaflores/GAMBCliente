@@ -11,5 +11,6 @@ export interface Segui{
   fechaderivado ?:Date;
   fecharecepcion?:Date;
   estado?: string;
+  asociado?: Boolean;
 
 }

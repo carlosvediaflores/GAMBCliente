@@ -39,4 +39,7 @@ label{
   margin-left: 7px;
   font-size: 170%;
 }
-
+.bagnuit{
+  cursor: pointer;
+  font-size: 100%;
+}

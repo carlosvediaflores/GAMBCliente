@@ -18,7 +18,7 @@ export class CorrespondenciaComponent implements OnInit {
   subscription: Subscription = new Subscription;
   public seguis: Segui[] = [];
   segui: any = [];
-  filterSeg: any = [];
+  filterSeg: any = ""
   loading: boolean=true;
   hoja: any = [];
   res: any = {};
@@ -78,18 +78,6 @@ export class CorrespondenciaComponent implements OnInit {
      this._seguiService.obtenerSeguiO(destino1).subscribe(data => {
       this.loading = false;
      this.segui = data;
-     for(let i = 0; i < this.segui.length; i++){
-      this.res = this.segui[i];
-      this.nuithr=this.res.nuit;
-      this._hojaService.busacrnuit(this.nuithr).subscribe(data => {
-        this.hoja = data.serverResponse;
-        this.canaso = this.hoja.asociado.length
-      }, error => {
-        console.log(error);
-      })
-      console.log(this.nuithr)
-     }
-     console.log(this.segui)
     }, error => {
       console.log(error);
     })

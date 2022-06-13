@@ -34,6 +34,7 @@ export class AsociarComponent implements OnInit {
   nuitB: any = [];
   hojaForm: FormGroup;
   titulo = 'ASOCIAR HOJA DE RUTA';
+  asociado: Boolean = true
   nuit: string | null;
   public identity: any = [];
   constructor(private fb: FormBuilder,
@@ -86,6 +87,8 @@ export class AsociarComponent implements OnInit {
                         this._hojaService.Asociar(this.nuit, asocia).subscribe(data => {
                           this.router.navigate(['/hoja-ruta']);
                           this.cambiarestado(this.idsegui)
+                          console.log(this.res.nuit)
+                          this.cambiaraso(this.res.nuit)
                         }, error => {
                           console.log({ error: "no se pudo registrar" });
                           this.hojaForm.reset();
@@ -146,5 +149,15 @@ export class AsociarComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+  cambiaraso(id: any) {
+    const SEGUI: Segui = {
+      asociado: this.asociado
+    }
+    this._seguiService.EditarSeguiaso(id,SEGUI).subscribe(data=>{
+      console.log("se modifico a true")
+    }, error => {
+      console.log(error);
+    }) 
   }
 }

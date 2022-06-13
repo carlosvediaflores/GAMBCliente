@@ -70,10 +70,10 @@
         <button class="btn btn-success float-end" routerLink="/hoja-ruta">
           VOLVER
         </button>
-        <div class="form-group">
-          <input type="text" class="form-control" name="filterSeg" placeholder="Filtrar..." [(ngModel)]="filterSeg">
+        <div class="form-group m-0">
+          <input type="text" class="form-control" name="filterSeg" placeholder="Filtrar por numero Hoja de Ruta" [(ngModel)]="filterSeg">
         </div>
-        <table class="table table-striped mt-3">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">Derivar</th>
@@ -156,14 +156,14 @@
                 </span>
                 <i (click)="reactivar(seguis._id)"  *ngSwitchCase="'MALETIN'" class="fasre fas fa-file-upload " style="color: rgb(230, 70, 176) !important"></i>
                 <i *ngSwitchCase="'MALETIN'" class="fasar fas fa-folder-minus p-0 mt-0" style="color: rgb(3, 126, 40) !important"></i>
+                <span *ngIf="seguis.estado != 'DERIVADO' && seguis.estado != 'MALETIN' && seguis.estado != 'RECIBIDO' && seguis.estado != 'ENVIADO'" class="badge badge-secondary text-dark">{{ seguis.estado }}</span>
               </td>
               <td>
                 <i
                   [routerLink]="['/seguimiento', seguis.idhj]"
                   class="fas fa-align-justify text-primary"
                 ></i>
-                <i [routerLink]="" *ngIf="seguis.nuit===nuithr"  class="fas fa-paperclip text-primary" ></i>
-
+                <i [routerLink]="['/list-asociar', seguis.idhj]" *ngIf="seguis.asociado"  class="fas fa-paperclip text-primary" ></i>
               </td>
               <td>
                 <i

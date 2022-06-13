@@ -3,28 +3,22 @@ import {HttpClient} from '@angular/common/http';
 import { Segui } from '../models/seguimiento';
 import { Observable } from 'rxjs';
 import { Global } from './global';
-
 @Injectable({
   providedIn: 'root'
 })
 export class SeguimientoService {
   public URL: string;
-
-
   constructor(
     private _http: HttpClient
   ) {
     this.URL=Global.url;
   }
-
   register(segui: Segui): Observable<any> {
     return this._http.post(this.URL + 'segui', segui);
   }
-
   getsegui():Observable<any>{
     return this._http.get(this.URL+'segui');
   }
-
   obtenerSegui(id: string): Observable<any> {
     return this._http.get(this.URL + 'segui/' + id);
   }
@@ -42,5 +36,8 @@ export class SeguimientoService {
   }
   EditarSeguis(id: string, segui:Segui): Observable<any> {
     return this._http.put(this.URL + 'seguis/' + id, segui);
+  }
+  EditarSeguiaso(nuit: string, segui:Segui): Observable<any> {
+    return this._http.put(this.URL + 'seguiaso/' + nuit, segui);
   }
 }

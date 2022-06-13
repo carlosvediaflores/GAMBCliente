@@ -16,6 +16,7 @@ export class HojaRutaComponent implements OnInit {
   public hojas: any = [];
   public hoja: any = [];
   loading: boolean=true;
+  filterhoja: any = ""
   idh: string = "";
   cant: number = 0;
   canten:number = 0;

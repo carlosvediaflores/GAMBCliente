@@ -2,17 +2,13 @@ import { User } from 'src/app/models/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { AuthService } from '../../services/auth.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-
   alert = "";
-
   identity: User;
   user = {
     email: "",
@@ -24,9 +20,7 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.identity = JSON.parse(localStorage.getItem('identity') || '{}');
-
   }
-
   ngOnInit(): void {
   }
   login() {
@@ -42,8 +36,5 @@ export class LoginComponent implements OnInit {
         },
         err => console.log(err)
       )
-
-
   }
-
 }
